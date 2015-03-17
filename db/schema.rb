@@ -11,10 +11,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150317182340) do
+ActiveRecord::Schema.define(version: 20150317213328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "budget_items", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "budget_amount"
+    t.integer  "project_id"
+    t.integer  "budgetable_id"
+    t.string   "budgetable_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "budget_items", ["budgetable_id"], name: "index_budget_items_on_budgetable_id", using: :btree
+
+  create_table "cn_projects", force: :cascade do |t|
+    t.integer  "congressional_notification_id"
+    t.integer  "project_id"
+    t.boolean  "is_renotification"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  create_table "congressional_notifications", force: :cascade do |t|
+    t.string   "name"
+    t.string   "cn_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "countries", force: :cascade do |t|
     t.string   "name"
@@ -40,6 +67,30 @@ ActiveRecord::Schema.define(version: 20150317182340) do
     t.datetime "updated_at",          null: false
   end
 
+  create_table "obligations", force: :cascade do |t|
+    t.string   "obligation_number"
+    t.integer  "obligation_amount"
+    t.date     "obligation_date"
+    t.integer  "fiscal_year"
+    t.string   "comments"
+    t.integer  "project_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  create_table "people", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "office"
+    t.integer  "personable_id"
+    t.string   "personable_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "people", ["personable_id"], name: "index_people_on_personable_id", using: :btree
+
   create_table "programs", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -49,6 +100,13 @@ ActiveRecord::Schema.define(version: 20150317182340) do
   create_table "programs_users", id: false, force: :cascade do |t|
     t.integer "program_id"
     t.integer "user_id"
+  end
+
+  create_table "project_implementers", force: :cascade do |t|
+    t.integer  "project_id"
+    t.integer  "implementer_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "projects", force: :cascade do |t|
