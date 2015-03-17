@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Projects</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Start date</th>
+      <th>End date</th>
+      <th>Budget requested</th>
+      <th>Fiscal year</th>
+      <th>Objective</th>
+      <th>Interest</th>
+      <th>Law enforcement</th>
+      <th>Coordination</th>
+      <th>Lessons learned</th>
+      <th>Sustainability</th>
+      <th>City province</th>
+      <th>Program audience</th>
+      <th>Reprogram</th>
+      <th>Reprogram comments</th>
+      <th>Implementation status</th>
+      <th>Program</th>
+      <th>User</th>
+      <th>Is archived</th>
+      <th>Is denied</th>
+      <th>Is active</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td><%= project.name %></td>
+        <td><%= project.description %></td>
+        <td><%= project.start_date %></td>
+        <td><%= project.end_date %></td>
+        <td><%= project.budget_requested %></td>
+        <td><%= project.fiscal_year %></td>
+        <td><%= project.objective %></td>
+        <td><%= project.interest %></td>
+        <td><%= project.law_enforcement %></td>
+        <td><%= project.coordination %></td>
+        <td><%= project.lessons_learned %></td>
+        <td><%= project.sustainability %></td>
+        <td><%= project.city_province %></td>
+        <td><%= project.program_audience %></td>
+        <td><%= project.reprogram %></td>
+        <td><%= project.reprogram_comments %></td>
+        <td><%= project.implementation_status %></td>
+        <td><%= project.program_id %></td>
+        <td><%= project.user_id %></td>
+        <td><%= project.is_archived %></td>
+        <td><%= project.is_denied %></td>
+        <td><%= project.is_active %></td>
+        <td><%= link_to 'Show', project %></td>
+        <td><%= link_to 'Edit', edit_project_path(project) %></td>
+        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Project', new_project_path %>
