@@ -11,15 +11,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150316222509) do
+ActiveRecord::Schema.define(version: 20150317182340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "countries", force: :cascade do |t|
+    t.string   "name"
+    t.string   "iso2"
+    t.string   "iso3"
+    t.string   "boundary_type"
+    t.text     "boundary_coordinates"
+    t.integer  "region_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  create_table "countries_projects", id: false, force: :cascade do |t|
+    t.integer "country_id"
+    t.integer "project_id"
+  end
+
+  create_table "implementers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "short_name"
+    t.string   "parent_organization"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
 
   create_table "programs", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "programs_users", id: false, force: :cascade do |t|
+    t.integer "program_id"
+    t.integer "user_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -49,7 +78,23 @@ ActiveRecord::Schema.define(version: 20150316222509) do
     t.datetime "updated_at",            null: false
   end
 
+  create_table "projects_sub_accounts", id: false, force: :cascade do |t|
+    t.integer "project_id"
+    t.integer "sub_account_id"
+  end
+
   create_table "regions", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "regions_users", id: false, force: :cascade do |t|
+    t.integer "region_id"
+    t.integer "user_id"
+  end
+
+  create_table "sub_accounts", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -81,8 +126,6 @@ ActiveRecord::Schema.define(version: 20150316222509) do
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
-    t.integer  "region_id"
-    t.integer  "program_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
