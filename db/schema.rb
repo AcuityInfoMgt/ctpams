@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150317213328) do
+ActiveRecord::Schema.define(version: 20150318160833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,17 @@ ActiveRecord::Schema.define(version: 20150317213328) do
   end
 
   add_index "budget_items", ["budgetable_id"], name: "index_budget_items_on_budgetable_id", using: :btree
+
+  create_table "clearances", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "clearance_status"
+    t.date     "clearance_date"
+    t.text     "comments"
+    t.integer  "clearable_id"
+    t.string   "clearable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
 
   create_table "cn_projects", force: :cascade do |t|
     t.integer  "congressional_notification_id"
@@ -57,6 +68,14 @@ ActiveRecord::Schema.define(version: 20150317213328) do
   create_table "countries_projects", id: false, force: :cascade do |t|
     t.integer "country_id"
     t.integer "project_id"
+  end
+
+  create_table "funding_mechanisms", force: :cascade do |t|
+    t.integer  "funding_type"
+    t.boolean  "is_modification"
+    t.integer  "project_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "implementers", force: :cascade do |t|
