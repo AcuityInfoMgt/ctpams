@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150318160833) do
+ActiveRecord::Schema.define(version: 20150320155220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20150318160833) do
     t.string   "cn_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "old_id"
   end
 
   create_table "countries", force: :cascade do |t|
@@ -63,6 +64,7 @@ ActiveRecord::Schema.define(version: 20150318160833) do
     t.integer  "region_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.integer  "old_id"
   end
 
   create_table "countries_projects", id: false, force: :cascade do |t|
@@ -84,6 +86,7 @@ ActiveRecord::Schema.define(version: 20150318160833) do
     t.string   "parent_organization"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.integer  "old_id"
   end
 
   create_table "obligations", force: :cascade do |t|
@@ -114,6 +117,7 @@ ActiveRecord::Schema.define(version: 20150318160833) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "old_id"
   end
 
   create_table "programs_users", id: false, force: :cascade do |t|
@@ -153,6 +157,7 @@ ActiveRecord::Schema.define(version: 20150318160833) do
     t.boolean  "is_active"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.integer  "old_id"
   end
 
   create_table "projects_sub_accounts", id: false, force: :cascade do |t|
@@ -164,6 +169,7 @@ ActiveRecord::Schema.define(version: 20150318160833) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "old_id"
   end
 
   create_table "regions_users", id: false, force: :cascade do |t|
@@ -175,6 +181,7 @@ ActiveRecord::Schema.define(version: 20150318160833) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "old_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -203,6 +210,7 @@ ActiveRecord::Schema.define(version: 20150318160833) do
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
+    t.integer  "old_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
