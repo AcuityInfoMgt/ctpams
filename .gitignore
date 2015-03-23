@@ -21,6 +21,10 @@ db/*.sqlite3
 /log/*
 /tmp/*
 
+#private seeds
+/db/seeds/02_users.rb
+/db/seeds/03_projects.rb
+
 # various artifacts
 **.war
 *.rbc

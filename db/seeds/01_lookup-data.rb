@@ -5,10 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-if User.count == 0
-  user = CreateAdminService.new.call
-  puts 'CREATED ADMIN USER: ' << user.email
-end
+
 
 if Program.count == 0
   Program.create(name: 'CT', old_id: 5)
