@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150325184102) do
+ActiveRecord::Schema.define(version: 20150326221651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,11 +73,10 @@ ActiveRecord::Schema.define(version: 20150325184102) do
   end
 
   create_table "funding_mechanisms", force: :cascade do |t|
-    t.integer  "funding_type"
-    t.boolean  "is_modification"
-    t.integer  "project_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
+    t.integer  "old_id"
   end
 
   create_table "implementers", force: :cascade do |t|
@@ -123,6 +122,13 @@ ActiveRecord::Schema.define(version: 20150325184102) do
   create_table "programs_users", id: false, force: :cascade do |t|
     t.integer "program_id"
     t.integer "user_id"
+  end
+
+  create_table "project_funding_mechanisms", force: :cascade do |t|
+    t.integer  "project_id"
+    t.integer  "funding_mechanism_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "project_implementers", force: :cascade do |t|

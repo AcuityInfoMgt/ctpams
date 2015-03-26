@@ -22,6 +22,15 @@ if Region.count == 0
   Region.create(name: 'Western Hemisphere', old_id: 317)
 end
 
+if FundingMechanism.count == 0
+  FundingMechanism.create(name: 'Bureau Transfer', old_id: 2)
+  FundingMechanism.create(name: 'Fund cite to post', old_id: 3)
+  FundingMechanism.create(name: 'MOU/IAA', old_id: 4)
+  FundingMechanism.create(name: 'Grant', old_id: 5)
+  FundingMechanism.create(name: 'Contract', old_id: 318)
+  FundingMechanism.create(name: 'Cooperative Agreement', old_id: 347)
+end
+
 if SubAccount.count == 0
   SubAccount.create(name: 'ATA', old_id: 300)
   SubAccount.create(name: 'CTE', old_id: 301)
