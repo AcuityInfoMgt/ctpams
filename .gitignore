@@ -27,6 +27,7 @@ db/*.sqlite3
 /db/seeds/04_budgets.rb
 /db/seeds/05_obligations.rb
 /db/seeds/06_cns.rb
+/db/seeds/07_clearances.rb
 
 # various artifacts
 **.war
