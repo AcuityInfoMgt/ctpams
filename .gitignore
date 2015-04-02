@@ -28,6 +28,7 @@ db/*.sqlite3
 /db/seeds/05_obligations.rb
 /db/seeds/06_cns.rb
 /db/seeds/07_clearances.rb
+/db/seeds/08_comments.rb
 
 # various artifacts
 **.war

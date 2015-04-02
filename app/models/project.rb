@@ -5,6 +5,7 @@ class Project < ActiveRecord::Base
   has_many :cn_projects
   has_many :congressional_notifications, through: :cn_projects
   has_many :people, as: :personable
+  has_many :comments, as: :commentable
   has_many :clearances, as: :clearable
   has_many :budget_items
   has_many :project_implementers
@@ -17,7 +18,7 @@ class Project < ActiveRecord::Base
   after_initialize :set_defaults, :if => :new_record?
 
   def set_defaults
-    self.implementation_status ||= :preimplementation
+    self.implementation_status ||= :'Pre-Implementation'
     self.is_active ||= true
   end
 end

@@ -111,10 +111,37 @@
 </p>
 
 <p>
+  <strong>Project Owners:</strong>
+<ul>
+  <% @project.people.each do |person| %>
+      <li><%= person.name %>  </li>
+  <% end %>
+</ul>
+</p>
+
+<p>
   <strong>Countries:</strong>
 <ul>
   <% @project.countries.each do |country| %>
       <li><%= country.name %>  </li>
+  <% end %>
+</ul>
+</p>
+
+<p>
+  <strong>Sub Accounts:</strong>
+<ul>
+  <% @project.sub_accounts.each do |sa| %>
+      <li><%= sa.name %>  </li>
+  <% end %>
+</ul>
+</p>
+
+<p>
+  <strong>Implementing Partners:</strong>
+<ul>
+  <% @project.implementers.each do |implementer| %>
+      <li><%= implementer.name %>  </li>
   <% end %>
 </ul>
 </p>
@@ -138,12 +165,39 @@
 </p>
 
 <p>
+  <strong>Funding Mechanisms:</strong>
+<ul>
+  <% @project.funding_mechanisms.each do |fm| %>
+      <li><%= fm.name %> </li>
+  <% end %>
+</ul>
+</p>
+
+<p>
   <strong>Obligations:</strong>
     <ul>
       <% @project.obligations.each do |obligation| %>
           <li><%= obligation.obligation_number %> - <%= obligation.obligation_amount %> - <%= obligation.obligation_date %> </li>
       <% end %>
     </ul>
+</p>
+
+<p>
+  <strong>Clearances:</strong>
+<ul>
+  <% @project.clearances.each do |clearance| %>
+      <li><%= clearance.name %> - <%= clearance.clearance_status %> - <%= clearance.clearance_date %> </li>
+  <% end %>
+</ul>
+</p>
+
+<p>
+  <strong>Comments:</strong>
+<ul>
+  <% @project.comments.each do |comment| %>
+      <li><%= comment.comments %> - <%= comment.user.name %> - <%= comment.user.role %> </li>
+  <% end %>
+</ul>
 </p>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |

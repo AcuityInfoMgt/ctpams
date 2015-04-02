@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150402143423) do
+ActiveRecord::Schema.define(version: 20150402204030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,16 @@ ActiveRecord::Schema.define(version: 20150402143423) do
     t.boolean  "is_renotification"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "comments"
+    t.integer  "user_id"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.datetime "comment_date"
   end
 
   create_table "congressional_notifications", force: :cascade do |t|
@@ -97,10 +107,10 @@ ActiveRecord::Schema.define(version: 20150402143423) do
     t.integer  "obligation_amount"
     t.date     "obligation_date"
     t.integer  "fiscal_year"
-    t.string   "comments"
     t.integer  "project_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.string   "obligation_comments"
   end
 
   create_table "people", force: :cascade do |t|
