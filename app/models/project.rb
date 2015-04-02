@@ -13,7 +13,7 @@ class Project < ActiveRecord::Base
   has_many :funding_mechanisms, through: :project_funding_mechanisms
   has_and_belongs_to_many :countries
   has_and_belongs_to_many :sub_accounts
-  enum implementation_status: [:preimplementation, :active, :complete]
+  enum implementation_status: [:'Pre-Implementation', :'Active', :'Complete']
   after_initialize :set_defaults, :if => :new_record?
 
   def set_defaults

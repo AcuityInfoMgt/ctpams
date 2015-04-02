@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150326221651) do
+ActiveRecord::Schema.define(version: 20150402143423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,7 +61,6 @@ ActiveRecord::Schema.define(version: 20150326221651) do
     t.string   "iso3"
     t.string   "boundary_type"
     t.text     "boundary_coordinates"
-    t.integer  "region_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.integer  "old_id"
@@ -70,6 +69,11 @@ ActiveRecord::Schema.define(version: 20150326221651) do
   create_table "countries_projects", id: false, force: :cascade do |t|
     t.integer "country_id"
     t.integer "project_id"
+  end
+
+  create_table "countries_regions", id: false, force: :cascade do |t|
+    t.integer "country_id"
+    t.integer "region_id"
   end
 
   create_table "funding_mechanisms", force: :cascade do |t|
@@ -174,9 +178,11 @@ ActiveRecord::Schema.define(version: 20150326221651) do
 
   create_table "regions", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "old_id"
+    t.integer  "region_type"
+    t.string   "abbreviation"
   end
 
   create_table "regions_users", id: false, force: :cascade do |t|
