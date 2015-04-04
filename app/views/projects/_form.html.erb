@@ -25,6 +25,15 @@
     <%= f.input :is_archived %>
     <%= f.input :is_denied %>
     <%= f.input :is_active %>
+    <h3>Budget Items</h3>
+    <div id="tasks">
+      <%= f.simple_fields_for :budget_items do |budget_item| %>
+        <%= render 'budget_item_fields', :f => budget_item %>
+      <% end %>
+          <div class="links">
+            <%= link_to_add_association 'add budget_item', f, :budget_items %>
+          </div>
+    </div>
   </div>
 
   <div class="form-actions">

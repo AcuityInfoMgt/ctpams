@@ -195,7 +195,7 @@
   <strong>Comments:</strong>
 <ul>
   <% @project.comments.each do |comment| %>
-      <li><%= comment.comments %> - <%= comment.user.name %> - <%= comment.user.role %> </li>
+      <li><%= comment.comment_date %> - <%= comment.comments %> - <%= comment.user.name %> - <%= comment.user.role %> </li>
   <% end %>
 </ul>
 </p>

@@ -18,6 +18,7 @@ gem 'devise_invitable'
 gem 'pg'
 gem 'pundit'
 gem 'simple_form'
+gem 'cocoon'
 gem 'figaro'
 group :development do
   gem 'better_errors'
