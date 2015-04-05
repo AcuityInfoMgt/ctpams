@@ -4,8 +4,8 @@
   <div class="form-inputs">
     <%= f.input :name %>
     <%= f.input :description %>
-    <%= f.input :start_date %>
-    <%= f.input :end_date %>
+    <%= f.input :start_date, as: :datepicker  %>
+    <%= f.input :end_date, as: :datepicker %>
     <%= f.input :budget_requested %>
     <%= f.input :fiscal_year %>
     <%= f.input :objective %>
@@ -18,20 +18,30 @@
     <%= f.input :program_audience %>
     <%= f.input :reprogram %>
     <%= f.input :reprogram_comments %>
-    <%= f.input :implementation_status %>
     <%= f.select(:implementation_status, Project.implementation_statuses.keys.map {|implementation_status| [implementation_status.titleize,implementation_status]}) %>
-    <%= f.input :program_id %>
+    <%= f.association :program %>
+    <%= f.association :sub_accounts %>
     <%= f.input :user_id %>
     <%= f.input :is_archived %>
     <%= f.input :is_denied %>
     <%= f.input :is_active %>
+    <%= f.association :countries %>
+    <h3>Project Owners</h3>
+    <div id="tasks">
+      <%= f.simple_fields_for :people do |person| %>
+          <%= render 'person_fields', :f => person %>
+      <% end %>
+      <div class="links">
+        <%= link_to_add_association 'add owner', f, :people %>
+      </div>
+    </div>
     <h3>Budget Items</h3>
     <div id="tasks">
       <%= f.simple_fields_for :budget_items do |budget_item| %>
         <%= render 'budget_item_fields', :f => budget_item %>
       <% end %>
           <div class="links">
-            <%= link_to_add_association 'add budget_item', f, :budget_items %>
+            <%= link_to_add_association 'add budget item', f, :budget_items %>
           </div>
     </div>
   </div>
