@@ -1,0 +1,10 @@
+<div class="nested-fields">
+  <%= f.input :obligation_number %>
+  <%= f.input :obligation_amount %>
+  <%= f.input :obligation_date, as: :datepicker %>
+  <%= f.input :fiscal_year %>
+  <%= f.input :obligation_comments %>
+
+
+  <%= link_to_remove_association "remove", f %>
+</div>

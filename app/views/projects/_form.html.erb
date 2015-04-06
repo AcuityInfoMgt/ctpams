@@ -21,13 +21,13 @@
     <%= f.select(:implementation_status, Project.implementation_statuses.keys.map {|implementation_status| [implementation_status.titleize,implementation_status]}) %>
     <%= f.association :program %>
     <%= f.association :sub_accounts %>
-    <%= f.input :user_id %>
+    <%= f.association :user %>
     <%= f.input :is_archived %>
     <%= f.input :is_denied %>
     <%= f.input :is_active %>
     <%= f.association :countries %>
     <h3>Project Owners</h3>
-    <div id="tasks">
+    <div id="owners">
       <%= f.simple_fields_for :people do |person| %>
           <%= render 'person_fields', :f => person %>
       <% end %>
@@ -36,13 +36,22 @@
       </div>
     </div>
     <h3>Budget Items</h3>
-    <div id="tasks">
+    <div id="budgetitems">
       <%= f.simple_fields_for :budget_items do |budget_item| %>
         <%= render 'budget_item_fields', :f => budget_item %>
       <% end %>
           <div class="links">
             <%= link_to_add_association 'add budget item', f, :budget_items %>
           </div>
+    </div>
+    <h3>Obligations</h3>
+    <div id="obligations">
+      <%= f.simple_fields_for :obligations do |obligation| %>
+          <%= render 'obligation_fields', :f => obligation %>
+      <% end %>
+      <div class="links">
+        <%= link_to_add_association 'add obligation', f, :obligations %>
+      </div>
     </div>
   </div>
 

@@ -192,6 +192,15 @@
 </p>
 
 <p>
+  <strong>Attached Files:</strong>
+<ul>
+  <% @project.attached_files.each do |attached_file| %>
+      <li><%= attached_file.name %> - <%= image_tag attached_file.attachable_document.url(:thumb) %> </li>
+  <% end %>
+</ul>
+</p>
+
+<p>
   <strong>Comments:</strong>
 <ul>
   <% @project.comments.each do |comment| %>

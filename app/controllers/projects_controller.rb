@@ -70,6 +70,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :description, :start_date, :end_date, :budget_requested, :fiscal_year, :objective, :interest, :law_enforcement, :coordination, :lessons_learned, :sustainability, :city_province, :program_audience, :reprogram, :reprogram_comments, :implementation_status, :program, :user_id, :is_archived, :is_denied, :is_active, people_attributes: [:id, :name, :email, :phone, :office, :_destroy], budget_items_attributes: [:id, :name, :budget_amount, :budgetable_id, :budgetable_type, :_destroy], country_ids: [], sub_account_ids: [])
+      params.require(:project).permit(:name, :description, :start_date, :end_date, :budget_requested, :fiscal_year, :objective, :interest, :law_enforcement, :coordination, :lessons_learned, :sustainability, :city_province, :program_audience, :reprogram, :reprogram_comments, :implementation_status, :program, :user_id, :is_archived, :is_denied, :is_active, people_attributes: [:id, :name, :email, :phone, :office, :_destroy], budget_items_attributes: [:id, :name, :budget_amount, :budgetable_id, :budgetable_type, :_destroy], obligations_attributes: [:id, :obligation_number, :obligation_amount, :obligation_date, :fiscal_year, :obligation_comments, :_destroy], country_ids: [], sub_account_ids: [])
     end
 end
