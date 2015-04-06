@@ -1,4 +1,4 @@
-<%= simple_form_for(@project) do |f| %>
+<%= simple_form_for(@project, multipart: true) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
@@ -51,6 +51,15 @@
       <% end %>
       <div class="links">
         <%= link_to_add_association 'add obligation', f, :obligations %>
+      </div>
+    </div>
+    <h3>Attached Files</h3>
+    <div id="attached_files">
+      <%= f.simple_fields_for :attached_files do |attached_file| %>
+          <%= render 'attached_file_fields', :f => attached_file %>
+      <% end %>
+      <div class="links">
+        <%= link_to_add_association 'add document', f, :attached_files %>
       </div>
     </div>
   </div>

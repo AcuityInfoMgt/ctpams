@@ -1,7 +1,8 @@
 class AttachedFile < ActiveRecord::Base
   has_attached_file :attachable_document
   validates_with AttachmentPresenceValidator, :attributes => :attachable_document
-  validates_with AttachmentSizeValidator, :attributes => :attachable_document, :less_than => 1.megabytes
+  validates_attachment_file_name :attachable_document, :matches => [/txt\Z/, /odt\Z/, /pdf\Z/]
+  #validates_with AttachmentSizeValidator, :attributes => :attachable_document, :less_than => 1.megabytes
   belongs_to :attachable, polymorphic: true
   after_initialize :set_defaults, :if => :new_record?
 
