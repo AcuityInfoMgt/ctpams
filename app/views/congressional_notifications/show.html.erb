@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @congressional_notification.name %>
+</p>
+
+<p>
+  <strong>Cn number:</strong>
+  <%= @congressional_notification.cn_number %>
+</p>
+
+<%= link_to 'Edit', edit_congressional_notification_path(@congressional_notification) %> |
+<%= link_to 'Back', congressional_notifications_path %>
