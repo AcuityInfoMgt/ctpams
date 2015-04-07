@@ -195,7 +195,7 @@
   <strong>Attached Files:</strong>
 <ul>
   <% @project.attached_files.each do |attached_file| %>
-      <li><%= attached_file.name %> - <%= image_tag attached_file.attachable_document.url(:thumb) %> </li>
+      <li><%= link_to attached_file.name, attached_file.attachable_document.url %> </li>
   <% end %>
 </ul>
 </p>
