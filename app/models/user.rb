@@ -14,4 +14,10 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable #, :confirmable
+
+  def get_project_workload
+    @role = self.role
+
+  end
+
 end

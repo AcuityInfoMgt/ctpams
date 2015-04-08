@@ -26,4 +26,5 @@ class Project < ActiveRecord::Base
     self.implementation_status ||= :'Pre-Implementation'
     self.is_active ||= true
   end
+
 end
