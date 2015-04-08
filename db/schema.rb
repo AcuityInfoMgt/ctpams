@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150406191504) do
+ActiveRecord::Schema.define(version: 20150408185106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,9 +73,10 @@ ActiveRecord::Schema.define(version: 20150406191504) do
   create_table "congressional_notifications", force: :cascade do |t|
     t.string   "name"
     t.string   "cn_number"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "old_id"
+    t.string   "workflow_state"
   end
 
   create_table "countries", force: :cascade do |t|
@@ -156,6 +157,7 @@ ActiveRecord::Schema.define(version: 20150406191504) do
     t.integer  "funding_mechanism_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.string   "workflow_state"
   end
 
   create_table "project_implementers", force: :cascade do |t|
@@ -192,6 +194,7 @@ ActiveRecord::Schema.define(version: 20150406191504) do
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.integer  "old_id"
+    t.string   "workflow_state"
   end
 
   create_table "projects_sub_accounts", id: false, force: :cascade do |t|

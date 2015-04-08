@@ -10,5 +10,41 @@
   <%= @congressional_notification.cn_number %>
 </p>
 
+<p>
+  <strong>Projects:</strong>
+<ul>
+  <% @congressional_notification.projects.each do |project| %>
+      <li><%= link_to project.name, project %></li>
+  <% end %>
+</ul>
+</p>
+
+<p>
+  <strong>Clearances:</strong>
+<ul>
+  <% @congressional_notification.clearances.each do |clearance| %>
+      <li><%= clearance.name %> - <%= clearance.clearance_status %> - <%= clearance.clearance_date %> </li>
+  <% end %>
+</ul>
+</p>
+
+<p>
+  <strong>Attached Files:</strong>
+<ul>
+  <% @congressional_notification.attached_files.each do |attached_file| %>
+      <li><%= link_to attached_file.name, attached_file.attachable_document.url %> </li>
+  <% end %>
+</ul>
+</p>
+
+<p>
+  <strong>Comments:</strong>
+<ul>
+  <% @congressional_notification.comments.each do |comment| %>
+      <li><%= comment.comment_date %> - <%= comment.comments %> - <%= comment.user.name %> - <%= comment.user.role %> </li>
+  <% end %>
+</ul>
+</p>
+
 <%= link_to 'Edit', edit_congressional_notification_path(@congressional_notification) %> |
 <%= link_to 'Back', congressional_notifications_path %>

@@ -23,6 +23,7 @@ gem 'cocoon'
 gem 'figaro'
 gem 'paperclip', '~> 4.2'
 gem 'aws-sdk', '~> 1.5.7'
+gem 'workflow'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]

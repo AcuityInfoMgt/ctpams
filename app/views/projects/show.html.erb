@@ -159,7 +159,7 @@
   <strong>CNs:</strong>
 <ul>
   <% @project.congressional_notifications.each do |cn| %>
-      <li><%= cn.name %> - <%= cn.cn_number %> </li>
+      <li><%= link_to cn.cn_number, cn %> </li>
   <% end %>
 </ul>
 </p>

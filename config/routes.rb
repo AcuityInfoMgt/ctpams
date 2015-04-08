@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get 'workload/index'
+  #get 'workload/index'
+  get 'workload', to: 'workload#index'
 
   get 'workload/dashboard'
 
