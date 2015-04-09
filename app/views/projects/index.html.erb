@@ -10,7 +10,8 @@
       <th>End date</th>
       <th>Budget requested</th>
       <th>Fiscal year</th>
-      <th>Implementation status</th>
+      <th>Current State</th>
+      <th>Implementation Status</th>
       <th>Program</th>
       <th colspan="3"></th>
     </tr>
@@ -24,6 +25,7 @@
         <td><%= project.end_date %></td>
         <td><%= project.budget_requested %></td>
         <td><%= project.fiscal_year %></td>
+        <td><%= project.current_state %></td>
         <td><%= project.implementation_status %></td>
         <td><%= project.program_id %></td>
         <td><%= link_to 'Show', project %></td>
