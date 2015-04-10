@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   get 'workload/dashboard'
 
+  post 'state/:id', to: 'projects#state'
+
   resources :projects
   resources :congressional_notifications, :path => 'cns'
 

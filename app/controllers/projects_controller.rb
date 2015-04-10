@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_filter :authenticate_user!
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :state]
 
   # GET /projects
   # GET /projects.json
@@ -59,6 +59,13 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def state
+    respond_to do |format|
+      format.html { redirect_to @project, notice: 'Project state changed: ' + @project.current_state.to_s }
+      format.json { render :show, status: :created, location: @project }
     end
   end
 
