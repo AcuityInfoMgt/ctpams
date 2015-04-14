@@ -75,5 +75,41 @@ class User < ActiveRecord::Base
     end
   end
 
+  def get_new_cn
+    if self.role == 'admin' || self.role == 'budget'
+      @cns = CongressionalNotification.where(workflow_state: 'new')
+    end
+  end
+
+  def get_submitted_cn
+    if self.role == 'admin' || self.role == 'budget'
+      @cns = CongressionalNotification.where(workflow_state: 'cn_submitted')
+    end
+  end
+
+  def get_legal_pending_cn
+    if self.role == 'admin' || self.role == 'budget' || self.role == 'legal'
+      @cns = CongressionalNotification.where(workflow_state: 'cn_legal_clearance_pending')
+    end
+  end
+
+  def get_clearance_pending_cn
+    if self.role == 'admin' || self.role == 'budget'
+      @cns = CongressionalNotification.where(workflow_state: 'cn_clearance_pending')
+    end
+  end
+
+  def get_congress_pending_cn
+    if self.role == 'admin' || self.role == 'budget'
+      @cns = CongressionalNotification.where(workflow_state: 'cn_congressional_clearance_pending')
+    end
+  end
+
+  def get_hold_cn
+    if self.role == 'admin' || self.role == 'budget'
+      @cns = CongressionalNotification.where(workflow_state: 'cn_on_hold')
+    end
+  end
+
 
 end

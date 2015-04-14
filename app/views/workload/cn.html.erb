@@ -1,0 +1,27 @@
+<h1>CN Workload</h1>
+<%= @user.role %>, <%= current_user.email %>, <%= @user.admin? %>, <%= current_user.id %>,
+<p id="notice"><%= notice %></p>
+
+<% if @cn_new != nil and @cn_new.count > 0 %>
+    <h1>Proposal in Progress</h1>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>CN Number</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @cn_new.each do |cn| %>
+          <tr>
+            <td><%= link_to cn.name, cn %></td>
+            <td><%= cn.cn_number %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <br>
+<% end %>

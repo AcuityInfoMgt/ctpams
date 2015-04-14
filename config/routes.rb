@@ -12,5 +12,6 @@ Rails.application.routes.draw do
   resources :users
 
   get 'workload', to: 'workload#index'
+  get 'cnworkload', to: 'workload#cn'
   get 'workload/dashboard'
 end
