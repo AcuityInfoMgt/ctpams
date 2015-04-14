@@ -21,7 +21,7 @@
       <tbody>
       <% @proposal_in_progress.each do |project| %>
           <tr>
-            <td><%= project.id %> - <%= project.name %></td>
+            <td><%= project.id %> - <%= link_to project.name, project %></td>
             <td><%= project.start_date %></td>
             <td><%= project.end_date %></td>
             <td><%= project.budget_requested %></td>
@@ -56,6 +56,142 @@
       <tbody>
       <% @preliminary_program_review.each do |project| %>
           <tr>
+            <td><%= link_to project.name, project %></td>
+            <td><%= project.start_date %></td>
+            <td><%= project.end_date %></td>
+            <td><%= project.budget_requested %></td>
+            <td><%= project.fiscal_year %></td>
+            <td><%= project.implementation_status %></td>
+            <td><%= project.program_id %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <br>
+<% end %>
+
+<% if @pre_legal_review != nil and @pre_legal_review.count > 0 %>
+    <h1>Pre-Legal Review</h1>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Budget requested</th>
+        <th>Fiscal year</th>
+        <th>Implementation Status</th>
+        <th>Program</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @pre_legal_review.each do |project| %>
+          <tr>
+            <td><%= project.name %></td>
+            <td><%= project.start_date %></td>
+            <td><%= project.end_date %></td>
+            <td><%= project.budget_requested %></td>
+            <td><%= project.fiscal_year %></td>
+            <td><%= project.implementation_status %></td>
+            <td><%= project.program_id %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <br>
+<% end %>
+
+<% if @regional_review != nil and @regional_review.count > 0 %>
+    <h1>Regional Review</h1>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Budget requested</th>
+        <th>Fiscal year</th>
+        <th>Implementation Status</th>
+        <th>Program</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @regional_review.each do |project| %>
+          <tr>
+            <td><%= project.name %></td>
+            <td><%= project.start_date %></td>
+            <td><%= project.end_date %></td>
+            <td><%= project.budget_requested %></td>
+            <td><%= project.fiscal_year %></td>
+            <td><%= project.implementation_status %></td>
+            <td><%= project.program_id %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <br>
+<% end %>
+
+<% if @secondary_program_review != nil and @secondary_program_review.count > 0 %>
+    <h1>Secondary Program Review</h1>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Budget requested</th>
+        <th>Fiscal year</th>
+        <th>Implementation Status</th>
+        <th>Program</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @secondary_program_review.each do |project| %>
+          <tr>
+            <td><%= project.name %></td>
+            <td><%= project.start_date %></td>
+            <td><%= project.end_date %></td>
+            <td><%= project.budget_requested %></td>
+            <td><%= project.fiscal_year %></td>
+            <td><%= project.implementation_status %></td>
+            <td><%= project.program_id %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <br>
+<% end %>
+
+<% if @cn_clearance_pending != nil and @cn_clearance_pending.count > 0 %>
+    <h1>CN Clearance Pending</h1>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Budget requested</th>
+        <th>Fiscal year</th>
+        <th>Implementation Status</th>
+        <th>Program</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @cn_clearance_pending.each do |project| %>
+          <tr>
             <td><%= project.name %></td>
             <td><%= project.start_date %></td>
             <td><%= project.end_date %></td>
@@ -72,196 +208,72 @@
 <% end %>
 
 
-<h1>Pre-Legal Review</h1>
+<% if @funding_clearance_pending != nil and @funding_clearance_pending.count > 0 %>
+    <h1>Funding Clearance Pending</h1>
 
-<table>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Start date</th>
-    <th>End date</th>
-    <th>Budget requested</th>
-    <th>Fiscal year</th>
-    <th>Implementation Status</th>
-    <th>Program</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @pre_legal_review.each do |project| %>
+    <table>
+      <thead>
       <tr>
-        <td><%= project.name %></td>
-        <td><%= project.start_date %></td>
-        <td><%= project.end_date %></td>
-        <td><%= project.budget_requested %></td>
-        <td><%= project.fiscal_year %></td>
-        <td><%= project.implementation_status %></td>
-        <td><%= project.program_id %></td>
+        <th>Name</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Budget requested</th>
+        <th>Fiscal year</th>
+        <th>Implementation Status</th>
+        <th>Program</th>
       </tr>
-  <% end %>
-  </tbody>
-</table>
+      </thead>
 
-<br>
+      <tbody>
+      <% @funding_clearance_pending.each do |project| %>
+          <tr>
+            <td><%= project.name %></td>
+            <td><%= project.start_date %></td>
+            <td><%= project.end_date %></td>
+            <td><%= project.budget_requested %></td>
+            <td><%= project.fiscal_year %></td>
+            <td><%= project.implementation_status %></td>
+            <td><%= project.program_id %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
 
-<h1>Regional Review</h1>
+    <br>
+<% end %>
 
-<table>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Start date</th>
-    <th>End date</th>
-    <th>Budget requested</th>
-    <th>Fiscal year</th>
-    <th>Implementation Status</th>
-    <th>Program</th>
-  </tr>
-  </thead>
+<% if @obligation_pending != nil and @obligation_pending.count > 0 %>
+    <h1>Obligation Pending</h1>
 
-  <tbody>
-  <% @regional_review.each do |project| %>
+    <table>
+      <thead>
       <tr>
-        <td><%= project.name %></td>
-        <td><%= project.start_date %></td>
-        <td><%= project.end_date %></td>
-        <td><%= project.budget_requested %></td>
-        <td><%= project.fiscal_year %></td>
-        <td><%= project.implementation_status %></td>
-        <td><%= project.program_id %></td>
+        <th>Name</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Budget requested</th>
+        <th>Fiscal year</th>
+        <th>Implementation Status</th>
+        <th>Program</th>
       </tr>
-  <% end %>
-  </tbody>
-</table>
+      </thead>
 
-<br>
+      <tbody>
+      <% @obligation_pending.each do |project| %>
+          <tr>
+            <td><%= project.name %></td>
+            <td><%= project.start_date %></td>
+            <td><%= project.end_date %></td>
+            <td><%= project.budget_requested %></td>
+            <td><%= project.fiscal_year %></td>
+            <td><%= project.implementation_status %></td>
+            <td><%= project.program_id %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
 
-<h1>Secondary Program Review</h1>
-
-<table>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Start date</th>
-    <th>End date</th>
-    <th>Budget requested</th>
-    <th>Fiscal year</th>
-    <th>Implementation Status</th>
-    <th>Program</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @secondary_program_review.each do |project| %>
-      <tr>
-        <td><%= project.name %></td>
-        <td><%= project.start_date %></td>
-        <td><%= project.end_date %></td>
-        <td><%= project.budget_requested %></td>
-        <td><%= project.fiscal_year %></td>
-        <td><%= project.implementation_status %></td>
-        <td><%= project.program_id %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<h1>CN Clearance Pending</h1>
-
-<table>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Start date</th>
-    <th>End date</th>
-    <th>Budget requested</th>
-    <th>Fiscal year</th>
-    <th>Implementation Status</th>
-    <th>Program</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @cn_clearance_pending.each do |project| %>
-      <tr>
-        <td><%= project.name %></td>
-        <td><%= project.start_date %></td>
-        <td><%= project.end_date %></td>
-        <td><%= project.budget_requested %></td>
-        <td><%= project.fiscal_year %></td>
-        <td><%= project.implementation_status %></td>
-        <td><%= project.program_id %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<h1>Funding Clearance Pending</h1>
-
-<table>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Start date</th>
-    <th>End date</th>
-    <th>Budget requested</th>
-    <th>Fiscal year</th>
-    <th>Implementation Status</th>
-    <th>Program</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @funding_clearance_pending.each do |project| %>
-      <tr>
-        <td><%= project.name %></td>
-        <td><%= project.start_date %></td>
-        <td><%= project.end_date %></td>
-        <td><%= project.budget_requested %></td>
-        <td><%= project.fiscal_year %></td>
-        <td><%= project.implementation_status %></td>
-        <td><%= project.program_id %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<h1>Obligation Pending</h1>
-
-<table>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Start date</th>
-    <th>End date</th>
-    <th>Budget requested</th>
-    <th>Fiscal year</th>
-    <th>Implementation Status</th>
-    <th>Program</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @obligation_pending.each do |project| %>
-      <tr>
-        <td><%= project.name %></td>
-        <td><%= project.start_date %></td>
-        <td><%= project.end_date %></td>
-        <td><%= project.budget_requested %></td>
-        <td><%= project.fiscal_year %></td>
-        <td><%= project.implementation_status %></td>
-        <td><%= project.program_id %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
-
-<br>
+    <br>
+<% end %>
 
 <%= link_to 'New Project', new_project_path %>
