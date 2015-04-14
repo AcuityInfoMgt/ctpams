@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150408185106) do
+ActiveRecord::Schema.define(version: 20150410160842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -196,6 +196,8 @@ ActiveRecord::Schema.define(version: 20150408185106) do
     t.integer  "old_id"
     t.string   "workflow_state"
   end
+
+  add_index "projects", ["workflow_state"], name: "index_projects_on_workflow_state", using: :btree
 
   create_table "projects_sub_accounts", id: false, force: :cascade do |t|
     t.integer "project_id"

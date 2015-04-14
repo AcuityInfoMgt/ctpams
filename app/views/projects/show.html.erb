@@ -222,7 +222,7 @@
 
 <%= simple_form_for @project,
                     :url => url_for(:action => 'state', :controller => 'projects'),
-                    :method => 'post' do |f| %>
+                    :method => 'patch' do |f| %>
     <div class="form-actions">
       <%= f.button :submit %>
     </div>

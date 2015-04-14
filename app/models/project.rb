@@ -24,36 +24,36 @@ class Project < ActiveRecord::Base
   after_initialize :set_defaults, :if => :new_record?
 
   workflow do
-    state :'Proposal in Progress' do
-      event :submit, :transitions_to => :'Preliminary Program Review'
+    state :proposal_in_progress do
+      event :submit, :transitions_to => :preliminary_program_review
     end
-    state :'Preliminary Program Review' do
-      event :send_to_legal, :transitions_to => :'Pre-Legal Review'
-      event :request_changes, :transitions_to => :'Proposal in Progress'
-      event :deny, :transitions_to => :Denied
+    state :preliminary_program_review do
+      event :send_to_legal, :transitions_to => :pre_legal_review
+      event :request_changes, :transitions_to => :proposal_in_progress
+      event :deny, :transitions_to => :proposal_denied
     end
-    state :'Pre-Legal Review' do
-      event :send_to_program, :transitions_to => :'Preliminary Program Review'
-      event :preclear_proposal, :transitions_to => :'Regional Review'
+    state :pre_legal_review do
+      event :send_to_program, :transitions_to => :preliminary_program_review
+      event :preclear_proposal, :transitions_to => :regional_review
     end
-    state :'Regional Review' do
-      event :send_comments, :transitions_to => :'Secondary Program Review'
+    state :regional_review do
+      event :send_comments, :transitions_to => :secondary_program_review
     end
-    state :'Secondary Program Review' do
-      event :approve, :transitions_to => :'CN Clearance Pending'
-      event :deny, :transitions_to => :Denied
+    state :secondary_program_review do
+      event :approve, :transitions_to => :cn_clearance_pending
+      event :deny, :transitions_to => :proposal_denied
     end
-    state :'CN Clearance Pending' do
-      event :cn_cleared, :transitions_to => :'Funding Clearance Pending'
+    state :cn_clearance_pending do
+      event :cn_cleared, :transitions_to => :funding_clearance_pending
     end
-    state :'Funding Clearance Pending' do
-      event :clear_funding, :transitions_to => :'Obligation Pending'
+    state :funding_clearance_pending do
+      event :clear_funding, :transitions_to => :obligation_pending
     end
-    state :'Obligation Pending' do
-      event :obligate_all_funds, :transitions_to => :'Project Fully Obligated'
+    state :obligation_pending do
+      event :obligate_all_funds, :transitions_to => :project_fully_obligated
     end
-    state :'Project Fully Obligated'
-    state :Denied
+    state :project_fully_obligated
+    state :proposal_denied
   end
 
 

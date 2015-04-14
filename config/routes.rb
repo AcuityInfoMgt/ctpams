@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
   #get 'workload/index'
-  get 'workload', to: 'workload#index'
 
-  get 'workload/dashboard'
 
-  post 'state/:id', to: 'projects#state'
+  patch 'state/:id', to: 'projects#state'
 
   resources :projects
   resources :congressional_notifications, :path => 'cns'
@@ -12,4 +10,7 @@ Rails.application.routes.draw do
   root to: 'projects#index'
   devise_for :users
   resources :users
+
+  get 'workload', to: 'workload#index'
+  get 'workload/dashboard'
 end
