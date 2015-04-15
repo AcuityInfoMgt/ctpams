@@ -10,15 +10,6 @@ class CongressionalNotification < ActiveRecord::Base
     state :new do
       event :submit_cn, :transitions_to => :cn_submitted
     end
-    state :cn_submitted do
-      event :begin_clearance_process, :transitions_to => :cn_legal_clearance_pending
-      event :hold, :transitions_to => :cn_on_hold
-      event :deny, :transitions_to => :cn_denied
-    end
-    state :cn_legal_clearance_pending do
-      event :clear, :transitions_to => :cn_clearance_pending
-      event :deny, :transitions_to => :cn_submitted
-    end
     state :cn_clearance_pending do
       event :clear, :transitions_to => :cn_congressional_clearance_pending
       event :hold, :transitions_to => :cn_on_hold

@@ -18,8 +18,6 @@ class WorkloadController < ApplicationController
     @uid = current_user.id
     @user = User.find(@uid)
     @cn_new = current_user.get_new_cn
-    @cn_submitted = current_user.get_submitted_cn
-    @cn_legal_pending = current_user.get_legal_pending_cn
     @cn_clearance_pending = current_user.get_clearance_pending_cn
     @cn_congress_pending = current_user.get_congress_pending_cn
     @cn_hold = current_user.get_hold_cn
