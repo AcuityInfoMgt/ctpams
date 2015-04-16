@@ -8,7 +8,7 @@ class CongressionalNotification < ActiveRecord::Base
 
   workflow do
     state :new do
-      event :submit_cn, :transitions_to => :cn_submitted
+      event :submit_cn, :transitions_to => :cn_clearance_pending
     end
     state :cn_clearance_pending do
       event :clear, :transitions_to => :cn_congressional_clearance_pending
@@ -21,7 +21,7 @@ class CongressionalNotification < ActiveRecord::Base
       event :deny, :transitions_to => :cn_denied
     end
     state :cn_on_hold   do
-      event :reactivate, :transitions_to => :cn_submitted
+      event :reactivate, :transitions_to => :cn_clearance_pending
       event :deny, :transitions_to => :cn_denied
     end
     state :cn_cleared

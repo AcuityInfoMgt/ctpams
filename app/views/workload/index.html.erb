@@ -173,7 +173,7 @@
     <br>
 <% end %>
 
-<% if @cn_clearance_pending != nil and @cn_clearance_pending.count > 0 %>
+<% if @project_cn_pending != nil and @project_cn_pending.count > 0 %>
     <h1>CN Clearance Pending</h1>
 
     <table>
@@ -190,7 +190,7 @@
       </thead>
 
       <tbody>
-      <% @cn_clearance_pending.each do |project| %>
+      <% @project_cn_pending.each do |project| %>
           <tr>
             <td><%= project.name %></td>
             <td><%= project.start_date %></td>
@@ -208,7 +208,7 @@
 <% end %>
 
 
-<% if @funding_clearance_pending != nil and @funding_clearance_pending.count > 0 %>
+<% if @project_funding_clearance_pending != nil and @project_funding_clearance_pending.count > 0 %>
     <h1>Funding Clearance Pending</h1>
 
     <table>
@@ -225,7 +225,7 @@
       </thead>
 
       <tbody>
-      <% @funding_clearance_pending.each do |project| %>
+      <% @project_funding_clearance_pending.each do |project| %>
           <tr>
             <td><%= project.name %></td>
             <td><%= project.start_date %></td>
@@ -277,3 +277,177 @@
 <% end %>
 
 <%= link_to 'New Project', new_project_path %>
+
+<h1>CN Workload</h1>
+<%= current_user.role %>, <%= current_user.email %>, <%= current_user.admin? %>, <%= current_user.id %>,
+<p id="notice"><%= notice %></p>
+
+<% if @cn_new != nil and @cn_new.count > 0 %>
+    <h1>CN Needs Submission</h1>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>CN Number</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @cn_new.each do |cn| %>
+          <tr>
+            <td><%= link_to cn.name, cn %></td>
+            <td><%= cn.cn_number %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <br>
+<% end %>
+
+<% if @cn_clearance_pending != nil and @cn_clearance_pending.count > 0 %>
+    <h1>CN Clearance Pending</h1>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>CN Number</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @cn_clearance_pending.each do |cn| %>
+          <tr>
+            <td><%= link_to cn.name, cn %></td>
+            <td><%= cn.cn_number %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <br>
+<% end %>
+
+<% if @cn_congress_pending != nil and @cn_congress_pending.count > 0 %>
+    <h1>CN Congressional Clearance Pending</h1>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>CN Number</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @cn_congress_pending.each do |cn| %>
+          <tr>
+            <td><%= link_to cn.name, cn %></td>
+            <td><%= cn.cn_number %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <br>
+<% end %>
+
+<% if @cn_hold != nil and @cn_hold.count > 0 %>
+    <h1>CN On Hold</h1>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>CN Number</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @cn_hold.each do |cn| %>
+          <tr>
+            <td><%= link_to cn.name, cn %></td>
+            <td><%= cn.cn_number %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <br>
+<% end %>
+
+
+<% if @funding_confirmation_pending != nil and @funding_confirmation_pending.count > 0 %>
+    <h1>Funding Confirmation Pending</h1>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Project Name</th>
+        <th>Funding Mechanism</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @funding_confirmation_pending.each do |pfm| %>
+          <tr>
+            <td><%= pfm.project.try(:name) %></td>
+            <td><%= pfm.funding_mechanism.name %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <br>
+<% end %>
+
+<% if @funding_clearance_pending != nil and @funding_clearance_pending.count > 0  %>
+    <h1>Funding Clearance Pending</h1>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Project Name</th>
+        <th>Funding Mechanism</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @funding_clearance_pending.each do |pfm| %>
+          <tr>
+            <td><%= pfm.project.try(:name) %></td>
+            <td><%= pfm.funding_mechanism.name %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <br>
+<% end %>
+
+<% if @funding_hold != nil and @funding_hold.count > 0 %>
+    <h1>Funding On Hold</h1>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Project Name</th>
+        <th>Funding Mechanism</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @funding_hold.each do |pfm| %>
+          <tr>
+            <td><%= pfm.project.try(:name) %></td>
+            <td><%= pfm.funding_mechanism.name %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <br>
+<% end %>
+

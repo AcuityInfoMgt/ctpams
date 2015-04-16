@@ -5,23 +5,24 @@ class WorkloadController < ApplicationController
     @uid = current_user.id
     @user = User.find(@uid)
     @proposal_in_progress = current_user.get_proposal_in_progress
-    @preliminary_program_review = current_user.get_preliminary_program_review
-    @pre_legal_review = current_user.get_pre_legal_review
-    @regional_review = current_user.get_regional_review
-    @secondary_program_review = current_user.get_secondary_program_review
-    @cn_clearance_pending = current_user.get_cn_clearance_pending
-    @funding_clearance_pending = current_user.get_funding_clearance_pending
-    @obligation_pending = current_user.get_obligation_pending
+    @preliminary_program_review = current_user.get_project_preliminary
+    @pre_legal_review = current_user.get_project_pre_legal
+    @regional_review = current_user.get_project_regional
+    @secondary_program_review = current_user.get_project_secondary
+    @project_cn_pending = current_user.get_project_cn
+    @project_funding_clearance_pending = current_user.get_project_funding
+    @obligation_pending = current_user.get_project_obligation
+
+    @cn_new = current_user.get_cn_new
+    @cn_clearance_pending = current_user.get_cn_clearance
+    @cn_congress_pending = current_user.get_cn_congress
+    @cn_hold = current_user.get_cn_hold
+
+    @funding_confirmation_pending = current_user.get_funding_confirmation
+    @funding_clearance_pending = current_user.get_funding_clearance
+    @funding_hold = current_user.get_funding_hold
   end
 
-  def cn
-    @uid = current_user.id
-    @user = User.find(@uid)
-    @cn_new = current_user.get_new_cn
-    @cn_clearance_pending = current_user.get_clearance_pending_cn
-    @cn_congress_pending = current_user.get_congress_pending_cn
-    @cn_hold = current_user.get_hold_cn
-  end
 
   def dashboard
   end

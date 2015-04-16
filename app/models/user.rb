@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def get_preliminary_program_review
+  def get_project_preliminary
     if self.role == 'reviewer'
       @projects = Project.where(workflow_state: 'preliminary_program_review').where(program_id: self.programs).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id)
     elsif self.role == 'admin'
@@ -33,13 +33,13 @@ class User < ActiveRecord::Base
     end
   end
 
-  def get_pre_legal_review
+  def get_project_pre_legal
     if self.role == 'admin' || self.role == 'legal'
       @projects = Project.where(workflow_state: 'pre_legal_review')
     end
   end
 
-  def get_regional_review
+  def get_project_regional
     if self.role == 'regional'
       @projects = Project.where(workflow_state: 'regional_review').where(program_id: self.programs).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id)
     elsif self.role == 'admin'
@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def get_secondary_program_review
+  def get_project_secondary
     if self.role == 'reviewer'
       @projects = Project.where(workflow_state: 'secondary_program_review').where(program_id: self.programs).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id)
     elsif self.role == 'admin'
@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def get_cn_clearance_pending
+  def get_project_cn
     if self.role == 'reviewer'
       @projects = Project.where(workflow_state: 'cn_clearance_pending').where(program_id: self.programs).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id)
     elsif self.role == 'admin' || self.role == 'budget'
@@ -63,39 +63,57 @@ class User < ActiveRecord::Base
     end
   end
 
-  def get_funding_clearance_pending
+  def get_project_funding
     if self.role == 'admin' || self.role == 'budget'
       @projects = Project.where(workflow_state: 'funding_clearance_pending')
     end
   end
 
-  def get_obligation_pending
+  def get_project_obligation
     if self.role == 'admin' || self.role == 'budget'
       @projects = Project.where(workflow_state: 'obligation_pending')
     end
   end
 
-  def get_new_cn
+  def get_cn_new
     if self.role == 'admin' || self.role == 'budget'
       @cns = CongressionalNotification.where(workflow_state: 'new')
     end
   end
 
-  def get_clearance_pending_cn
+  def get_cn_clearance
     if self.role == 'admin' || self.role == 'budget'
       @cns = CongressionalNotification.where(workflow_state: 'cn_clearance_pending')
     end
   end
 
-  def get_congress_pending_cn
+  def get_cn_congress
     if self.role == 'admin' || self.role == 'budget'
       @cns = CongressionalNotification.where(workflow_state: 'cn_congressional_clearance_pending')
     end
   end
 
-  def get_hold_cn
+  def get_cn_hold
     if self.role == 'admin' || self.role == 'budget'
       @cns = CongressionalNotification.where(workflow_state: 'cn_on_hold')
+    end
+  end
+
+  def get_funding_confirmation
+    if self.role == 'admin' || self.role == 'budget'
+      @funding_mechanisms = ProjectFundingMechanism.includes(:project, :funding_mechanism).where(workflow_state: 'funding_mechanism_confirmation_pending').where(projects: { workflow_state: 'funding_clearance_pending' })
+    end
+  end
+
+  def get_funding_clearance
+    if self.role == 'admin' || self.role == 'budget'
+      @funding_mechanisms = ProjectFundingMechanism.includes(:project, :funding_mechanism).where(workflow_state: 'funding_clearance_pending')
+    end
+  end
+
+  def get_funding_hold
+    if self.role == 'admin' || self.role == 'budget'
+      @funding_mechanisms = ProjectFundingMechanism.includes(:project, :funding_mechanism).where(workflow_state: 'funding_on_hold')
     end
   end
 
