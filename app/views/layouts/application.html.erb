@@ -2,23 +2,30 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Ctpams" %></title>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Ctpams" %>">
+    <title><%= content_for?(:title) ? yield(:title) : "Project Activity Management System (PAMS)" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Project Activity Management System (PAMS)" %>">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag 'bootstrap-theme', media: 'all', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag 'sb-admin-2', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'metisMenu', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'custom', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'sb-admin-2', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'metisMenu', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <header>
+    <div id="wrapper">
       <%= render 'layouts/navigation' %>
-    </header>
-    <main role="main">
-       <%= render 'layouts/messages' %>
-       <%= yield %>
-    </main>
+      <div id="page-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12">
+                <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

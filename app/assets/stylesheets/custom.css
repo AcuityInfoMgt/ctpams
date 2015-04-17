@@ -38,7 +38,10 @@ p.cbox_messagebox {
   text-decoration: underline;
 }
 
-body {color: #4f4f4f}
+body {
+    color: #4f4f4f;
+    padding-top:50px;
+}
 
 .ct-logo-back {
 	  	position:fixed;bottom:5px;left:5px;z-index:1;opacity:0.1;filter:alpha(opacity=10);
