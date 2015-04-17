@@ -1,0 +1,62 @@
+<%= simple_form_for(@project, multipart: true) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.input :name, label: 'Project Name' %>
+      <%= f.input :objective, label: 'Project Summary' %>
+      <label>Project Owners</label>
+      <div id="owners">
+        <%= f.simple_fields_for :people do |person| %>
+            <%= render 'person_fields', :f => person %>
+        <% end %>
+        <div class="links">
+          <%= link_to_add_association 'Add Project Owner', f, :people, class: 'btn btn-default btn-xs'  %>
+        </div><br>
+      </div>
+      <%= f.input :description, label: 'Description of Project Proposed' %>
+      <%= f.input :start_date, as: :datepicker  %>
+      <%= f.input :end_date, as: :datepicker %>
+      <%= f.input :budget_requested %>
+      <%= f.input :fiscal_year %>
+      <%= f.input :objective %>
+      <%= f.input :interest %>
+      <%= f.input :law_enforcement %>
+      <%= f.input :coordination %>
+      <%= f.input :lessons_learned %>
+      <%= f.input :sustainability %>
+      <%= f.input :city_province %>
+      <%= f.input :program_audience %>
+      <%= f.input :reprogram %>
+      <%= f.input :reprogram_comments %>
+      <%= f.select(:implementation_status, Project.implementation_statuses.keys.map {|implementation_status| [implementation_status.titleize,implementation_status]}) %>
+      <%= f.association :program %>
+      <%= f.association :sub_accounts %>
+      <%= f.association :user %>
+      <%= f.input :is_archived %>
+      <%= f.input :is_denied %>
+      <%= f.input :is_active %>
+      <%= f.association :countries %>
+      <h3>Budget Items</h3>
+      <div id="budgetitems">
+        <%= f.simple_fields_for :budget_items do |budget_item| %>
+            <%= render 'budget_item_fields', :f => budget_item %>
+        <% end %>
+        <div class="links">
+          <%= link_to_add_association 'add budget item', f, :budget_items %>
+        </div>
+      </div>
+      <h3>Attached Files</h3>
+      <div id="attached_files">
+        <%= f.simple_fields_for :attached_files do |attached_file| %>
+            <%= render 'attached_file_fields', :f => attached_file %>
+        <% end %>
+        <div class="links">
+          <%= link_to_add_association 'add document', f, :attached_files %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit %>
+    </div>
+<% end %>

@@ -1,0 +1,121 @@
+.fixed-alert {position: fixed;
+width: 90%;
+z-index: 99996;
+}
+
+div.cbox_messagebox_info, div.cbox_messagebox_warning, div.cbox_messagebox_error {
+		padding: 10px 10px 10px ! important;
+        margin: 0 auto 0px ! important;
+        background: rgb(255, 255, 255) ! important;
+        background: rgba(255, 255, 255, .8) ! important;
+        border: 1px solid #e5e5e5 ! important;
+        -webkit-border-radius: 5px ! important;
+           -moz-border-radius: 5px ! important;
+                border-radius: 5px ! important;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05) ! important;
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05) ! important;
+                box-shadow: 0 1px 2px rgba(0,0,0,.05) ! important;
+}
+
+p.cbox_messagebox {
+	color: #c09853 ! important;
+	text-align: center ! important;
+	font-size: 16px ! important;
+	
+}
+
+.bigger {font-size: 120%;}
+
+.breadcrumb {font-size: 120%; }
+
+.panel-title {
+  color: #337ab7;
+  text-decoration: none;
+}
+.panel-title:hover,
+.panel-title:focus {
+  color: #23527c;
+  text-decoration: underline;
+}
+
+body {color: #4f4f4f}
+
+.ct-logo-back {
+	  	position:fixed;bottom:5px;left:5px;z-index:1;opacity:0.1;filter:alpha(opacity=10);
+}
+
+.handpointer { cursor: pointer; cursor: hand; }
+
+
+#page-wrapper, #auth-body {
+	background-image:url('../images/bg-map.jpg');
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.container-fluid {
+background: rgb(255, 255, 255);
+        background: rgba(119, 136, 153, .1);
+}
+
+
+
+
+/* PRE LOADER */
+.loadstack {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  z-index: 99996;
+  height: 100%;
+  width: 100%;
+  overflow: hidden !important;
+}
+
+.spinner {
+  width: 100px;
+  height: 100px;
+  margin: 100px auto;
+  background-color: #ccc;
+  border-radius: 100%;  
+  top: 50%;
+  position: absolute;
+  left: 50%;
+  margin-left: -50px;
+  margin-top: -50px;
+  -webkit-animation:scaleout 1.0s infinite ease-in-out;
+  -moz-animation:scaleout 1.0s infinite ease-in-out;
+  -ms-animation:scaleout 1.0s infinite ease-in-out;
+  -o-animation:scaleout 1.0s infinite ease-in-out;
+  animation:scaleout 1.0s infinite ease-in-out;
+}
+
+@-webkit-keyframes scaleout {
+  0% {-webkit-transform: scale(0.0);}
+  100% {opacity: 0;-webkit-transform: scale(1.0);}
+}
+
+@-moz-keyframes scaleout {
+  0% {-moz-transform: scale(0.0);}
+  100% {opacity: 0;-moz-transform: scale(1.0);}
+}
+
+@-ms-keyframes scaleout {
+  0% {-ms-transform: scale(0.0);}
+  100% {opacity: 0;-ms-transform: scale(1.0);}
+}
+
+@-o-keyframes scaleout {
+  0% {-o-transform: scale(0.0);}
+  100% {opacity: 0;-o-transform: scale(1.0);}
+}
+
+@keyframes scaleout {
+  0% {transform: scale(0.0);}
+  100% {opacity: 0;transform: scale(1.0);}
+}
+
+

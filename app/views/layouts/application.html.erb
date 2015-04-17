@@ -5,7 +5,11 @@
     <title><%= content_for?(:title) ? yield(:title) : "Ctpams" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Ctpams" %>">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'bootstrap-theme', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'sb-admin-2', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'sb-admin-2', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'metisMenu', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
   </head>
   <body>

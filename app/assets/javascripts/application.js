@@ -11,13 +11,13 @@
 // about supported directives.
 //
 //= require jquery
+//= require bootstrap-sprockets
 //= require jquery_ujs
-//= require jquery-ui
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
 //= require cocoon
 
-$(document).on("page:load ready", function(){
-    $("input.datepicker").datepicker({ dateFormat: 'yy-mm-dd' });
-});
+//$(document).on("page:load ready", function(){
+ //   $("input.datepicker").datepicker({ dateFormat: 'yy-mm-dd' });
+//});
