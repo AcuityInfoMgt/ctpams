@@ -2,6 +2,7 @@
     <%= f.error_notification %>
 
     <div class="form-inputs">
+      <%= f.association :program %>
       <%= f.input :name, label: 'Project Name' %>
       <%= f.input :objective, label: 'Project Summary' %>
       <label>Project Owners</label>
@@ -14,28 +15,20 @@
         </div><br>
       </div>
       <%= f.input :description, label: 'Description of Project Proposed' %>
-      <%= f.input :start_date, as: :datepicker  %>
-      <%= f.input :end_date, as: :datepicker %>
-      <%= f.input :budget_requested %>
-      <%= f.input :fiscal_year %>
-      <%= f.input :objective %>
-      <%= f.input :interest %>
-      <%= f.input :law_enforcement %>
-      <%= f.input :coordination %>
-      <%= f.input :lessons_learned %>
-      <%= f.input :sustainability %>
-      <%= f.input :city_province %>
-      <%= f.input :program_audience %>
-      <%= f.input :reprogram %>
-      <%= f.input :reprogram_comments %>
-      <%= f.select(:implementation_status, Project.implementation_statuses.keys.map {|implementation_status| [implementation_status.titleize,implementation_status]}) %>
-      <%= f.association :program %>
-      <%= f.association :sub_accounts %>
-      <%= f.association :user %>
-      <%= f.input :is_archived %>
-      <%= f.input :is_denied %>
-      <%= f.input :is_active %>
-      <%= f.association :countries %>
+      <%= f.input :interest, label: 'Specify explicitly how this proposal advances US national security and foreign policy interests (CVE: Project Context/Rationale)' %>
+      <%= f.input :law_enforcement, label: 'Specify explicitly how this activity supports law enforcement\'s ability to counter terrorism or efforts to counter terrorist financing (CVE: Law Enforcement Nexus - NADR funding only)' %>
+      <%= f.input :coordination, label: 'What have the sponsors of the project done to coordinate this program with this interagency or multilateral partners? (CVE: Coordination)' %>
+      <%= f.input :sustainability, label: 'Sustainability (if applicable)' %>
+      <%= f.input :lessons_learned, label: 'Project Monitoring (CVE: Measuring Impact and Effectiveness)' %>
+      <%= f.input :start_date, as: :datepicker, label: 'Start Date'  %>
+      <%= f.input :end_date, as: :datepicker, label: 'End Date' %>
+      <%= f.association :countries, label: 'Countries Engaged' %>
+      <%= f.input :city_province, label: 'Neighborhood, City or Province (if applicable)' %>
+      <%= f.input :program_audience, label: 'Program Audience' %>
+      <%= f.association :sub_accounts, label: 'Funding Sources' %>
+      <%= f.hidden_field :user_id, :value => current_user.id %>
+      <%= f.input :budget_requested, label: 'Funding Amount Requested' %>
+      <%= f.input :fiscal_year, label: 'Fiscal Year' %>
       <h3>Budget Items</h3>
       <div id="budgetitems">
         <%= f.simple_fields_for :budget_items do |budget_item| %>
