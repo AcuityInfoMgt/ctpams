@@ -26,4 +26,8 @@ class WorkloadController < ApplicationController
 
   def dashboard
   end
+
+  def my_projects
+  end
+
 end
