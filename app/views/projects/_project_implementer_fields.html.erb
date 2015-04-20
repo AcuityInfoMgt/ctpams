@@ -1,0 +1,10 @@
+<div class="nested-fields">
+  <%= f.collection_select(:implementer_id, Implementer.all, :id, :name) %>
+  <%= f.input :description, label: 'Details' %>
+  <%= f.input :poc_name, label: 'POC Name' %>
+  <%= f.input :poc_email, label: 'POC Email' %>
+  <%= f.input :poc_phone, label: 'POC Phone' %>
+
+
+  <%= link_to_remove_association "remove", f %>
+</div>

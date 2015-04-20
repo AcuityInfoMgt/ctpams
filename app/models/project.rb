@@ -15,6 +15,7 @@ class Project < ActiveRecord::Base
   has_many :budget_items
   accepts_nested_attributes_for :budget_items, :reject_if => :all_blank, :allow_destroy => true
   has_many :project_implementers
+  accepts_nested_attributes_for :project_implementers, :reject_if => :all_blank, :allow_destroy => true
   has_many :implementers, through:  :project_implementers
   has_many :project_funding_mechanisms
   has_many :funding_mechanisms, through: :project_funding_mechanisms
