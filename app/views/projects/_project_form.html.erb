@@ -35,7 +35,11 @@
       </div>
       <%= f.input :city_province, label: 'Neighborhood, City or Province (if applicable)' %>
       <%= f.input :program_audience, label: 'Program Audience' %>
-      <%= f.association :funding_mechanisms, label: 'Funding Mechanism Type', input_html: { multiple: false }  %>
+
+      <%= f.simple_fields_for :project_funding_mechanisms do |project_funding_mechanism| %>
+          <%= project_funding_mechanism.association :funding_mechanism, label: 'Funding Mechanism'  %>
+      <% end %>
+
       <%= f.association :sub_accounts, label: 'Funding Sources' %>
       <%= f.hidden_field :user_id, :value => current_user.id %>
       <%= f.input :budget_requested, label: 'Funding Amount Requested' %>
