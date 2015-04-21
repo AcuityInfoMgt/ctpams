@@ -2,6 +2,8 @@
 <%= @user.role %>, <%= current_user.email %>, <%= @user.admin? %>, <%= current_user.id %>,
 <p id="notice"><%= notice %></p>
 
+<%= link_to 'New Project', new_project_path %>
+
 <% if @proposal_in_progress != nil and @proposal_in_progress.count > 0 %>
     <h1>Proposal in Progress</h1>
 

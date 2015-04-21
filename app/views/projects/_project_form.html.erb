@@ -2,8 +2,9 @@
     <%= f.error_notification %>
 
     <div class="form-inputs">
-      <%= f.association :program %>
+
       <%= f.input :name, label: 'Project Name' %>
+      <%= f.association :program %>
       <%= f.input :objective, label: 'Project Summary' %>
       <label>Project Owners</label>
       <div id="owners">
@@ -20,7 +21,7 @@
       <%= f.input :coordination, label: 'What have the sponsors of the project done to coordinate this program with this interagency or multilateral partners? (CVE: Coordination)' %>
       <%= f.input :sustainability, label: 'Sustainability (if applicable)' %>
       <%= f.input :lessons_learned, label: 'Project Monitoring (CVE: Measuring Impact and Effectiveness)' %>
-      <%= f.input :start_date, as: :datepicker, label: 'Start Date'  %>
+      <%= f.input :start_date, as: :datepicker, label: 'Start Date' %>
       <%= f.input :end_date, as: :datepicker, label: 'End Date' %>
       <%= f.association :countries, label: 'Countries Engaged' %>
       <h3>Imlementing Partners</h3>
