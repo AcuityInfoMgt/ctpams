@@ -18,6 +18,6 @@
 //= require_tree .
 //= require cocoon
 
-//$(document).on("page:load ready", function(){
- //   $("input.datepicker").datepicker({ dateFormat: 'yy-mm-dd' });
-//});
+$(document).on("page:load ready", function(){
+    $("input.datepicker").datepicker({ dateFormat: 'yy-mm-dd' });
+});
