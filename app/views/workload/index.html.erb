@@ -2,7 +2,7 @@
 <%= @user.role %>, <%= current_user.email %>, <%= @user.admin? %>, <%= current_user.id %>,
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'New Project', new_project_path %>
+
 
 <% if @proposal_in_progress != nil and @proposal_in_progress.count > 0 %>
     <h1>Proposal in Progress</h1>
@@ -23,7 +23,7 @@
       <tbody>
       <% @proposal_in_progress.each do |project| %>
           <tr>
-            <td><%= project.id %> - <%= link_to project.name, project %></td>
+            <td><%= link_to project.id, project %> - <%= link_to project.name, project %></td>
             <td><%= project.start_date %></td>
             <td><%= project.end_date %></td>
             <td><%= project.budget_requested %></td>
@@ -58,7 +58,7 @@
       <tbody>
       <% @preliminary_program_review.each do |project| %>
           <tr>
-            <td><%= link_to project.name, project %></td>
+            <td><%= link_to project.id, project %> - <%= link_to project.name, project %></td>
             <td><%= project.start_date %></td>
             <td><%= project.end_date %></td>
             <td><%= project.budget_requested %></td>
@@ -92,7 +92,7 @@
       <tbody>
       <% @pre_legal_review.each do |project| %>
           <tr>
-            <td><%= project.name %></td>
+            <td><%= link_to project.id, project %> - <%= link_to project.name, project %></td>
             <td><%= project.start_date %></td>
             <td><%= project.end_date %></td>
             <td><%= project.budget_requested %></td>
@@ -126,7 +126,7 @@
       <tbody>
       <% @regional_review.each do |project| %>
           <tr>
-            <td><%= project.name %></td>
+            <td><%= link_to project.id, project %> - <%= link_to project.name, project %></td>
             <td><%= project.start_date %></td>
             <td><%= project.end_date %></td>
             <td><%= project.budget_requested %></td>
@@ -160,7 +160,7 @@
       <tbody>
       <% @secondary_program_review.each do |project| %>
           <tr>
-            <td><%= project.name %></td>
+            <td><%= link_to project.id, project %> - <%= link_to project.name, project %></td>
             <td><%= project.start_date %></td>
             <td><%= project.end_date %></td>
             <td><%= project.budget_requested %></td>
@@ -194,7 +194,7 @@
       <tbody>
       <% @project_cn_pending.each do |project| %>
           <tr>
-            <td><%= project.name %></td>
+            <td><%= link_to project.id, project %> - <%= link_to project.name, project %></td>
             <td><%= project.start_date %></td>
             <td><%= project.end_date %></td>
             <td><%= project.budget_requested %></td>
@@ -229,7 +229,7 @@
       <tbody>
       <% @project_funding_clearance_pending.each do |project| %>
           <tr>
-            <td><%= project.name %></td>
+            <td><%= link_to project.id, project %> - <%= link_to project.name, project %></td>
             <td><%= project.start_date %></td>
             <td><%= project.end_date %></td>
             <td><%= project.budget_requested %></td>
@@ -263,7 +263,7 @@
       <tbody>
       <% @obligation_pending.each do |project| %>
           <tr>
-            <td><%= project.name %></td>
+            <td><%= link_to project.id, project %> - <%= link_to project.name, project %></td>
             <td><%= project.start_date %></td>
             <td><%= project.end_date %></td>
             <td><%= project.budget_requested %></td>

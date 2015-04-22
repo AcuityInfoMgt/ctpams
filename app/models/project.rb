@@ -1,4 +1,5 @@
 class Project < ActiveRecord::Base
+  validates :name, presence: true
   include Workflow
   belongs_to :program
   belongs_to :user

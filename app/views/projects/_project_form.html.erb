@@ -65,6 +65,12 @@
     </div>
 
     <div class="form-actions">
-      <%= f.button :submit %>
+
+      <% if @project.proposal_in_progress? %>
+          <%= f.button :submit, 'Save' %>
+          <%= f.button :submit, 'Save and Submit for Review' %>
+      <% else %>
+          <%= f.button :submit, 'Update Project' %>
+      <% end %>
     </div>
 <% end %>

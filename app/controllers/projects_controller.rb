@@ -42,15 +42,43 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
-    respond_to do |format|
-      if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
-        format.json { render :show, status: :ok, location: @project }
-      else
-        format.html { render :edit }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
+    if params[:commit] == 'Save and Submit for Review'
+      respond_to do |format|
+        if @project.update(project_params)
+          @project.submit!
+          format.html { redirect_to @project, notice: 'Project was successfully submitted for review.' }
+          format.json { render :show, status: :ok, location: @project }
+        else
+          format.html { render :edit }
+          format.json { render json: @project.errors, status: :unprocessable_entity }
+        end
+      end
+    elsif params[:commit] == 'Send to Legal'
+
+    elsif params[:commit] == 'Update Project'
+          respond_to do |format|
+            if @project.update(project_params)
+              flash.now[:notice] = 'Project was successfully updated.'
+              format.html { render :edit }
+              format.json { render :show, status: :ok, location: @project }
+            else
+              format.html { render :edit }
+              format.json { render json: @project.errors, status: :unprocessable_entity }
+            end
+          end
+    else
+      respond_to do |format|
+        if @project.update(project_params)
+          flash.now[:notice] = 'Proposal was successfully saved.'
+          format.html { render :edit }
+          format.json { render :show, status: :ok, location: @project }
+        else
+          format.html { render :edit }
+          format.json { render json: @project.errors, status: :unprocessable_entity }
+        end
       end
     end
+
   end
 
   # DELETE /projects/1
@@ -63,12 +91,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def state
-    respond_to do |format|
-      format.html { redirect_to @project, notice: 'Project state changed: ' + @project.current_state.to_s }
-      format.json { render :show, status: :created, location: @project }
-    end
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
