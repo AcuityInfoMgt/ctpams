@@ -220,10 +220,4 @@
 
 <br>
 
-<%= simple_form_for @project,
-                    :url => url_for(:action => 'state', :controller => 'projects'),
-                    :method => 'patch' do |f| %>
-    <div class="form-actions">
-      <%= f.button :submit %>
-    </div>
-<% end %>
+<%= render 'project_review_actions' %>

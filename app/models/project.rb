@@ -69,4 +69,34 @@ class Project < ActiveRecord::Base
     self.reprogram ||= false
   end
 
+  def update_project_state(state_event)
+    if state_event == 'Save and Submit for Review'
+      self.submit!
+      'Proposal was successfully submitted for review.'
+    elsif state_event == 'Send to Legal'
+      self.send_to_legal!
+      'Proposal was sent to Legal for Pre-Clear.'
+    elsif state_event == 'Request Changes'
+      self.request_changes!
+      'Proposal was sent to Submitter for Changes.'
+    elsif state_event == 'Send to Program'
+      self.send_to_program!
+      'Proposal sent back to Program.'
+    elsif state_event == 'Pre-Clear Proposal.'
+      self.preclear_proposal!
+      'Proposal Pre-Cleared Successfully.'
+    elsif state_event == 'Send Comments to Program'
+      self.send_comments!
+      'Regional Review Comments Sent to Program.'
+    elsif state_event == 'Approve Proposal'
+      self.approve!
+      'Proposal Successfully Approved.'
+    elsif state_event == 'Deny Proposal'
+      self.deny!
+      'Proposal Denied.'
+    else
+      'Project Updated'
+    end
+  end
+
 end
