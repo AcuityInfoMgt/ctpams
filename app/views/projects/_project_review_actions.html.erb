@@ -3,20 +3,23 @@
       <%= f.hidden_field :name %>
 
     <div class="form-actions">
-      <% if @project.preliminary_program_review? %>
+      <% if @project.preliminary_program_review? && ((current_user.role == 'reviewer' && current_user.in_project_region?(@project.id)) || current_user.admin?) %>
           <%= f.button :submit, 'Send to Legal' %>
           <%= f.button :submit, 'Request Changes' %>
           <%= f.button :submit, 'Deny Proposal' %>
-      <% elsif @project.pre_legal_review? %>
+      <% elsif @project.pre_legal_review? && (current_user.role == 'legal' || current_user.admin?) %>
           <%= f.button :submit, 'Send to Program' %>
           <%= f.button :submit, 'Pre-Clear Proposal' %>
-      <% elsif @project.regional_review? %>
+      <% elsif @project.regional_review? && ((current_user.role == 'regional' && current_user.in_project_region?(@project.id)) || current_user.admin?) %>
           <%= f.button :submit, 'Send Comments to Program' %>
-      <% elsif @project.secondary_program_review? %>
+      <% elsif @project.secondary_program_review? && ((current_user.role == 'reviewer' && current_user.in_project_region?(@project.id)) || current_user.admin?) %>
           <%= f.button :submit, 'Approve Proposal' %>
           <%= f.button :submit, 'Deny Proposal' %>
       <% end %>
-      <%= link_to 'Edit', edit_project_path(@project) %>
+      <% if (current_user.role == 'reviewer' && current_user.in_project_region?(@project.id)) || (current_user.role == 'submitter' && current_user.project_owner?(@project.id) && @project.proposal_in_progress?) || current_user.admin? %>
+        <%= link_to 'Edit', edit_project_path(@project) %>
+      <% end %>
+
       <br>
     </div>
 <% end %>

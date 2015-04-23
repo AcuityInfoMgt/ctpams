@@ -15,6 +15,20 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable #, :confirmable
 
+  def in_project_region?(project_id)
+    Project.where("id = (?)", @project.id).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id)
+  end
+
+  def project_owner?(project_id)
+    @project = Project.find(project_id)
+    if self.id == @project.user_id
+      true
+    else
+      Project.where("id = (?)", @project.id).where("id in (select personable_id from people where personable_type = 'Project' and email = (?))", self.email).count > 0
+    end
+  end
+
+  # Workload Summary Queries:
   def get_proposal_in_progress
     if self.role == 'submitter'
       @projects = Project.where(workflow_state: 'proposal_in_progress').where(user_id: self.id)
