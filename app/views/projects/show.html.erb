@@ -3,7 +3,7 @@
 
 <p>
   <strong>State:</strong>
-  <%= @project.current_state %>
+  <%= @project.current_state.to_s.titleize %>
 </p>
 
 <p>
@@ -215,9 +215,6 @@
 </ul>
 </p>
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
 
-<br>
 
 <%= render 'project_review_actions' %>
