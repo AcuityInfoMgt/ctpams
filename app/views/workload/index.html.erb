@@ -466,7 +466,7 @@
         <th>Budget requested</th>
         <th>Fiscal year</th>
         <th>Implementation Status</th>
-        <th>Program</th>
+        <th>Status</th>
       </tr>
       </thead>
 
@@ -479,7 +479,7 @@
             <td><%= project.budget_requested %></td>
             <td><%= project.fiscal_year %></td>
             <td><%= project.implementation_status %></td>
-            <td><%= project.program_id %></td>
+            <td><%= project.current_state.to_s.titleize %></td>
           </tr>
       <% end %>
       </tbody>
