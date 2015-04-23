@@ -21,6 +21,8 @@ class WorkloadController < ApplicationController
     @funding_confirmation_pending = current_user.get_funding_confirmation
     @funding_clearance_pending = current_user.get_funding_clearance
     @funding_hold = current_user.get_funding_hold
+
+    @my_projects = current_user.get_my_projects
   end
 
 

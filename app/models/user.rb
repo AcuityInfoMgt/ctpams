@@ -29,6 +29,10 @@ class User < ActiveRecord::Base
   end
 
   # Workload Summary Queries:
+  def get_my_projects
+    @projects = Project.where("user_id = (?) or id in (select personable_id from people where personable_type = 'Project' and email = (?))", self.id, self.email)
+  end
+
   def get_proposal_in_progress
     if self.role == 'submitter'
       @projects = Project.where(workflow_state: 'proposal_in_progress').where(user_id: self.id)
