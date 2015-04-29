@@ -1,8 +1,6 @@
 class CongressionalNotification < ActiveRecord::Base
   include Workflow
-  has_many :cn_projects
-  accepts_nested_attributes_for :cn_projects, :reject_if => :all_blank, :allow_destroy => true
-  has_many :projects, through: :cn_projects
+  has_and_belongs_to_many :projects
   has_many :comments, as: :commentable
   has_many :clearances, as: :clearable
   has_many :attached_files, as: :attachable

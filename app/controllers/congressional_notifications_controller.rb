@@ -69,6 +69,6 @@ class CongressionalNotificationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def congressional_notification_params
-      params.require(:congressional_notification).permit(:name, :cn_number, cn_projects_attributes: [:id, :project_id, :is_renotification, :_destroy])
+      params.require(:congressional_notification).permit(:name, :cn_number)
     end
 end

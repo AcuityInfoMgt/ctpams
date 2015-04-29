@@ -5,8 +5,7 @@ class Project < ActiveRecord::Base
   belongs_to :user
   has_many :obligations
   accepts_nested_attributes_for :obligations, :reject_if => :all_blank, :allow_destroy => true
-  has_many :cn_projects
-  has_many :congressional_notifications, through: :cn_projects
+  has_and_belongs_to_many :congressional_notifications
   has_many :people, as: :personable
   accepts_nested_attributes_for :people, :reject_if => :all_blank, :allow_destroy => true
   has_many :comments, as: :commentable
