@@ -30,6 +30,7 @@ class WorkloadController < ApplicationController
   end
 
   def my_projects
+    @my_projects = current_user.get_my_projects
   end
 
 end

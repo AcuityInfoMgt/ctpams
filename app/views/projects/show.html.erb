@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <%= current_user.project_owner?(@project.id) %>
+<%= current_user.in_project_region?(@project.id) %>
 
 <p>
   <strong>State:</strong>

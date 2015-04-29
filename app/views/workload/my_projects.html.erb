@@ -1,0 +1,37 @@
+<h1>My Projects</h1>
+<%= current_user.role %>, <%= current_user.email %>, <%= current_user.admin? %>, <%= current_user.id %>,
+<p id="notice"><%= notice %></p>
+
+<% if @my_projects != nil and @my_projects.count > 0 %>
+    <h1>My Projects</h1>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Budget requested</th>
+        <th>Fiscal year</th>
+        <th>Implementation Status</th>
+        <th>Program</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @my_projects.each do |project| %>
+          <tr>
+            <td><%= link_to project.id, project %> - <%= link_to project.name, project %></td>
+            <td><%= project.start_date %></td>
+            <td><%= project.end_date %></td>
+            <td><%= project.budget_requested %></td>
+            <td><%= project.fiscal_year %></td>
+            <td><%= project.implementation_status %></td>
+            <td><%= project.current_state.to_s.titleize %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <br>
+<% end %>

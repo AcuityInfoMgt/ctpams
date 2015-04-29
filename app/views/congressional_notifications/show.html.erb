@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>State:</strong>
+  <%= @congressional_notification.current_state.to_s.titleize %>
+</p>
+
+<p>
   <strong>Name:</strong>
   <%= @congressional_notification.name %>
 </p>
