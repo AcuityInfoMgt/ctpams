@@ -1209,5 +1209,11 @@ c = Country.create(name: 'Zimbabwe', iso2: 'ZW', iso3: 'ZWE', boundary_type: 'Po
 c.regions << r 
 c.regions << rsi 
 
+r = Region.find_by old_id: '311'
+rsi = Region.find_by old_id: '14'
+c = Country.create(name: 'Mauritius', iso2: 'MU', iso3: 'MUS', boundary_type: 'Polygon', boundary_coordinates: '[[[57.8,-20.38],[57.36,-20.38],[57.36,-20.0],[57.8,-20.0]]]', old_id: 159 )
+c.regions << r 
+c.regions << rsi 
+
 
 end
