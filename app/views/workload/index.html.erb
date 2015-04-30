@@ -1,3 +1,74 @@
+<ol class="breadcrumb">
+  <li>Workload</li>
+  <li class="active">Summary</li>
+</ol>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-tasks fa-fw"></i> Projects
+        <div class="pull-right">
+          <button type="button" class="btn btn-primary  btn-xs" data-toggle="modal" data-target="#addModal"><i class="icon-plus-sign icon-white"></i> New Proposal</button>
+        </div>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12">
+            <p class="text-muted">This page displays all proposals currently in PAMS that are relevant to you.
+              Proposals at different steps in the process are grouped under descriptive headings.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-tasks fa-fw"></i> Congressional Notifications
+        <div class="pull-right">
+          <button type="button" class="btn btn-primary  btn-xs" data-toggle="modal" data-target="#addModal"><i class="icon-plus-sign icon-white"></i> New Proposal</button>
+        </div>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12">
+            <p class="text-muted">This page displays all proposals currently in PAMS that are relevant to you.
+              Proposals at different steps in the process are grouped under descriptive headings.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-tasks fa-fw"></i> Funding Clearances
+        <div class="pull-right">
+          <button type="button" class="btn btn-primary  btn-xs" data-toggle="modal" data-target="#addModal"><i class="icon-plus-sign icon-white"></i> New Proposal</button>
+        </div>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12">
+            <p class="text-muted">This page displays all proposals currently in PAMS that are relevant to you.
+              Proposals at different steps in the process are grouped under descriptive headings.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <h1>Workload</h1>
 <%= @user.role %>, <%= current_user.email %>, <%= @user.admin? %>, <%= current_user.id %>,
 <p id="notice"><%= notice %></p>
@@ -456,6 +527,7 @@
 
 <% if @my_projects != nil and @my_projects.count > 0 %>
     <h1>My Projects</h1>
+
 
     <table>
       <thead>

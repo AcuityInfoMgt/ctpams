@@ -4,10 +4,11 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :regions
   has_many :comments
   enum role: [:submitter, :reviewer, :budget, :viewer, :admin, :legal, :regional, :commenter, :fclear, :hclear, :spclear, :foclear]
-  after_initialize :set_default_role, :if => :new_record?
+  after_initialize :set_defaults, :if => :new_record?
 
-  def set_default_role
+  def set_defaults
     self.role ||= :submitter
+    self.is_active ||= true
   end
 
   # Include default devise modules. Others available are:
