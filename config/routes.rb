@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :congressional_notifications, :path => 'cns'
 
   root to: 'workload#index'
-  devise_for :users, :path_prefix => 'd'
+  devise_for :users
   resources :users
 
 

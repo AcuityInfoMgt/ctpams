@@ -66,6 +66,10 @@ class Project < ActiveRecord::Base
     self.is_archived ||= false
     self.is_denied ||= false
     self.reprogram ||= false
+    self.do_renotify ||= false
+    self.is_renotified ||= false
+    self.is_funding_modified ||= false
+    self.is_global ||= false
   end
 
   def update_project_state(state_event)
