@@ -20,6 +20,348 @@
               Proposals at different steps in the process are grouped under descriptive headings.</p>
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+              <% if @proposal_in_progress != nil and @proposal_in_progress.count > 0 %>
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingproposalinprogress">
+                      <h4 class="panel-title">
+                        <a class="collapsed handpointer" data-toggle="collapse" data-target="#collapseproposalinprogress"  aria-expanded="false" aria-controls="collapseproposalinprogress">
+                          Proposal in Progress<span id="proposalinprogress"></span>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseproposalinprogress" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingproposalinprogress">
+                        <div class="panel-body">
+                          <table>
+                            <thead>
+                            <tr>
+                              <th>Name</th>
+                              <th>Start date</th>
+                              <th>End date</th>
+                              <th>Budget requested</th>
+                              <th>Fiscal year</th>
+                              <th>Implementation Status</th>
+                              <th>Program</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <% @proposal_in_progress.each do |project| %>
+                                <tr>
+                                  <td><%= link_to project.id, project %> - <%= link_to project.name, project %></td>
+                                  <td><%= project.start_date %></td>
+                                  <td><%= project.end_date %></td>
+                                  <td><%= project.budget_requested %></td>
+                                  <td><%= project.fiscal_year %></td>
+                                  <td><%= project.implementation_status %></td>
+                                  <td><%= project.program_id %></td>
+                                </tr>
+                            <% end %>
+                            </tbody>
+                          </table>
+                        </div>
+                    </div>
+                  </div>
+              <% end %>
+              <% if @preliminary_program_review != nil and @preliminary_program_review.count > 0 %>
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingpreliminaryprogramreview">
+                      <h4 class="panel-title">
+                        <a class="collapsed handpointer" data-toggle="collapse" data-target="#collapsepreliminaryprogramreview"  aria-expanded="false" aria-controls="collapsepreliminaryprogramreview">
+                          Preliminary Program Review<span id="preliminaryprogramreview"></span>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsepreliminaryprogramreview" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingpreliminaryprogramreview">
+                      <div class="panel-body">
+                        <table>
+                          <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Start date</th>
+                            <th>End date</th>
+                            <th>Budget requested</th>
+                            <th>Fiscal year</th>
+                            <th>Implementation Status</th>
+                            <th>Program</th>
+                          </tr>
+                          </thead>
+
+                          <tbody>
+                          <% @preliminary_program_review.each do |project| %>
+                              <tr>
+                                <td><%= link_to project.id, project %> - <%= link_to project.name, project %></td>
+                                <td><%= project.start_date %></td>
+                                <td><%= project.end_date %></td>
+                                <td><%= project.budget_requested %></td>
+                                <td><%= project.fiscal_year %></td>
+                                <td><%= project.implementation_status %></td>
+                                <td><%= project.program_id %></td>
+                              </tr>
+                          <% end %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+              <% end %>
+              <% if @pre_legal_review != nil and @pre_legal_review.count > 0 %>
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingprelegalreview">
+                      <h4 class="panel-title">
+                        <a class="collapsed handpointer" data-toggle="collapse" data-target="#collapseprelegalreview"  aria-expanded="false" aria-controls="collapseprelegalreview">
+                          Pre-Legal Review<span id="prelegalreview"></span>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseprelegalreview" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingprelegalreview">
+                      <div class="panel-body">
+                        <table>
+                          <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Start date</th>
+                            <th>End date</th>
+                            <th>Budget requested</th>
+                            <th>Fiscal year</th>
+                            <th>Implementation Status</th>
+                            <th>Program</th>
+                          </tr>
+                          </thead>
+
+                          <tbody>
+                          <% @pre_legal_review.each do |project| %>
+                              <tr>
+                                <td><%= link_to project.id, project %> - <%= link_to project.name, project %></td>
+                                <td><%= project.start_date %></td>
+                                <td><%= project.end_date %></td>
+                                <td><%= project.budget_requested %></td>
+                                <td><%= project.fiscal_year %></td>
+                                <td><%= project.implementation_status %></td>
+                                <td><%= project.program_id %></td>
+                              </tr>
+                          <% end %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+              <% end %>
+              <% if @regional_review != nil and @regional_review.count > 0 %>
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingregionalreview">
+                      <h4 class="panel-title">
+                        <a class="collapsed handpointer" data-toggle="collapse" data-target="#collapseregionalreview"  aria-expanded="false" aria-controls="collapseregionalreview">
+                          Pre-Legal Review<span id="regionalreview"></span>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseregionalreview" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingregionalreview">
+                      <div class="panel-body">
+                        <table>
+                          <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Start date</th>
+                            <th>End date</th>
+                            <th>Budget requested</th>
+                            <th>Fiscal year</th>
+                            <th>Implementation Status</th>
+                            <th>Program</th>
+                          </tr>
+                          </thead>
+
+                          <tbody>
+                          <% @regional_review.each do |project| %>
+                              <tr>
+                                <td><%= link_to project.id, project %> - <%= link_to project.name, project %></td>
+                                <td><%= project.start_date %></td>
+                                <td><%= project.end_date %></td>
+                                <td><%= project.budget_requested %></td>
+                                <td><%= project.fiscal_year %></td>
+                                <td><%= project.implementation_status %></td>
+                                <td><%= project.program_id %></td>
+                              </tr>
+                          <% end %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+              <% end %>
+              <% if @secondary_program_review != nil and @secondary_program_review.count > 0 %>
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingsecondaryprogramreview">
+                      <h4 class="panel-title">
+                        <a class="collapsed handpointer" data-toggle="collapse" data-target="#collapsesecondaryprogramreview"  aria-expanded="false" aria-controls="collapsesecondaryprogramreview">
+                          Secondary Program Review<span id="secondaryprogramreview"></span>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsesecondaryprogramreview" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingsecondaryprogramreview">
+                      <div class="panel-body">
+                        <table>
+                          <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Start date</th>
+                            <th>End date</th>
+                            <th>Budget requested</th>
+                            <th>Fiscal year</th>
+                            <th>Implementation Status</th>
+                            <th>Program</th>
+                          </tr>
+                          </thead>
+
+                          <tbody>
+                          <% @secondary_program_review.each do |project| %>
+                              <tr>
+                                <td><%= link_to project.id, project %> - <%= link_to project.name, project %></td>
+                                <td><%= project.start_date %></td>
+                                <td><%= project.end_date %></td>
+                                <td><%= project.budget_requested %></td>
+                                <td><%= project.fiscal_year %></td>
+                                <td><%= project.implementation_status %></td>
+                                <td><%= project.program_id %></td>
+                              </tr>
+                          <% end %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+              <% end %>
+              <% if @project_cn_pending != nil and @project_cn_pending.count > 0 %>
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingprojectcnpending">
+                      <h4 class="panel-title">
+                        <a class="collapsed handpointer" data-toggle="collapse" data-target="#collapseprojectcnpending"  aria-expanded="false" aria-controls="collapseprojectcnpending">
+                          CN Clearance Pending<span id="projectcnpending"></span>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseprojectcnpending" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingprojectcnpending">
+                      <div class="panel-body">
+                        <table>
+                          <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Start date</th>
+                            <th>End date</th>
+                            <th>Budget requested</th>
+                            <th>Fiscal year</th>
+                            <th>Implementation Status</th>
+                            <th>Program</th>
+                          </tr>
+                          </thead>
+
+                          <tbody>
+                          <% @project_cn_pending.each do |project| %>
+                              <tr>
+                                <td><%= link_to project.id, project %> - <%= link_to project.name, project %></td>
+                                <td><%= project.start_date %></td>
+                                <td><%= project.end_date %></td>
+                                <td><%= project.budget_requested %></td>
+                                <td><%= project.fiscal_year %></td>
+                                <td><%= project.implementation_status %></td>
+                                <td><%= project.program_id %></td>
+                              </tr>
+                          <% end %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+              <% end %>
+              <% if @project_funding_clearance_pending != nil and @project_funding_clearance_pending.count > 0 %>
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingprojectfundingpending">
+                      <h4 class="panel-title">
+                        <a class="collapsed handpointer" data-toggle="collapse" data-target="#collapseprojectfundingpending"  aria-expanded="false" aria-controls="collapseprojectfundingpending">
+                          Funding Clearance Pending<span id="projectfundingpending"></span>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseprojectfundingpending" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingprojectfundingpending">
+                      <div class="panel-body">
+                        <table>
+                          <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Start date</th>
+                            <th>End date</th>
+                            <th>Budget requested</th>
+                            <th>Fiscal year</th>
+                            <th>Implementation Status</th>
+                            <th>Program</th>
+                          </tr>
+                          </thead>
+
+                          <tbody>
+                          <% @project_funding_clearance_pending.each do |project| %>
+                              <tr>
+                                <td><%= link_to project.id, project %> - <%= link_to project.name, project %></td>
+                                <td><%= project.start_date %></td>
+                                <td><%= project.end_date %></td>
+                                <td><%= project.budget_requested %></td>
+                                <td><%= project.fiscal_year %></td>
+                                <td><%= project.implementation_status %></td>
+                                <td><%= project.program_id %></td>
+                              </tr>
+                          <% end %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+              <% end %>
+              <% if @obligation_pending != nil and @obligation_pending.count > 0 %>
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingobligationpending">
+                      <h4 class="panel-title">
+                        <a class="collapsed handpointer" data-toggle="collapse" data-target="#collapseobligationpending"  aria-expanded="false" aria-controls="collapseobligationpending">
+                          Obligation Pending<span id="obligationpending"></span>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseobligationpending" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingobligationpending">
+                      <div class="panel-body">
+                        <table>
+                          <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Start date</th>
+                            <th>End date</th>
+                            <th>Budget requested</th>
+                            <th>Fiscal year</th>
+                            <th>Implementation Status</th>
+                            <th>Program</th>
+                          </tr>
+                          </thead>
+
+                          <tbody>
+                          <% @obligation_pending.each do |project| %>
+                              <tr>
+                                <td><%= link_to project.id, project %> - <%= link_to project.name, project %></td>
+                                <td><%= project.start_date %></td>
+                                <td><%= project.end_date %></td>
+                                <td><%= project.budget_requested %></td>
+                                <td><%= project.fiscal_year %></td>
+                                <td><%= project.implementation_status %></td>
+                                <td><%= project.program_id %></td>
+                              </tr>
+                          <% end %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
