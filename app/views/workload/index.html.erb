@@ -359,7 +359,7 @@
       <div class="panel-heading">
         <i class="fa fa-tasks fa-fw"></i> Congressional Notifications
         <div class="pull-right">
-          <button type="button" class="btn btn-primary  btn-xs" data-toggle="modal" data-target="#addModal"><i class="icon-plus-sign icon-white"></i> New Proposal</button>
+          <%= link_to 'New CN', new_congressional_notification_path, class: 'btn btn-primary  btn-xs' %>
         </div>
       </div>
       <!-- /.panel-heading -->
@@ -469,6 +469,38 @@
                     </div>
                   </div>
               <% end %>
+              <% if @cn_hold != nil and @cn_hold.count > 0 %>
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingcnhold">
+                      <h4 class="panel-title">
+                        <a class="collapsed handpointer" data-toggle="collapse" data-target="#collapsecnhold"  aria-expanded="false" aria-controls="collapsecnhold">
+                          Congressional Clearance Pending - <%= @cn_hold.count %>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsecnhold" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingcnhold">
+                      <div class="panel-body">
+                        <table>
+                          <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>CN Number</th>
+                          </tr>
+                          </thead>
+
+                          <tbody>
+                          <% @cn_hold.each do |cn| %>
+                              <tr>
+                                <td><%= link_to cn.name, cn %></td>
+                                <td><%= cn.cn_number %></td>
+                              </tr>
+                          <% end %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+              <% end %>
             </div>
           </div>
         </div>
@@ -483,7 +515,6 @@
       <div class="panel-heading">
         <i class="fa fa-tasks fa-fw"></i> Funding Clearances
         <div class="pull-right">
-          <button type="button" class="btn btn-primary  btn-xs" data-toggle="modal" data-target="#addModal"><i class="icon-plus-sign icon-white"></i> New Proposal</button>
         </div>
       </div>
       <!-- /.panel-heading -->
@@ -494,220 +525,169 @@
               Proposals at different steps in the process are grouped under descriptive headings.</p>
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel-group" id="fundingaccordion" role="tablist" aria-multiselectable="true">
+              <% if @funding_confirmation_pending != nil and @funding_confirmation_pending.count > 0 %>
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingfundingconfirmationpending">
+                      <h4 class="panel-title">
+                        <a class="collapsed handpointer" data-toggle="collapse" data-target="#collapsefundingconfirmationpending"  aria-expanded="false" aria-controls="collapsefundingconfirmationpending">
+                          Funding Confirmation Pending - <%= @funding_confirmation_pending.count %>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsefundingconfirmationpending" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingfundingconfirmationpending">
+                      <div class="panel-body">
+                        <table>
+                          <thead>
+                          <tr>
+                            <th>Project Name</th>
+                            <th>Funding Mechanism</th>
+                          </tr>
+                          </thead>
+
+                          <tbody>
+                          <% @funding_confirmation_pending.each do |pfm| %>
+                              <tr>
+                                <td><%= pfm.project.try(:name) %></td>
+                                <td><%= pfm.funding_mechanism.name %></td>
+                              </tr>
+                          <% end %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+              <% end %>
+              <% if @funding_clearance_pending != nil and @funding_clearance_pending.count > 0  %>
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingfundingclearancepending">
+                      <h4 class="panel-title">
+                        <a class="collapsed handpointer" data-toggle="collapse" data-target="#collapsefundingclearancepending"  aria-expanded="false" aria-controls="collapsefundingclearancepending">
+                          Funding Clearance Pending - <%= @funding_clearance_pending.count %>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsefundingclearancepending" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingfundingclearancepending">
+                      <div class="panel-body">
+                        <table>
+                          <thead>
+                          <tr>
+                            <th>Project Name</th>
+                            <th>Funding Mechanism</th>
+                          </tr>
+                          </thead>
+
+                          <tbody>
+                          <% @funding_clearance_pending.each do |pfm| %>
+                              <tr>
+                                <td><%= pfm.project.try(:name) %></td>
+                                <td><%= pfm.funding_mechanism.name %></td>
+                              </tr>
+                          <% end %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+              <% end %>
+              <% if @funding_hold != nil and @funding_hold.count > 0 %>
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingfundingonhold">
+                      <h4 class="panel-title">
+                        <a class="collapsed handpointer" data-toggle="collapse" data-target="#collapsefundingonhold"  aria-expanded="false" aria-controls="collapsefundingonhold">
+                          Funding On Hold - <%= @funding_hold.count %>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsefundingonhold" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingfundingonhold">
+                      <div class="panel-body">
+                        <table>
+                          <thead>
+                          <tr>
+                            <th>Project Name</th>
+                            <th>Funding Mechanism</th>
+                          </tr>
+                          </thead>
+
+                          <tbody>
+                          <% @funding_hold.each do |pfm| %>
+                              <tr>
+                                <td><%= pfm.project.try(:name) %></td>
+                                <td><%= pfm.funding_mechanism.name %></td>
+                              </tr>
+                          <% end %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 
-<%= link_to 'New Project', new_project_path %>
-
-<h1>CN Workload</h1>
-<%= current_user.role %>, <%= current_user.email %>, <%= current_user.admin? %>, <%= current_user.id %>,
-<p id="notice"><%= notice %></p>
-
-<% if @cn_new != nil and @cn_new.count > 0 %>
-    <h1>CN Needs Submission</h1>
-
-    <table>
-      <thead>
-      <tr>
-        <th>Name</th>
-        <th>CN Number</th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <% @cn_new.each do |cn| %>
-          <tr>
-            <td><%= link_to cn.name, cn %></td>
-            <td><%= cn.cn_number %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
-
-    <br>
-<% end %>
-
-<% if @cn_clearance_pending != nil and @cn_clearance_pending.count > 0 %>
-    <h1>CN Clearance Pending</h1>
-
-    <table>
-      <thead>
-      <tr>
-        <th>Name</th>
-        <th>CN Number</th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <% @cn_clearance_pending.each do |cn| %>
-          <tr>
-            <td><%= link_to cn.name, cn %></td>
-            <td><%= cn.cn_number %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
-
-    <br>
-<% end %>
-
-<% if @cn_congress_pending != nil and @cn_congress_pending.count > 0 %>
-    <h1>CN Congressional Clearance Pending</h1>
-
-    <table>
-      <thead>
-      <tr>
-        <th>Name</th>
-        <th>CN Number</th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <% @cn_congress_pending.each do |cn| %>
-          <tr>
-            <td><%= link_to cn.name, cn %></td>
-            <td><%= cn.cn_number %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
-
-    <br>
-<% end %>
-
-<% if @cn_hold != nil and @cn_hold.count > 0 %>
-    <h1>CN On Hold</h1>
-
-    <table>
-      <thead>
-      <tr>
-        <th>Name</th>
-        <th>CN Number</th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <% @cn_hold.each do |cn| %>
-          <tr>
-            <td><%= link_to cn.name, cn %></td>
-            <td><%= cn.cn_number %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
-
-    <br>
-<% end %>
-
-
-<% if @funding_confirmation_pending != nil and @funding_confirmation_pending.count > 0 %>
-    <h1>Funding Confirmation Pending</h1>
-
-    <table>
-      <thead>
-      <tr>
-        <th>Project Name</th>
-        <th>Funding Mechanism</th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <% @funding_confirmation_pending.each do |pfm| %>
-          <tr>
-            <td><%= pfm.project.try(:name) %></td>
-            <td><%= pfm.funding_mechanism.name %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
-
-    <br>
-<% end %>
-
-<% if @funding_clearance_pending != nil and @funding_clearance_pending.count > 0  %>
-    <h1>Funding Clearance Pending</h1>
-
-    <table>
-      <thead>
-      <tr>
-        <th>Project Name</th>
-        <th>Funding Mechanism</th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <% @funding_clearance_pending.each do |pfm| %>
-          <tr>
-            <td><%= pfm.project.try(:name) %></td>
-            <td><%= pfm.funding_mechanism.name %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
-
-    <br>
-<% end %>
-
-<% if @funding_hold != nil and @funding_hold.count > 0 %>
-    <h1>Funding On Hold</h1>
-
-    <table>
-      <thead>
-      <tr>
-        <th>Project Name</th>
-        <th>Funding Mechanism</th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <% @funding_hold.each do |pfm| %>
-          <tr>
-            <td><%= pfm.project.try(:name) %></td>
-            <td><%= pfm.funding_mechanism.name %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
-
-    <br>
-<% end %>
 
 
 <% if @my_projects != nil and @my_projects.count > 0 %>
-    <h1>My Projects</h1>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <i class="fa fa-tasks fa-fw"></i> My Projects
+            <div class="pull-right">
+              <%= link_to 'New CN', new_congressional_notification_path, class: 'btn btn-primary  btn-xs' %>
+            </div>
+          </div>
+          <!-- /.panel-heading -->
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-12">
+                <p class="text-muted">This page displays all proposals currently in PAMS that are relevant to you.
+                  Proposals at different steps in the process are grouped under descriptive headings.</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <table>
+                  <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Start date</th>
+                    <th>End date</th>
+                    <th>Budget requested</th>
+                    <th>Fiscal year</th>
+                    <th>Implementation Status</th>
+                    <th>Program</th>
+                  </tr>
+                  </thead>
 
+                  <tbody>
+                  <% @my_projects.each do |project| %>
+                      <tr>
+                        <td><%= link_to project.id, project %> - <%= link_to project.name, project %></td>
+                        <td><%= project.start_date %></td>
+                        <td><%= project.end_date %></td>
+                        <td><%= project.budget_requested %></td>
+                        <td><%= project.fiscal_year %></td>
+                        <td><%= project.implementation_status %></td>
+                        <td><%= project.current_state.to_s.titleize %></td>
+                      </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <table>
-      <thead>
-      <tr>
-        <th>Name</th>
-        <th>Start date</th>
-        <th>End date</th>
-        <th>Budget requested</th>
-        <th>Fiscal year</th>
-        <th>Implementation Status</th>
-        <th>Program</th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <% @my_projects.each do |project| %>
-          <tr>
-            <td><%= link_to project.id, project %> - <%= link_to project.name, project %></td>
-            <td><%= project.start_date %></td>
-            <td><%= project.end_date %></td>
-            <td><%= project.budget_requested %></td>
-            <td><%= project.fiscal_year %></td>
-            <td><%= project.implementation_status %></td>
-            <td><%= project.current_state.to_s.titleize %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
-
-    <br>
 <% end %>
 
