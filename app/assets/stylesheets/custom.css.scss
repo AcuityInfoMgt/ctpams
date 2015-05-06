@@ -146,6 +146,14 @@ ol.progtrckr li.progtrckr-done {
   color: black;
   border-bottom: 4px solid yellowgreen;
 }
+ol.progtrckr li.progtrckr-denied {
+  color: black;
+  border-bottom: 4px solid indianred;
+}
+ol.progtrckr li.progtrckr-pending {
+  color: black;
+  border-bottom: 4px solid yellow;
+}
 ol.progtrckr li.progtrckr-todo {
   color: silver;
   border-bottom: 4px solid silver;
@@ -165,6 +173,26 @@ ol.progtrckr li.progtrckr-done:before {
   content: "\2713";
   color: white;
   background-color: yellowgreen;
+  height: 1.2em;
+  width: 1.2em;
+  line-height: 1.2em;
+  border: none;
+  border-radius: 1.2em;
+}
+ol.progtrckr li.progtrckr-denied:before {
+  content: "\2717";
+  color: white;
+  background-color: indianred;
+  height: 1.2em;
+  width: 1.2em;
+  line-height: 1.2em;
+  border: none;
+  border-radius: 1.2em;
+}
+ol.progtrckr li.progtrckr-pending:before {
+  content: "\2753";
+  color: black;
+  background-color: yellow;
   height: 1.2em;
   width: 1.2em;
   line-height: 1.2em;

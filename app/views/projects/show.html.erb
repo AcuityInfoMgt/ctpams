@@ -2,6 +2,7 @@
 
 <%= current_user.project_owner?(@project.id) %>
 <%= current_user.in_project_region?(@project.id) %>
+<%= current_user.admin? %>
 
 <div class="row">
   <div class="col-md-12">
@@ -39,26 +40,7 @@
   </div>
 </div>
 
-<p>
-  <strong>State:</strong>
-  <%= @project.current_state.to_s.titleize %>
-</p>
 
-
-<p>
-  <strong>Implementation status:</strong>
-  <%= @project.implementation_status %>
-</p>
-
-<p>
-  <strong>Program:</strong>
-  <%= @project.program.name %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @project.user.name %>
-</p>
 
 <p>
   <strong>Is archived:</strong>

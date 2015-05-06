@@ -1,9 +1,43 @@
 <div class="row">
-  <div class="col-md-12 text-center">
+  <div class="col-md-3 text-center">
+    <% if @project.is_denied %>
+        <span class="text-danger"><strong><i class="fa fa-ban fa-fw"></i>Denied</strong></span>
+    <% elsif @project.is_archived %>
+        <span class="text-warning"><strong><i class="fa fa-archive fa-fw"></i>Archived</strong></span>
+    <% end %>
+    <% if @project.is_renotified %>
+        <br><span class="text-info"><strong><i class="fa fa-repeat fa-fw"></i>Renotified</strong></span>
+    <% end %>
+    <% if @project.is_funding_modified %>
+        <br><span class="text-muted"><strong><i class="fa fa-edit fa-fw"></i>Funding Modification</strong></span>
+    <% end %>
+  </div>
+  <div class="col-md-3 text-center">
+    <label>Approval Status:</label><br>
+    <%= @project.current_state.to_s.titleize %>
+  </div>
+  <div class="col-md-3 text-center">
+    <label>Implementation Status:</label><br>
+    <%= @project.implementation_status %>
+  </div>
+  <div class="col-md-3 text-center">
+    <label>Entered By:</label><br>
+    <%= @project.user.name %>
+  </div>
 
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12 text-center">
     <ol class="progtrckr" data-progtrckr-steps="<%= @project.clearances.count %>"><!--
-      <% @project.clearances.each do |clearance| %>
-          --><li  class="<% if clearance.clearance_date %>progtrckr-done<% else %>progtrckr-todo<% end %>"><%= clearance.name %></li><!--
+      <% @project.clearances.order('created_at').each do |clearance| %>
+          --><li  class=<% if clearance.clearance_date && clearance.clearance_status == 'Yes' %>"progtrckr-done" data-toggle="tooltip" title="<%= clearance.clearance_status %> - <%= clearance.clearance_date %>">
+          <% elsif clearance.clearance_date && clearance.clearance_status == 'No' %>"progtrckr-denied" data-toggle="tooltip" title="<%= clearance.clearance_status %> - <%= clearance.clearance_date %>">
+          <% elsif clearance.clearance_date  %>"progtrckr-pending" data-toggle="tooltip" title="<%= clearance.clearance_status %> - <%= clearance.clearance_date %>">
+          <% else %>"progtrckr-todo"  data-toggle="tooltip" title="<%= clearance.clearance_status %>">
+          <% end %>
+
+      <%= clearance.name %></li><!--
       <% end %>
       -->
     </ol>
