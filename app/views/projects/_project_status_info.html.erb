@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="col-md-12 text-center">
+
+    <ol class="progtrckr" data-progtrckr-steps="<%= @project.clearances.count %>"><!--
+      <% @project.clearances.each do |clearance| %>
+          --><li  class="<% if clearance.clearance_date %>progtrckr-done<% else %>progtrckr-todo<% end %>"><%= clearance.name %></li><!--
+      <% end %>
+      -->
+    </ol>
+  </div>
+</div>

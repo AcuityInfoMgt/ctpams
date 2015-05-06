@@ -3,90 +3,47 @@
 <%= current_user.project_owner?(@project.id) %>
 <%= current_user.in_project_region?(@project.id) %>
 
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <span class="bigger"><%= @project.program.name %>-<%= @project.id %>: <%= @project.name %></span>
+        <div class="pull-right">
+
+        </div>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <%= render 'project_status_info' %>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-list-alt fa-fw"></i> Project Details
+        <div class="pull-right">
+
+        </div>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <%= render 'project_core_info' %>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+  </div>
+</div>
+
 <p>
   <strong>State:</strong>
   <%= @project.current_state.to_s.titleize %>
 </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @project.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @project.description %>
-</p>
-
-<p>
-  <strong>Start date:</strong>
-  <%= @project.start_date %>
-</p>
-
-<p>
-  <strong>End date:</strong>
-  <%= @project.end_date %>
-</p>
-
-<p>
-  <strong>Budget requested:</strong>
-  <%= @project.budget_requested %>
-</p>
-
-<p>
-  <strong>Fiscal year:</strong>
-  <%= @project.fiscal_year %>
-</p>
-
-<p>
-  <strong>Objective:</strong>
-  <%= @project.objective %>
-</p>
-
-<p>
-  <strong>Interest:</strong>
-  <%= @project.interest %>
-</p>
-
-<p>
-  <strong>Law enforcement:</strong>
-  <%= @project.law_enforcement %>
-</p>
-
-<p>
-  <strong>Coordination:</strong>
-  <%= @project.coordination %>
-</p>
-
-<p>
-  <strong>Lessons learned:</strong>
-  <%= @project.lessons_learned %>
-</p>
-
-<p>
-  <strong>Sustainability:</strong>
-  <%= @project.sustainability %>
-</p>
-
-<p>
-  <strong>City province:</strong>
-  <%= @project.city_province %>
-</p>
-
-<p>
-  <strong>Program audience:</strong>
-  <%= @project.program_audience %>
-</p>
-
-<p>
-  <strong>Reprogram:</strong>
-  <%= @project.reprogram %>
-</p>
-
-<p>
-  <strong>Reprogram comments:</strong>
-  <%= @project.reprogram_comments %>
-</p>
 
 <p>
   <strong>Implementation status:</strong>
@@ -118,50 +75,7 @@
   <%= @project.is_active %>
 </p>
 
-<p>
-  <strong>Project Owners:</strong>
-<ul>
-  <% @project.people.each do |person| %>
-      <li><%= person.name %>  </li>
-  <% end %>
-</ul>
-</p>
 
-<p>
-  <strong>Countries:</strong>
-<ul>
-  <% @project.countries.each do |country| %>
-      <li><%= country.name %>  </li>
-  <% end %>
-</ul>
-</p>
-
-<p>
-  <strong>Sub Accounts:</strong>
-<ul>
-  <% @project.sub_accounts.each do |sa| %>
-      <li><%= sa.name %>  </li>
-  <% end %>
-</ul>
-</p>
-
-<p>
-  <strong>Implementing Partners:</strong>
-<ul>
-  <% @project.implementers.each do |implementer| %>
-      <li><%= implementer.name %>  </li>
-  <% end %>
-</ul>
-</p>
-
-<p>
-  <strong>Budget Items:</strong>
-<ul>
-  <% @project.budget_items.each do |budget_item| %>
-      <li><%= budget_item.name %> - <%= budget_item.budget_amount %> - <%= budget_item.budgetable.name %> </li>
-  <% end %>
-</ul>
-</p>
 
 <p>
   <strong>CNs:</strong>
@@ -172,14 +86,6 @@
 </ul>
 </p>
 
-<p>
-  <strong>Funding Mechanisms:</strong>
-<ul>
-  <% @project.funding_mechanisms.each do |fm| %>
-      <li><%= fm.name %> </li>
-  <% end %>
-</ul>
-</p>
 
 <p>
   <strong>Obligations:</strong>

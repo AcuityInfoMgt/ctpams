@@ -1,0 +1,160 @@
+<table class="table table-striped table-hover">
+  <tr>
+    <td><label>Project Title</label></td>
+    <td><%= @project.name %></td>
+  </tr>
+  <tr>
+    <td><label>Project Owner(s)</label></td>
+    <td>
+      <table class="table table-bordered table-striped table-condensed table-hover">
+        <thead>
+        <tr>
+          <!--- <th>First Name</th> --->
+          <th>Name</th><!--- Last  --->
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Office</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @project.people.each do |person| %>
+            <tr>
+              <td><%= person.name %></td>
+              <td><%= person.email %></td>
+              <td><%= person.phone %></td>
+              <td><%= person.office %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td><label>Project Purpose/Summary</label></td>
+    <td><%= @project.objective %></td>
+  </tr>
+  <tr>
+    <td><label>Description of Project Proposed</label></td>
+    <td><%= @project.description %></td>
+  </tr>
+  <tr>
+    <td><label>Specify explicitly how this proposal advances US national security and foreign policy interests (CVE: Project Context/Rationale)</label></td>
+    <td><%= @project.interest %></td>
+  </tr>
+  <tr>
+    <td><label>Specify explicitly how this activity supports law enforcement's ability to counter terrorism or efforts to counter terrorist financing  (CVE: Law Enforcement Nexus - NADR funding only)</label></td>
+    <td><%= @project.law_enforcement %></td>
+  </tr>
+  <tr>
+    <td><label>What have the sponsors of the  project done to coordinate this program with this interagency or multilateral partners? (CVE: Coordination)</label></td>
+    <td><%= @project.coordination %></td>
+  </tr>
+  <tr>
+    <td><label>Project Monitoring (CVE: Measuring Impact and Effectiveness)</label></td>
+    <td><%= @project.lessons_learned %></td>
+  </tr>
+  <tr>
+    <td><label>Sustainability</label></td>
+    <td><%= @project.sustainability %></td>
+  </tr>
+  <tr>
+    <td><label>Neighborhood, City or Province</label></td>
+    <td><%= @project.city_province %></td>
+  </tr>
+  <tr>
+    <td><label>Period of Performance</label></td>
+    <td><b>From:</b> <%= @project.start_date %> &nbsp;&nbsp;<b>To:</b>  <%= @project.end_date %></td>
+  </tr>
+  <tr>
+    <td><label>Countries Engaged</label></td>
+    <td>
+      <ul class="list-inline">
+        <% @project.countries.each do |country| %>
+            <li><%= country.name %>  </li>
+        <% end %>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><label>Implementing Partners</label></td>
+    <td>
+      <table class="table table-bordered table-striped table-condensed table-hover">
+        <thead>
+        <tr>
+          <th>Implementing Partner</th>
+          <th>Details</th>
+          <th>POC Name</th>
+          <th>POC Email</th>
+          <th>POC Phone</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @project.project_implementers.each do |pi| %>
+            <tr>
+              <td><%= pi.implementer.name %>  </td>
+              <td><%= pi.description %>  </td>
+              <td><%= pi.poc_name %>  </td>
+              <td><%= pi.poc_email %>  </td>
+              <td><%= pi.poc_phone %>  </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td><label>Program Audience</label></td>
+    <td><%= @project.program_audience %></td>
+  </tr>
+  <tr>
+    <td><label>Funding Amount Requested</label></td>
+    <td><%= number_to_currency(@project.budget_requested) %></td>
+  </tr>
+  <tr>
+    <td><label>Funding Breakdown</label></td>
+    <td>
+      <table class="table table-bordered table-striped table-condensed table-hover">
+        <thead>
+        <tr>
+          <th>Country/Organization</th>
+          <th>Budget Item</th>
+          <th>Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @project.budget_items.each do |budget_item| %>
+          <tr>
+            <td><%= budget_item.budgetable.name %></td>
+            <td><%= budget_item.name %></td>
+            <td><%= number_to_currency(budget_item.budget_amount) %> </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td><label>Funding Mechanisms</label></td>
+    <td>
+      <ul class="list-inline">
+        <% @project.funding_mechanisms.each do |fm| %>
+            <li><%= fm.name %> </li>
+        <% end %>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><label>Funding Sources</label></td>
+    <td>
+      <ul class="list-inline">
+        <% @project.sub_accounts.each do |sa| %>
+            <li><%= sa.name %>  </li>
+        <% end %>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><label>Fiscal Year</label></td>
+    <td><%= @project.fiscal_year %></td>
+  </tr>
+</table>
