@@ -74,27 +74,43 @@ class Project < ActiveRecord::Base
   def update_project_state(state_event)
     if state_event == 'Save and Submit for Review'
       self.submit!
+      c = Clearance.find_by(name: 'Submitted', clearable_id: self.id, clearable_type: 'Project')
+      c.update(clearance_status: 2, clearance_date: Date.today)
       'Proposal was successfully submitted for review.'
     elsif state_event == 'Send to Legal'
       self.send_to_legal!
+      c = Clearance.find_by(name: 'Pre-legal Cleared', clearable_id: self.id, clearable_type: 'Project')
+      c.update(clearance_status: 1, clearance_date: Date.today)
       'Proposal was sent to Legal for Pre-Clear.'
     elsif state_event == 'Request Changes'
       self.request_changes!
+      c = Clearance.find_by(name: 'Submitted', clearable_id: self.id, clearable_type: 'Project')
+      c.update(clearance_status: 1, clearance_date: Date.today)
       'Proposal was sent to Submitter for Changes.'
     elsif state_event == 'Send to Program'
       self.send_to_program!
+      c = Clearance.find_by(name: 'Pre-legal Cleared', clearable_id: self.id, clearable_type: 'Project')
+      c.update(clearance_status: 1, clearance_date: Date.today)
       'Proposal sent back to Program.'
-    elsif state_event == 'Pre-Clear Proposal.'
+    elsif state_event == 'Pre-Clear Proposal'
       self.preclear_proposal!
+      c = Clearance.find_by(name: 'Pre-legal Cleared', clearable_id: self.id, clearable_type: 'Project')
+      c.update(clearance_status: 2, clearance_date: Date.today)
       'Proposal Pre-Cleared Successfully.'
     elsif state_event == 'Send Comments to Program'
       self.send_comments!
+      c = Clearance.find_by(name: 'Approved', clearable_id: self.id, clearable_type: 'Project')
+      c.update(clearance_status: 1, clearance_date: Date.today)
       'Regional Review Comments Sent to Program.'
     elsif state_event == 'Approve Proposal'
       self.approve!
+      c = Clearance.find_by(name: 'Approved', clearable_id: self.id, clearable_type: 'Project')
+      c.update(clearance_status: 2, clearance_date: Date.today)
       'Proposal Successfully Approved.'
     elsif state_event == 'Deny Proposal'
       self.deny!
+      c = Clearance.find_by(name: 'Approved', clearable_id: self.id, clearable_type: 'Project')
+      c.update(clearance_status: 3, clearance_date: Date.today)
       'Proposal Denied.'
     else
       'Project Updated'
