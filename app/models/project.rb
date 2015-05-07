@@ -69,7 +69,6 @@ class Project < ActiveRecord::Base
     self.do_renotify ||= false
     self.is_renotified ||= false
     self.is_funding_modified ||= false
-    self.is_global ||= false
   end
 
   def update_project_state(state_event)
@@ -100,6 +99,27 @@ class Project < ActiveRecord::Base
     else
       'Project Updated'
     end
+  end
+
+  def create_project_clearances
+    c = Clearance.create(name: 'Submitted', clearance_status: 0)
+    c.clearable = self
+    c.save
+    c = Clearance.create(name: 'Pre-legal Cleared', clearance_status: 0)
+    c.clearable = self
+    c.save
+    c = Clearance.create(name: 'Approved', clearance_status: 0)
+    c.clearable = self
+    c.save
+    c = Clearance.create(name: 'CN Cleared', clearance_status: 0)
+    c.clearable = self
+    c.save
+    c = Clearance.create(name: 'Funding Approved', clearance_status: 0)
+    c.clearable = self
+    c.save
+    c = Clearance.create(name: 'Fully Obligated', clearance_status: 0)
+    c.clearable = self
+    c.save
   end
 
 
