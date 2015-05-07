@@ -8,6 +8,7 @@ class AttachedFile < ActiveRecord::Base
 
   def set_defaults
     self.is_active ||= true
+    self.is_archived ||= false
   end
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150430200010) do
+ActiveRecord::Schema.define(version: 20150507194521) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20150430200010) do
     t.string   "attachable_document_content_type"
     t.integer  "attachable_document_file_size"
     t.datetime "attachable_document_updated_at"
+    t.boolean  "is_archived"
   end
 
   create_table "budget_items", force: :cascade do |t|
@@ -198,7 +199,6 @@ ActiveRecord::Schema.define(version: 20150430200010) do
     t.string   "workflow_state"
     t.boolean  "do_renotify"
     t.boolean  "is_renotified"
-    t.boolean  "is_global"
     t.boolean  "is_funding_modified"
   end
 
