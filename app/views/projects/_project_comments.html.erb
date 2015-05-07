@@ -1,0 +1,5 @@
+<ul>
+  <% @project.comments.each do |comment| %>
+      <li><%= comment.comment_date %> - <%= comment.comments %> - <%= comment.user.name %> - <%= comment.user.role %> </li>
+  <% end %>
+</ul>

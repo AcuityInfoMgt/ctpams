@@ -1,0 +1,5 @@
+<ul>
+  <% @project.attached_files.each do |attached_file| %>
+      <li><%= link_to attached_file.name, attached_file.attachable_document.url %> </li>
+  <% end %>
+</ul>

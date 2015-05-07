@@ -1,9 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<%= current_user.project_owner?(@project.id) %>
-<%= current_user.in_project_region?(@project.id) %>
-<%= current_user.admin? %>
-
 <div class="row">
   <div class="col-md-12">
     <div class="panel panel-default">
@@ -23,10 +19,10 @@
 </div>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-8">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <i class="fa fa-list-alt fa-fw"></i> Project Details
+        <i class="fa fa-list-alt fa-fw"></i> Details
         <div class="pull-right">
 
         </div>
@@ -38,24 +34,65 @@
       <!-- /.panel-body -->
     </div>
   </div>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-list-alt fa-fw"></i> Documents
+        <div class="pull-right">
+
+        </div>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <%= render 'project_documents' %>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-list-alt fa-fw"></i> Comments
+        <div class="pull-right">
+
+        </div>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <%= render 'project_comments' %>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-list-alt fa-fw"></i> Add Comment
+        <div class="pull-right">
+
+        </div>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <%= render 'comment_form' %>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-list-alt fa-fw"></i> Actions
+        <div class="pull-right">
+
+        </div>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <%= render 'project_review_actions' %>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+  </div>
 </div>
 
 
 
-<p>
-  <strong>Is archived:</strong>
-  <%= @project.is_archived %>
-</p>
 
-<p>
-  <strong>Is denied:</strong>
-  <%= @project.is_denied %>
-</p>
-
-<p>
-  <strong>Is active:</strong>
-  <%= @project.is_active %>
-</p>
 
 
 
@@ -78,33 +115,9 @@
     </ul>
 </p>
 
-<p>
-  <strong>Clearances:</strong>
-<ul>
-  <% @project.clearances.each do |clearance| %>
-      <li><%= clearance.name %> - <%= clearance.clearance_status %> - <%= clearance.clearance_date %> </li>
-  <% end %>
-</ul>
-</p>
-
-<p>
-  <strong>Attached Files:</strong>
-<ul>
-  <% @project.attached_files.each do |attached_file| %>
-      <li><%= link_to attached_file.name, attached_file.attachable_document.url %> </li>
-  <% end %>
-</ul>
-</p>
-
-<p>
-  <strong>Comments:</strong>
-<ul>
-  <% @project.comments.each do |comment| %>
-      <li><%= comment.comment_date %> - <%= comment.comments %> - <%= comment.user.name %> - <%= comment.user.role %> </li>
-  <% end %>
-</ul>
-</p>
 
 
 
-<%= render 'project_review_actions' %>
+
+
+
