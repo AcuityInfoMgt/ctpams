@@ -1,7 +1,27 @@
 <p id="notice"><%= notice %></p>
-<h1>Editing Project</h1>
 
-<%= render 'project_form' %>
+<div class="row">
+  <div class="col-md-12">
+    <!--- start panel --->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <i class="fa fa-edit fa-fw"></i> Edit Project
+            <div class="pull-right">
 
-<%= link_to 'Show', @project %> |
+            </div>
+          </div>
+          <!-- /.panel-heading -->
+          <div class="panel-body">
+            <%= render 'project_form' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+
+
+
+<%= link_to 'Show', @project %>

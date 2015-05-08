@@ -1,13 +1,15 @@
-<div class="nested-fields">
-  <%= f.input :name %>
-  <%= f.input :budget_amount %>
-  <% if f.object.budgetable_type == 'Implementer' %>
-      <%= f.collection_select(:budgetable_id, Implementer.all, :id, :name) %>
-      <%= f.input :budgetable_type, as: :hidden, input_html: { value: 'Implementer' } %>
-  <% else %>
-      <%= f.collection_select(:budgetable_id, Country.all, :id, :name) %>
-      <%= f.input :budgetable_type, as: :hidden, input_html: { value: 'Country' } %>
-  <% end %>
+<tr class="nested-fields">
+  <td><%= f.input :name, label: false %></td>
+  <td><%= f.input :budget_amount, label: false %></td>
+  <td>
+    <% if f.object.budgetable_type == 'Implementer' %>
+        <%= f.collection_select(:budgetable_id, Implementer.all, :id, :name) %>
+        <%= f.input :budgetable_type, as: :hidden, input_html: { value: 'Implementer' } %>
+    <% else %>
+        <%= f.collection_select(:budgetable_id, Country.all, :id, :name) %>
+        <%= f.input :budgetable_type, as: :hidden, input_html: { value: 'Country' } %>
+    <% end %>
+  </td>
 
-  <%= link_to_remove_association "remove", f %>
-</div>
+  <td><%= link_to_remove_association "X", f, class: 'btn btn-default btn-xs' %></td>
+</tr>

@@ -1,9 +1,7 @@
-<div class="nested-fields">
-  <%= f.input :name %>
-  <%= f.input :email %>
-  <%= f.input :phone %>
-  <%= f.input :office %>
-
-
-  <%= link_to_remove_association "remove", f %>
-</div>
+<tr class="nested-fields">
+  <td><%= f.input :name, label: false %></td>
+  <td><%= f.input :email, label: false %></td>
+  <td><%= f.input :phone, label: false %></td>
+  <td><%= f.input :office, label: false %></td>
+  <td class="text-center"><%= link_to_remove_association "X", f, class: 'btn btn-default btn-xs' %></td>
+</tr>

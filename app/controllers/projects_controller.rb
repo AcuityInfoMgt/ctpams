@@ -43,30 +43,18 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
-    if params[:commit] == 'Save Proposal'
-      respond_to do |format|
-        if @project.update(project_params)
-          flash.now[:notice] = 'Proposal was successfully saved.'
-          format.html { render :edit }
-          format.json { render :show, status: :ok, location: @project }
-        else
-          format.html { render :edit }
-          format.json { render json: @project.errors, status: :unprocessable_entity }
-        end
-      end
-    else
-      respond_to do |format|
-        if @project.update(project_params)
-          state_message = @project.update_project_state(params[:commit])
-          format.html { redirect_to @project, notice: state_message }
-          format.json { render :show, status: :ok, location: @project }
-        else
-          format.html { render :edit }
-          format.json { render json: @project.errors, status: :unprocessable_entity }
-        end
+    respond_to do |format|
+      if @project.update(project_params)
+        state_message = @project.update_project_state(params[:commit])
+        format.html { redirect_to @project, notice: state_message }
+        format.json { render :show, status: :ok, location: @project }
+      else
+        format.html { render :edit }
+        format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
   end
+
 
 
 
