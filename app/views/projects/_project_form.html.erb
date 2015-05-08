@@ -36,6 +36,7 @@
       <%= f.input :start_date, as: :datepicker, label: 'Start Date:  ' %>
       <%= f.input :end_date, as: :datepicker, label: 'End Date:  ' %>
       <%= f.association :countries, label: 'Countries Engaged' %>
+      <label>Implementing Partners</label>
       <div id="projectimplementers">
         <table class="table table-bordered table-striped table-condensed table-hover">
           <thead>
@@ -54,7 +55,7 @@
         <% end %>
           </tbody>
         </table>
-        <div class="links">
+        <div class="links text-right">
           <%= link_to_add_association 'Add Implementer', f, :project_implementers, :"data-association-insertion-node" => "tbody#project_implementers", :"data-association-insertion-method" => "append", :partial => "project_implementer_fields", class: 'btn btn-default btn-xs' %>
         </div><br>
       </div>
@@ -69,7 +70,7 @@
       <%= f.hidden_field :user_id, :value => current_user.id %>
       <%= f.input :budget_requested, label: 'Funding Amount Requested' %>
       <%= f.input :fiscal_year, label: 'Fiscal Year' %>
-      <h3>Budget Items</h3>
+      <label>Budget Items</label>
       <div id="budgetitems">
         <table class="table table-bordered table-striped table-condensed table-hover">
           <thead>
@@ -92,22 +93,34 @@
       </div>
       <h3>Attached Files</h3>
       <div id="attached_files">
-        <%= f.simple_fields_for :attached_files do |attached_file| %>
-            <%= render 'attached_file_fields', :f => attached_file %>
-        <% end %>
-        <div class="links">
-          <%= link_to_add_association 'add document', f, :attached_files %>
+        <table class="table table-bordered table-striped table-condensed table-hover">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>File</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody id="attached_files_list">
+            <%= f.simple_fields_for :attached_files do |attached_file| %>
+                <%= render 'attached_file_fields', :f => attached_file %>
+            <% end %>
+          </tbody>
+        </table>
+        <div class="links text-right">
+          <%= link_to_add_association 'add document', f, :attached_files, :"data-association-insertion-node" => "tbody#attached_files_list", :"data-association-insertion-method" => "append", :partial => "attached_file_fields", class: 'btn btn-default btn-xs' %>
         </div>
       </div>
     </div>
-
+<hr>
     <div class="form-actions">
 
       <% if @project.proposal_in_progress? %>
-          <%= f.button :submit, 'Save' %>
-          <%= f.button :submit, 'Save and Submit for Review' %>
+          <%= f.button :submit, 'Save', class: 'btn btn-default btn-xs' %>
+          <%= f.button :submit, 'Save and Submit for Review', class: 'btn btn-default btn-xs' %>
       <% else %>
-          <%= f.button :submit, 'Update Project' %>
+          <%= f.button :submit, 'Update Project', class: 'btn btn-default btn-xs' %>
       <% end %>
+      <%= link_to 'Cancel', @project, class: 'btn btn-default btn-xs' %>
     </div>
 <% end %>
