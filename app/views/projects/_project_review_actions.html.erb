@@ -3,21 +3,22 @@
       <%= f.hidden_field :name %>
 
     <div class="form-actions">
-      <% if @project.preliminary_program_review? && ((current_user.role == 'reviewer' && current_user.in_project_region?(@project.id)) || current_user.admin?) %>
+      <% if @project.preliminary_review? && ((current_user.role == 'reviewer' && current_user.in_project_region?(@project.id)) || current_user.admin?) %>
           <%= f.button :submit, 'Send to Legal', class: 'btn btn-default btn-xs' %>
           <%= f.button :submit, 'Request Changes', class: 'btn btn-default btn-xs' %>
-          <%= f.button :submit, 'Deny Proposal', class: 'btn btn-default btn-xs' %>
-      <% elsif @project.pre_legal_review? && (current_user.role == 'legal' || current_user.admin?) %>
+      <% elsif @project.prelegal_review? && (current_user.role == 'legal' || current_user.admin?) %>
           <%= f.button :submit, 'Send to Program', class: 'btn btn-default btn-xs' %>
           <%= f.button :submit, 'Pre-Clear Proposal', class: 'btn btn-default btn-xs' %>
       <% elsif @project.regional_review? && ((current_user.role == 'regional' && current_user.in_project_region?(@project.id)) || current_user.admin?) %>
           <%= f.button :submit, 'Send Comments to Program', class: 'btn btn-default btn-xs' %>
-      <% elsif @project.secondary_program_review? && ((current_user.role == 'reviewer' && current_user.in_project_region?(@project.id)) || current_user.admin?) %>
+      <% elsif @project.secondary_review? && ((current_user.role == 'reviewer' && current_user.in_project_region?(@project.id)) || current_user.admin?) %>
           <%= f.button :submit, 'Approve Proposal', class: 'btn btn-default btn-xs' %>
-          <%= f.button :submit, 'Deny Proposal', class: 'btn btn-default btn-xs' %>
       <% end %>
-      <% if (current_user.role == 'reviewer' && current_user.in_project_region?(@project.id)) || (current_user.role == 'submitter' && current_user.project_owner?(@project.id) && @project.proposal_in_progress?) || current_user.admin? %>
-        <%= link_to 'Edit', edit_project_path(@project), class: 'btn btn-default btn-xs' %>
+      <% if ((current_user.role == 'reviewer' && current_user.in_project_region?(@project.id)) || current_user.admin?) && @project.current_state < :fully_obligated %>
+          <hr>
+          <%= f.button :submit, 'Deny Proposal', class: 'btn btn-default btn-xs' %>
+          <%= f.button :submit, 'Delete Proposal', class: 'btn btn-default btn-xs' %>
+          <%= f.button :submit, 'Archive Proposal', class: 'btn btn-default btn-xs' %>
       <% end %>
       <br>
     </div>

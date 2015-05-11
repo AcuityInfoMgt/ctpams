@@ -24,6 +24,9 @@
       <div class="panel-heading">
         <i class="fa fa-list-alt fa-fw"></i> Details
         <div class="pull-right">
+          <% if (current_user.role == 'reviewer' && current_user.in_project_region?(@project.id)) || (current_user.role == 'submitter' && current_user.project_owner?(@project.id) && @project.proposal_in_progress?) || current_user.admin? %>
+              <%= link_to 'Edit', edit_project_path(@project), class: 'btn btn-default btn-xs' %>
+          <% end %>
 
         </div>
       </div>

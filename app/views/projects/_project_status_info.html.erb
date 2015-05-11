@@ -27,17 +27,17 @@
 
 </div>
 <hr>
+
 <div class="row">
   <div class="col-md-12 text-center">
-    <ol class="progtrckr" data-progtrckr-steps="<%= @project.clearances.count %>"><!--
-      <% @project.clearances.order('created_at').each do |clearance| %>
-          --><li  class=<% if clearance.clearance_date && clearance.clearance_status == 'Yes' %>"progtrckr-done" data-toggle="tooltip" title="<%= clearance.clearance_status %> - <%= clearance.clearance_date %>">
-          <% elsif clearance.clearance_date && clearance.clearance_status == 'No' %>"progtrckr-denied" data-toggle="tooltip" title="<%= clearance.clearance_status %> - <%= clearance.clearance_date %>">
-          <% elsif clearance.clearance_date  %>"progtrckr-pending" data-toggle="tooltip" title="<%= clearance.clearance_status %> - <%= clearance.clearance_date %>">
-          <% else %>"progtrckr-todo"  data-toggle="tooltip" title="<%= clearance.clearance_status %>">
-          <% end %>
+    <ol class="progtrckr" data-progtrckr-steps="<%= @states.count %>"><!--
+      <% @states.each do |s| %>
+        <% check_state = s.to_s + "?" %>
+          --><li  class=<% if @project.current_state > s %>"progtrckr-done">
+    <% else %>"progtrckr-todo">
+    <% end %>
 
-      <%= clearance.name %></li><!--
+    <%= s.to_s.titleize %></li><!--
       <% end %>
       -->
     </ol>

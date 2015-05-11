@@ -11,6 +11,9 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    @states = Project.workflow_spec.states.keys
+    @states.shift
+    @states.pop
   end
 
   # GET /projects/new

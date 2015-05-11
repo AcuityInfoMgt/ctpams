@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :programs
   has_and_belongs_to_many :regions
   has_many :comments
-  enum role: [:submitter, :reviewer, :budget, :viewer, :admin, :legal, :regional, :commenter, :fclear, :hclear, :spclear, :foclear]
+  enum role: [:submitter, :reviewer, :budget, :viewer, :admin, :legal, :regional, :foreign_assistance, :legislative_affairs, :policy_planning, :front_office]
   after_initialize :set_defaults, :if => :new_record?
 
   def set_defaults
@@ -36,103 +36,103 @@ class User < ActiveRecord::Base
 
   def get_proposal_in_progress
     if self.role == 'submitter'
-      @projects = Project.where(workflow_state: 'proposal_in_progress').where(user_id: self.id)
+      @projects = Project.with_draft_state.where(user_id: self.id)
     elsif self.role == 'reviewer'
-        @projects = Project.where(workflow_state: 'proposal_in_progress').where(program_id: self.programs).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id)
+        @projects = Project.with_draft_state.where(program_id: self.programs).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id)
     elsif self.role == 'admin'
-      @projects = Project.where(workflow_state: 'proposal_in_progress')
+      @projects = Project.with_draft_state
     end
   end
 
   def get_project_preliminary
     if self.role == 'reviewer'
-      @projects = Project.where(workflow_state: 'preliminary_program_review').where(program_id: self.programs).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id)
+      @projects = Project.with_preliminary_review_state.where(program_id: self.programs).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id)
     elsif self.role == 'admin'
-      @projects = Project.where(workflow_state: 'preliminary_program_review')
+      @projects = Project.with_preliminary_review_state
     end
   end
 
   def get_project_pre_legal
     if self.role == 'admin' || self.role == 'legal'
-      @projects = Project.where(workflow_state: 'pre_legal_review')
+      @projects = Project.with_prelegal_review_state
     end
   end
 
   def get_project_regional
     if self.role == 'regional'
-      @projects = Project.where(workflow_state: 'regional_review').where(program_id: self.programs).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id)
+      @projects = Project.with_regional_review_state.where(program_id: self.programs).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id)
     elsif self.role == 'admin'
-      @projects = Project.where(workflow_state: 'regional_review')
+      @projects = Project.with_regional_review_state
     end
   end
 
   def get_project_secondary
     if self.role == 'reviewer'
-      @projects = Project.where(workflow_state: 'secondary_program_review').where(program_id: self.programs).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id)
+      @projects = Project.with_secondary_review_state.where(program_id: self.programs).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id)
     elsif self.role == 'admin'
-      @projects = Project.where(workflow_state: 'secondary_program_review')
+      @projects = Project.with_secondary_review_state
     end
   end
 
   def get_project_cn
     if self.role == 'reviewer'
-      @projects = Project.where(workflow_state: 'cn_clearance_pending').where(program_id: self.programs).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id)
+      @projects = Project.with_cn_clearance_state.where(program_id: self.programs).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id)
     elsif self.role == 'admin' || self.role == 'budget'
-      @projects = Project.where(workflow_state: 'cn_clearance_pending')
+      @projects = Project.with_cn_clearance_state
     end
   end
 
   def get_project_funding
     if self.role == 'admin' || self.role == 'budget'
-      @projects = Project.where(workflow_state: 'funding_clearance_pending')
+      @projects = Project.with_funding_clearance_state
     end
   end
 
   def get_project_obligation
     if self.role == 'admin' || self.role == 'budget'
-      @projects = Project.where(workflow_state: 'obligation_pending')
+      @projects = Project.with_obligation_state
     end
   end
 
   def get_cn_new
     if self.role == 'admin' || self.role == 'budget'
-      @cns = CongressionalNotification.where(workflow_state: 'new')
+      @cns = CongressionalNotification.with_new_state
     end
   end
 
   def get_cn_clearance
     if self.role == 'admin' || self.role == 'budget'
-      @cns = CongressionalNotification.where(workflow_state: 'cn_clearance_pending')
+      @cns = CongressionalNotification.with_clearance_pending_state
     end
   end
 
   def get_cn_congress
     if self.role == 'admin' || self.role == 'budget'
-      @cns = CongressionalNotification.where(workflow_state: 'cn_congressional_clearance_pending')
+      @cns = CongressionalNotification.with_congressional_clearance_pending_state
     end
   end
 
   def get_cn_hold
     if self.role == 'admin' || self.role == 'budget'
-      @cns = CongressionalNotification.where(workflow_state: 'cn_on_hold')
+      @cns = CongressionalNotification.with_on_hold_state
     end
   end
 
   def get_funding_confirmation
     if self.role == 'admin' || self.role == 'budget'
-      @funding_mechanisms = ProjectFundingMechanism.includes(:project, :funding_mechanism).where(workflow_state: 'funding_mechanism_confirmation_pending').where(projects: { workflow_state: 'funding_clearance_pending' })
+      @funding_mechanisms = ProjectFundingMechanism.includes(:project, :funding_mechanism).with_confirmation_pending_state.where(projects: { workflow_state: 'funding_clearance_pending' })
     end
   end
 
   def get_funding_clearance
     if self.role == 'admin' || self.role == 'budget'
-      @funding_mechanisms = ProjectFundingMechanism.includes(:project, :funding_mechanism).where(workflow_state: 'funding_clearance_pending')
+      @funding_mechanisms = ProjectFundingMechanism.includes(:project, :funding_mechanism).with_clearance_pending_state
     end
   end
 
   def get_funding_hold
     if self.role == 'admin' || self.role == 'budget'
-      @funding_mechanisms = ProjectFundingMechanism.includes(:project, :funding_mechanism).where(workflow_state: 'funding_on_hold')
+      @funding_mechanisms = ProjectFundingMechanism.includes(:project, :funding_mechanism).with_on_hold_state
     end
   end
 

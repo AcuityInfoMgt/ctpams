@@ -27,36 +27,36 @@ class Project < ActiveRecord::Base
   after_initialize :set_defaults, :if => :new_record?
 
   workflow do
-    state :proposal_in_progress do
-      event :submit, :transitions_to => :preliminary_program_review
+    state :draft do
+      event :submit, :transitions_to => :preliminary_review
     end
-    state :preliminary_program_review do
-      event :send_to_legal, :transitions_to => :pre_legal_review
-      event :request_changes, :transitions_to => :proposal_in_progress
-      event :deny, :transitions_to => :proposal_denied
+    state :preliminary_review do
+      event :send_to_legal, :transitions_to => :prelegal_review
+      event :request_changes, :transitions_to => :draft
+      #event :deny, :transitions_to => :proposal_denied
     end
-    state :pre_legal_review do
-      event :send_to_program, :transitions_to => :preliminary_program_review
+    state :prelegal_review do
+      event :send_to_program, :transitions_to => :preliminary_review
       event :preclear_proposal, :transitions_to => :regional_review
     end
     state :regional_review do
-      event :send_comments, :transitions_to => :secondary_program_review
+      event :send_comments, :transitions_to => :secondary_review
     end
-    state :secondary_program_review do
-      event :approve, :transitions_to => :cn_clearance_pending
-      event :deny, :transitions_to => :proposal_denied
+    state :secondary_review do
+      event :approve, :transitions_to => :cn_clearance
+      #event :deny, :transitions_to => :proposal_denied
     end
-    state :cn_clearance_pending do
-      event :cn_cleared, :transitions_to => :funding_clearance_pending
+    state :cn_clearance do
+      event :cn_cleared, :transitions_to => :funding_clearance
     end
-    state :funding_clearance_pending do
-      event :clear_funding, :transitions_to => :obligation_pending
+    state :funding_clearance do
+      event :clear_funding, :transitions_to => :obligation
     end
-    state :obligation_pending do
-      event :obligate_all_funds, :transitions_to => :project_fully_obligated
+    state :obligation do
+      event :obligate_all_funds, :transitions_to => :fully_obligated
     end
-    state :project_fully_obligated
-    state :proposal_denied
+    state :fully_obligated
+    #state :proposal_denied
   end
 
 
@@ -75,85 +75,31 @@ class Project < ActiveRecord::Base
   def update_project_state(state_event)
     if state_event == 'Save and Submit for Review'
       self.submit!
-      c = Clearance.find_by(name: 'Submitted', clearable_id: self.id, clearable_type: 'Project')
-      if c
-        c.update(clearance_status: 2, clearance_date: Date.today)
-      end
       'Proposal was successfully submitted for review.'
     elsif state_event == 'Send to Legal'
       self.send_to_legal!
-      c = Clearance.find_by(name: 'Pre-legal Cleared', clearable_id: self.id, clearable_type: 'Project')
-      if c
-        c.update(clearance_status: 1, clearance_date: Date.today)
-      end
       'Proposal was sent to Legal for Pre-Clear.'
     elsif state_event == 'Request Changes'
       self.request_changes!
-      c = Clearance.find_by(name: 'Submitted', clearable_id: self.id, clearable_type: 'Project')
-      if c
-        c.update(clearance_status: 1, clearance_date: Date.today)
-      end
       'Proposal was sent to Submitter for Changes.'
     elsif state_event == 'Send to Program'
       self.send_to_program!
-      c = Clearance.find_by(name: 'Pre-legal Cleared', clearable_id: self.id, clearable_type: 'Project')
-      if c
-        c.update(clearance_status: 1, clearance_date: Date.today)
-      end
       'Proposal sent back to Program.'
     elsif state_event == 'Pre-Clear Proposal'
       self.preclear_proposal!
-      c = Clearance.find_by(name: 'Pre-legal Cleared', clearable_id: self.id, clearable_type: 'Project')
-      if c
-        c.update(clearance_status: 2, clearance_date: Date.today)
-      end
       'Proposal Pre-Cleared Successfully.'
     elsif state_event == 'Send Comments to Program'
       self.send_comments!
-      c = Clearance.find_by(name: 'Approved', clearable_id: self.id, clearable_type: 'Project')
-      if c
-        c.update(clearance_status: 1, clearance_date: Date.today)
-      end
       'Regional Review Comments Sent to Program.'
     elsif state_event == 'Approve Proposal'
       self.approve!
-      c = Clearance.find_by(name: 'Approved', clearable_id: self.id, clearable_type: 'Project')
-      if c
-        c.update(clearance_status: 2, clearance_date: Date.today)
-      end
       'Proposal Successfully Approved.'
-    elsif state_event == 'Deny Proposal'
-      self.deny!
-      c = Clearance.find_by(name: 'Approved', clearable_id: self.id, clearable_type: 'Project')
-      if c
-        c.update(clearance_status: 3, clearance_date: Date.today)
-      end
-      'Proposal Denied.'
     else
       'Project Updated'
     end
   end
 
-  def create_project_clearances
-    c = Clearance.create(name: 'Submitted', clearance_status: 0)
-    c.clearable = self
-    c.save
-    c = Clearance.create(name: 'Pre-legal Cleared', clearance_status: 0)
-    c.clearable = self
-    c.save
-    c = Clearance.create(name: 'Approved', clearance_status: 0)
-    c.clearable = self
-    c.save
-    c = Clearance.create(name: 'CN Cleared', clearance_status: 0)
-    c.clearable = self
-    c.save
-    c = Clearance.create(name: 'Funding Approved', clearance_status: 0)
-    c.clearable = self
-    c.save
-    c = Clearance.create(name: 'Fully Obligated', clearance_status: 0)
-    c.clearable = self
-    c.save
-  end
+
 
 
 end
