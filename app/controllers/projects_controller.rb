@@ -14,6 +14,7 @@ class ProjectsController < ApplicationController
     @states = Project.workflow_spec.states.keys
     @states.shift
     @states.pop
+    #@comment = Comment.new
   end
 
   # GET /projects/new
@@ -47,7 +48,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        state_message = @project.update_project_state(params[:commit])
+        state_message = @project.update_project_state(params[:commit], params[:new_comments], current_user.id)
         format.html { redirect_to @project, notice: state_message }
         format.json { render :show, status: :ok, location: @project }
       else
@@ -79,6 +80,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :description, :start_date, :end_date, :budget_requested, :fiscal_year, :objective, :interest, :law_enforcement, :coordination, :lessons_learned, :sustainability, :city_province, :program_audience, :reprogram, :reprogram_comments, :implementation_status, :program_id, :user_id, :is_archived, :is_denied, :is_active, project_funding_mechanisms_attributes: [:id, :funding_mechanism_id, :_destroy], people_attributes: [:id, :name, :email, :phone, :office, :_destroy], project_implementers_attributes: [:id, :description, :implementer_id, :poc_name, :poc_email, :poc_phone, :_destroy], budget_items_attributes: [:id, :name, :budget_amount, :budgetable_id, :budgetable_type, :_destroy], obligations_attributes: [:id, :obligation_number, :obligation_amount, :obligation_date, :fiscal_year, :obligation_comments, :_destroy], attached_files_attributes: [:id, :name, :is_active, :attachable_id, :attachable_type, :attachable_document_file_name, :attachable_document_content_type, :attachable_document_file_size, :attachable_document, :_destroy], country_ids: [], sub_account_ids: [], congressional_notification_ids: [])
+      params.require(:project).permit(:name, :description, :start_date, :end_date, :budget_requested, :fiscal_year, :objective, :interest, :law_enforcement, :coordination, :lessons_learned, :sustainability, :city_province, :program_audience, :reprogram, :reprogram_comments, :implementation_status, :program_id, :user_id, :is_archived, :is_denied, :is_active, project_funding_mechanisms_attributes: [:id, :funding_mechanism_id, :_destroy], people_attributes: [:id, :name, :email, :phone, :office, :_destroy], comments_attributes: [:id, :comments, :user_id, :_destroy], project_implementers_attributes: [:id, :description, :implementer_id, :poc_name, :poc_email, :poc_phone, :_destroy], budget_items_attributes: [:id, :name, :budget_amount, :budgetable_id, :budgetable_type, :_destroy], obligations_attributes: [:id, :obligation_number, :obligation_amount, :obligation_date, :fiscal_year, :obligation_comments, :_destroy], attached_files_attributes: [:id, :name, :is_active, :attachable_id, :attachable_type, :attachable_document_file_name, :attachable_document_content_type, :attachable_document_file_size, :attachable_document, :_destroy], country_ids: [], sub_account_ids: [], congressional_notification_ids: [])
     end
 end

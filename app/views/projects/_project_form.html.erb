@@ -19,12 +19,12 @@
           </thead>
           <tbody id="project_owners">
             <%= f.simple_fields_for :people do |person| %>
-                <%= render 'person_fields', :f => person %>
+                <%= render 'projects/cocoon/person_fields', :f => person %>
             <% end %>
           </tbody>
         </table>
         <div class="links text-right">
-          <%= link_to_add_association 'Add Project Owner', f, :people, :"data-association-insertion-node" => "tbody#project_owners", :"data-association-insertion-method" => "append", :partial => "person_fields", class: 'btn btn-default btn-xs'  %>
+          <%= link_to_add_association 'Add Project Owner', f, :people, :"data-association-insertion-node" => "tbody#project_owners", :"data-association-insertion-method" => "append", :partial => "projects/cocoon/person_fields", class: 'btn btn-default btn-xs'  %>
         </div><br>
       </div>
       <%= f.input :description, label: 'Description of Project Proposed' %>
@@ -51,12 +51,12 @@
           </thead>
           <tbody id="project_implementers">
         <%= f.simple_fields_for :project_implementers do |project_implementer| %>
-            <%= render 'project_implementer_fields', :f => project_implementer %>
+            <%= render 'projects/cocoon/project_implementer_fields', :f => project_implementer %>
         <% end %>
           </tbody>
         </table>
         <div class="links text-right">
-          <%= link_to_add_association 'Add Implementer', f, :project_implementers, :"data-association-insertion-node" => "tbody#project_implementers", :"data-association-insertion-method" => "append", :partial => "project_implementer_fields", class: 'btn btn-default btn-xs' %>
+          <%= link_to_add_association 'Add Implementer', f, :project_implementers, :"data-association-insertion-node" => "tbody#project_implementers", :"data-association-insertion-method" => "append", :partial => "projects/cocoon/project_implementer_fields", class: 'btn btn-default btn-xs' %>
         </div><br>
       </div>
       <%= f.input :city_province, label: 'Neighborhood, City or Province (if applicable)' %>
@@ -83,12 +83,12 @@
           </thead>
           <tbody id="budget_items">
             <%= f.simple_fields_for :budget_items do |budget_item| %>
-                <%= render 'budget_item_fields', :f => budget_item %>
+                <%= render 'projects/cocoon/budget_item_fields', :f => budget_item %>
             <% end %>
           </tbody>
         </table>
         <div class="links text-right">
-          <%= link_to_add_association 'add budget item', f, :budget_items, :"data-association-insertion-node" => "tbody#budget_items", :"data-association-insertion-method" => "append", :partial => "budget_item_fields", class: 'btn btn-default btn-xs' %>
+          <%= link_to_add_association 'add budget item', f, :budget_items, :"data-association-insertion-node" => "tbody#budget_items", :"data-association-insertion-method" => "append", :partial => "projects/cocoon/budget_item_fields", class: 'btn btn-default btn-xs' %>
         </div>
       </div>
       <h3>Attached Files</h3>
@@ -103,12 +103,12 @@
           </thead>
           <tbody id="attached_files_list">
             <%= f.simple_fields_for :attached_files do |attached_file| %>
-                <%= render 'attached_file_fields', :f => attached_file %>
+                <%= render 'projects/cocoon/attached_file_fields', :f => attached_file %>
             <% end %>
           </tbody>
         </table>
         <div class="links text-right">
-          <%= link_to_add_association 'add document', f, :attached_files, :"data-association-insertion-node" => "tbody#attached_files_list", :"data-association-insertion-method" => "append", :partial => "attached_file_fields", class: 'btn btn-default btn-xs' %>
+          <%= link_to_add_association 'add document', f, :attached_files, :"data-association-insertion-node" => "tbody#attached_files_list", :"data-association-insertion-method" => "append", :partial => "projects/cocoon/attached_file_fields", class: 'btn btn-default btn-xs' %>
         </div>
       </div>
     </div>

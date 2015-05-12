@@ -2,6 +2,7 @@ class Project < ActiveRecord::Base
   validates :name, presence: true
   validates :program, presence: true
   include Workflow
+  attr_accessor :new_comments
   belongs_to :program
   belongs_to :user
   has_many :obligations
@@ -10,6 +11,7 @@ class Project < ActiveRecord::Base
   has_many :people, as: :personable
   accepts_nested_attributes_for :people, :reject_if => :all_blank, :allow_destroy => true
   has_many :comments, as: :commentable
+  accepts_nested_attributes_for :comments, :reject_if => :all_blank, :allow_destroy => true
   has_many :clearances, as: :clearable
   has_many :attached_files, as: :attachable
   accepts_nested_attributes_for :attached_files, :reject_if => :all_blank, :allow_destroy => true
@@ -73,7 +75,13 @@ class Project < ActiveRecord::Base
     self.is_funding_modified ||= false
   end
 
-  def update_project_state(state_event)
+  def update_project_state(state_event, comments, commenter)
+    if comments && comments.strip.length > 0
+      c = Comment.create(comments: comments, user_id: commenter, comment_date: DateTime.now)
+      c.commentable = self
+      c.save
+    end
+
     if state_event == 'Save and Submit for Review'
       self.submit!
       'Proposal was successfully submitted for review.'
@@ -102,6 +110,8 @@ class Project < ActiveRecord::Base
       'Project Updated'
     end
   end
+
+
 
 
 

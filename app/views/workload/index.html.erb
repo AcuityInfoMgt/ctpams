@@ -18,12 +18,6 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-md-12">
-            <p class="text-muted">This page displays all proposals currently in PAMS that are relevant to you.
-              Proposals at different steps in the process are grouped under descriptive headings.</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
               <% if @proposal_in_progress != nil and @proposal_in_progress.count > 0 %>
                   <div class="panel panel-default">
@@ -367,12 +361,6 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-md-12">
-            <p class="text-muted">This page displays all proposals currently in PAMS that are relevant to you.
-              Proposals at different steps in the process are grouped under descriptive headings.</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
             <div class="panel-group" id="cnaccordion" role="tablist" aria-multiselectable="true">
               <% if @cn_new != nil and @cn_new.count > 0 %>
                   <div class="panel panel-default">
@@ -385,7 +373,7 @@
                     </div>
                     <div id="collapsenewcn" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingnewcn">
                       <div class="panel-body">
-                        <table>
+                        <table class="table table-striped table-hover">
                           <thead>
                           <tr>
                             <th>Name</th>
@@ -417,7 +405,7 @@
                     </div>
                     <div id="collapsecnclearancepending" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingcnclearancepending">
                       <div class="panel-body">
-                        <table>
+                        <table class="table table-striped table-hover">
                           <thead>
                           <tr>
                             <th>Name</th>
@@ -449,7 +437,7 @@
                     </div>
                     <div id="collapsecncongresspending" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingcncongresspending">
                       <div class="panel-body">
-                        <table>
+                        <table class="table table-striped table-hover">
                           <thead>
                           <tr>
                             <th>Name</th>
@@ -481,7 +469,7 @@
                     </div>
                     <div id="collapsecnhold" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingcnhold">
                       <div class="panel-body">
-                        <table>
+                        <table class="table table-striped table-hover">
                           <thead>
                           <tr>
                             <th>Name</th>
@@ -522,12 +510,6 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-md-12">
-            <p class="text-muted">This page displays all proposals currently in PAMS that are relevant to you.
-              Proposals at different steps in the process are grouped under descriptive headings.</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
             <div class="panel-group" id="fundingaccordion" role="tablist" aria-multiselectable="true">
               <% if @funding_confirmation_pending != nil and @funding_confirmation_pending.count > 0 %>
                   <div class="panel panel-default">
@@ -540,7 +522,7 @@
                     </div>
                     <div id="collapsefundingconfirmationpending" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingfundingconfirmationpending">
                       <div class="panel-body">
-                        <table>
+                        <table class="table table-striped table-hover">
                           <thead>
                           <tr>
                             <th>Project Name</th>
@@ -572,7 +554,7 @@
                     </div>
                     <div id="collapsefundingclearancepending" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingfundingclearancepending">
                       <div class="panel-body">
-                        <table>
+                        <table class="table table-striped table-hover">
                           <thead>
                           <tr>
                             <th>Project Name</th>
@@ -604,7 +586,7 @@
                     </div>
                     <div id="collapsefundingonhold" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingfundingonhold">
                       <div class="panel-body">
-                        <table>
+                        <table class="table table-striped table-hover">
                           <thead>
                           <tr>
                             <th>Project Name</th>
@@ -643,38 +625,34 @@
           <div class="panel-heading">
             <i class="fa fa-tasks fa-fw"></i> My Projects
             <div class="pull-right">
-              <%= link_to 'New CN', new_congressional_notification_path, class: 'btn btn-primary  btn-xs' %>
             </div>
           </div>
           <!-- /.panel-heading -->
           <div class="panel-body">
             <div class="row">
               <div class="col-md-12">
-                <p class="text-muted">This page displays all proposals currently in PAMS that are relevant to you.
-                  Proposals at different steps in the process are grouped under descriptive headings.</p>
+                <p class="text-muted">All projects entered by you, or listing you as a project owner.</p>
               </div>
             </div>
             <div class="row">
               <div class="col-md-12">
-                <table>
+                <table class="table table-striped table-hover">
                   <thead>
                   <tr>
+                    <th>ID</th>
                     <th>Name</th>
-                    <th>Start date</th>
-                    <th>End date</th>
-                    <th>Budget requested</th>
-                    <th>Fiscal year</th>
-                    <th>Implementation Status</th>
-                    <th>Program</th>
+                    <th>Budget</th>
+                    <th>FY</th>
+                    <th>Implementation</th>
+                    <th>Status</th>
                   </tr>
                   </thead>
 
                   <tbody>
                   <% @my_projects.each do |project| %>
                       <tr>
-                        <td><%= link_to project.id, project %> - <%= link_to project.name, project %></td>
-                        <td><%= project.start_date %></td>
-                        <td><%= project.end_date %></td>
+                        <td><%= link_to project.program.name, project %>-<%= link_to project.id, project %></td>
+                        <td><%= link_to project.name, project %></td>
                         <td><%= project.budget_requested %></td>
                         <td><%= project.fiscal_year %></td>
                         <td><%= project.implementation_status %></td>
