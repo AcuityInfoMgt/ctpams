@@ -28,7 +28,10 @@ class Project < ActiveRecord::Base
 
   workflow do
     state :draft do
-      event :submit, :transitions_to => :preliminary_review
+      event :submit, :transitions_to => :regional_review
+    end
+    state :regional_review do
+      event :send_comments, :transitions_to => :preliminary_review
     end
     state :preliminary_review do
       event :send_to_legal, :transitions_to => :prelegal_review
@@ -37,13 +40,11 @@ class Project < ActiveRecord::Base
     end
     state :prelegal_review do
       event :send_to_program, :transitions_to => :preliminary_review
-      event :preclear_proposal, :transitions_to => :regional_review
-    end
-    state :regional_review do
-      event :send_comments, :transitions_to => :secondary_review
+      event :preclear_proposal, :transitions_to => :secondary_review
     end
     state :secondary_review do
       event :approve, :transitions_to => :cn_clearance
+      event :request_changes, :transitions_to => :draft
       #event :deny, :transitions_to => :proposal_denied
     end
     state :cn_clearance do
@@ -76,6 +77,12 @@ class Project < ActiveRecord::Base
     if state_event == 'Save and Submit for Review'
       self.submit!
       'Proposal was successfully submitted for review.'
+    elsif state_event == 'Send Comments to Program'
+      self.send_comments!
+    elsif state_event == 'Send to Legal (skip Regional Review)'
+      self.send_comments!
+      self.send_to_legal!
+      'Proposal was sent to Legal for Pre-Clear.'
     elsif state_event == 'Send to Legal'
       self.send_to_legal!
       'Proposal was sent to Legal for Pre-Clear.'
@@ -88,9 +95,6 @@ class Project < ActiveRecord::Base
     elsif state_event == 'Pre-Clear Proposal'
       self.preclear_proposal!
       'Proposal Pre-Cleared Successfully.'
-    elsif state_event == 'Send Comments to Program'
-      self.send_comments!
-      'Regional Review Comments Sent to Program.'
     elsif state_event == 'Approve Proposal'
       self.approve!
       'Proposal Successfully Approved.'
