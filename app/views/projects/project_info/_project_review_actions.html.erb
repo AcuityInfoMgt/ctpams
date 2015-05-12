@@ -25,9 +25,9 @@
           <%= f.button :submit, 'Approve Proposal', class: 'btn btn-default btn-xs' %>
           <%= f.button :submit, 'Request Changes', class: 'btn btn-default btn-xs' %>
       <% end %>
-      <%= f.button :submit, 'Add Comments', class: 'btn btn-default btn-xs' %><hr>
+      <%= f.button :submit, 'Add Comments', class: 'btn btn-default btn-xs' %>
       <% if ((current_user.role == 'reviewer' && current_user.in_project_region?(@project.id)) || current_user.admin?) && @project.current_state < :fully_obligated %>
-
+          <hr>
           <%= f.button :submit, 'Deny Proposal', class: 'btn btn-default btn-xs' %>
           <%= f.button :submit, 'Delete Proposal', class: 'btn btn-default btn-xs' %>
           <%= f.button :submit, 'Archive Proposal', class: 'btn btn-default btn-xs' %>
