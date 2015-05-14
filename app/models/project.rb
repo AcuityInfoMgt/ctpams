@@ -1,9 +1,12 @@
 class Project < ActiveRecord::Base
+
   def self.default_scope
     where is_denied: false, is_archived: false, is_active: true
   end
+
   validates :name, presence: true
   validates :program, presence: true
+
   include Workflow
   attr_accessor :new_comments
   belongs_to :program
@@ -29,6 +32,7 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :countries
   has_and_belongs_to_many :sub_accounts
   enum implementation_status: [:'Pre-Implementation', :'Active', :'Complete']
+
   after_initialize :set_defaults, :if => :new_record?
 
   workflow do
@@ -41,7 +45,6 @@ class Project < ActiveRecord::Base
     state :preliminary_review do
       event :send_to_legal, :transitions_to => :prelegal_review
       event :request_changes, :transitions_to => :draft
-      #event :deny, :transitions_to => :proposal_denied
     end
     state :prelegal_review do
       event :send_to_program, :transitions_to => :preliminary_review
@@ -50,7 +53,6 @@ class Project < ActiveRecord::Base
     state :secondary_review do
       event :approve, :transitions_to => :cn_clearance
       event :request_changes, :transitions_to => :draft
-      #event :deny, :transitions_to => :proposal_denied
     end
     state :cn_clearance do
       event :cn_cleared, :transitions_to => :funding_clearance
@@ -64,8 +66,6 @@ class Project < ActiveRecord::Base
     state :fully_obligated
     #state :proposal_denied
   end
-
-
 
   def set_defaults
     self.implementation_status ||= :'Pre-Implementation'
@@ -109,6 +109,8 @@ class Project < ActiveRecord::Base
     elsif state_event == 'Approve Proposal'
       self.approve!
       'Proposal Successfully Approved.'
+    elsif comments && comments.strip.length > 0
+      'Comments Added'
     else
       'Project Updated'
     end
@@ -120,10 +122,5 @@ class Project < ActiveRecord::Base
     projects = projects.where('program_id in (?)', attributes[:program_id]) if attributes[:program_id].present?
     projects
   end
-
-
-
-
-
 
 end
