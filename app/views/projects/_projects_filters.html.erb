@@ -5,6 +5,7 @@
     <%= select_tag(:funding_mechanism_id, options_from_collection_for_select(FundingMechanism.all, :id, :name, params[:funding_mechanism_id]), multiple: true) %>
     <%= select_tag(:sub_account_id, options_from_collection_for_select(SubAccount.all, :id, :name, params[:sub_account_id]), multiple: true) %>
     <%= select_tag(:country_id, options_from_collection_for_select(Country.all, :id, :name, params[:country_id]), multiple: true) %>
+    <%= select_tag(:workflow_state, options_for_select(Project.workflow_spec.states.keys.map {|state| [state.to_s.titleize,state]}, params[:workflow_state]), multiple: true) %>
 
     <%= submit_tag('Go') %>
 
