@@ -31,66 +31,66 @@ class User < ActiveRecord::Base
 
   # Workload Summary Queries:
   def get_my_projects
-    @projects = Project.where("user_id = (?) or id in (select personable_id from people where personable_type = 'Project' and email = (?))", self.id, self.email)
+    @projects = Project.includes(:program).where("user_id = (?) or id in (select personable_id from people where personable_type = 'Project' and email = (?))", self.id, self.email)
   end
 
   def get_proposal_in_progress
     if self.role == 'submitter'
-      @projects = Project.with_draft_state.where(user_id: self.id)
+      @projects = Project.includes(:program).with_draft_state.where(user_id: self.id)
     elsif self.role == 'reviewer'
-        @projects = Project.with_draft_state.where(program_id: self.programs).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id)
+        @projects = Project.includes(:program).with_draft_state.where(program_id: self.programs).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id)
     elsif self.role == 'admin'
-      @projects = Project.with_draft_state
+      @projects = Project.includes(:program).with_draft_state
     end
   end
 
   def get_project_preliminary
     if self.role == 'reviewer'
-      @projects = Project.with_preliminary_review_state.where(program_id: self.programs).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id)
+      @projects = Project.includes(:program).with_preliminary_review_state.where(program_id: self.programs).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id)
     elsif self.role == 'admin'
-      @projects = Project.with_preliminary_review_state
+      @projects = Project.includes(:program).with_preliminary_review_state
     end
   end
 
   def get_project_pre_legal
     if self.role == 'admin' || self.role == 'legal'
-      @projects = Project.with_prelegal_review_state
+      @projects = Project.includes(:program).with_prelegal_review_state
     end
   end
 
   def get_project_regional
     if self.role == 'regional'
-      @projects = Project.with_regional_review_state.where(program_id: self.programs).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id)
+      @projects = Project.includes(:program).with_regional_review_state.where(program_id: self.programs).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id)
     elsif self.role == 'admin'
-      @projects = Project.with_regional_review_state
+      @projects = Project.includes(:program).with_regional_review_state
     end
   end
 
   def get_project_secondary
     if self.role == 'reviewer'
-      @projects = Project.with_secondary_review_state.where(program_id: self.programs).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id)
+      @projects = Project.includes(:program).with_secondary_review_state.where(program_id: self.programs).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id)
     elsif self.role == 'admin'
-      @projects = Project.with_secondary_review_state
+      @projects = Project.includes(:program).with_secondary_review_state
     end
   end
 
   def get_project_cn
     if self.role == 'reviewer'
-      @projects = Project.with_cn_clearance_state.where(program_id: self.programs).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id)
+      @projects = Project.includes(:program).with_cn_clearance_state.where(program_id: self.programs).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id)
     elsif self.role == 'admin' || self.role == 'budget'
-      @projects = Project.with_cn_clearance_state
+      @projects = Project.includes(:program).with_cn_clearance_state
     end
   end
 
   def get_project_funding
     if self.role == 'admin' || self.role == 'budget'
-      @projects = Project.with_funding_clearance_state
+      @projects = Project.includes(:program).with_funding_clearance_state
     end
   end
 
   def get_project_obligation
     if self.role == 'admin' || self.role == 'budget'
-      @projects = Project.with_obligation_state
+      @projects = Project.includes(:program).with_obligation_state
     end
   end
 

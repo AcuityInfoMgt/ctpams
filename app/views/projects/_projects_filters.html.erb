@@ -1,0 +1,12 @@
+<%= form_tag("/projects", method: "get") do %>
+
+    <%= select_tag(:fiscal_year, options_for_select(['2011','2012','2013'], params[:fiscal_year]), multiple: true) %>
+    <%= select_tag(:program_id, options_from_collection_for_select(Program.all, :id, :name, params[:program_id]), multiple: true) %>
+    <%= select_tag(:funding_mechanism_id, options_from_collection_for_select(FundingMechanism.all, :id, :name, params[:funding_mechanism_id]), multiple: true) %>
+    <%= select_tag(:sub_account_id, options_from_collection_for_select(SubAccount.all, :id, :name, params[:sub_account_id]), multiple: true) %>
+    <%= select_tag(:country_id, options_from_collection_for_select(Country.all, :id, :name, params[:country_id]), multiple: true) %>
+
+    <%= submit_tag('Go') %>
+
+
+<% end %>>

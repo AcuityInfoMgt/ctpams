@@ -1,40 +1,47 @@
+<ol class="breadcrumb">
+  <li>Projects</li>
+  <li class="active">Filtered Project List</li>
+</ol>
+
 <p id="notice"><%= notice %></p>
-<%= current_user.role %>, <%= current_user.email %>, <%= current_user.admin? %>, <%= current_user.id %>,
-<h1>Listing Projects</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Start date</th>
-      <th>End date</th>
-      <th>Budget requested</th>
-      <th>Fiscal year</th>
-      <th>Current State</th>
-      <th>Implementation Status</th>
-      <th>Program</th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.name %></td>
-        <td><%= project.start_date %></td>
-        <td><%= project.end_date %></td>
-        <td><%= project.budget_requested %></td>
-        <td><%= project.fiscal_year %></td>
-        <td><%= project.current_state %></td>
-        <td><%= project.implementation_status %></td>
-        <td><%= project.program_id %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-tasks fa-fw"></i> Apply Filters
+        <div class="pull-right">
+        </div>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12">
+            <%= render 'projects_filters' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<br>
-
-<%= link_to 'New Project', new_project_path %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-tasks fa-fw"></i> Projects
+        <div class="pull-right">
+        </div>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12">
+            <%= render 'projects_list' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

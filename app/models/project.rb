@@ -1,4 +1,7 @@
 class Project < ActiveRecord::Base
+  def self.default_scope
+    where is_denied: false, is_archived: false, is_active: true
+  end
   validates :name, presence: true
   validates :program, presence: true
   include Workflow
@@ -109,6 +112,13 @@ class Project < ActiveRecord::Base
     else
       'Project Updated'
     end
+  end
+
+  def self.filter(attributes)
+    projects = Project.includes(:program).order(:id)
+    projects = projects.where('fiscal_year in (?)', attributes[:fiscal_year]) if attributes[:fiscal_year].present?
+    projects = projects.where('program_id in (?)', attributes[:program_id]) if attributes[:program_id].present?
+    projects
   end
 
 
