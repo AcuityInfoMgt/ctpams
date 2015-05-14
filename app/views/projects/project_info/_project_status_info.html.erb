@@ -32,11 +32,9 @@
   <div class="col-md-12 text-center">
     <ol class="progtrckr" data-progtrckr-steps="<%= @states.count %>"><!--
       <% @states.each do |s| %>
-        <% check_state = s.to_s + "?" %>
           --><li  class=<% if @project.current_state > s %>"progtrckr-done">
     <% else %>"progtrckr-todo">
     <% end %>
-
     <%= s.to_s.titleize %></li><!--
       <% end %>
       -->

@@ -1,7 +1,7 @@
 <table class="table table-striped table-hover">
   <% @project.comments.each do |comment| %>
       <tr>
-        <td class="text-muted"><%= comment.comment_date %></td>
+        <td class="text-muted" style="width:100px"><%= comment.comment_date %></td>
         <td><strong><%= comment.user.name %> - <%= comment.user.role.titleize %></strong> <br><%= comment.comments %></td>
       </tr>
   <% end %>

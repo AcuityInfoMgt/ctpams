@@ -64,7 +64,6 @@ class Project < ActiveRecord::Base
       event :obligate_all_funds, :transitions_to => :fully_obligated
     end
     state :fully_obligated
-    #state :proposal_denied
   end
 
   def set_defaults
