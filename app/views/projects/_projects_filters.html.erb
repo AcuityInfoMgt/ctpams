@@ -6,9 +6,12 @@
     <%= select_tag(:sub_account_id, options_from_collection_for_select(SubAccount.all, :id, :name, params[:sub_account_id]), multiple: true) %>
     <%= select_tag(:country_id, options_from_collection_for_select(Country.all, :id, :name, params[:country_id]), multiple: true) %>
     <%= select_tag(:workflow_state, options_for_select(Project.workflow_spec.states.keys.map {|state| [state.to_s.titleize,state]}, params[:workflow_state]), multiple: true) %>
-    <%= select_tag(:implementation_status, options_for_select(Project.implementation_statuses.keys.map {|status| [status,status]}, params[:implementation_status]), multiple: true) %>
+    <%= select_tag(:implementation_status, options_for_select(Project.implementation_statuses {|status| [status.key,status.value]}, params[:implementation_status]), multiple: true) %>
+    <%= select_tag(:implementer_id, options_from_collection_for_select(Implementer.all, :id, :name, params[:implementer_id]), multiple: true) %>
+    <%= select_tag(:region_id, options_from_collection_for_select(Region.where(region_type: 'State'), :id, :name, params[:region_id]), multiple: true) %>
+
 
     <%= submit_tag('Go') %>
 
 
-<% end %>>
+<% end %>

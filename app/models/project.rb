@@ -119,6 +119,13 @@ class Project < ActiveRecord::Base
     projects = Project.includes(:program).order(:id)
     projects = projects.where('fiscal_year in (?)', attributes[:fiscal_year]) if attributes[:fiscal_year].present?
     projects = projects.where('program_id in (?)', attributes[:program_id]) if attributes[:program_id].present?
+    projects = projects.where('projects.id in (select project_id from project_funding_mechanisms where funding_mechanism_id in (?))', attributes[:funding_mechanism_id]) if attributes[:funding_mechanism_id].present?
+    projects = projects.where('projects.id in (select project_id from projects_sub_accounts where sub_account_id in (?))', attributes[:sub_account_id]) if attributes[:sub_account_id].present?
+    projects = projects.where('projects.id in (select project_id from countries_projects where country_id in (?))', attributes[:country_id]) if attributes[:country_id].present?
+    projects = projects.where('projects.id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (?)))', attributes[:region_id]) if attributes[:region_id].present?
+    projects = projects.where('projects.id in (select project_id from project_implementers where implementer_id in (?))', attributes[:implementer_id]) if attributes[:implementer_id].present?
+    projects = projects.where('workflow_state in (?)', attributes[:workflow_state]) if attributes[:workflow_state].present?
+    projects = projects.where('implementation_status in (?)', attributes[:implementation_status]) if attributes[:implementation_status].present?
     projects
   end
 

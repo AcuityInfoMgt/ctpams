@@ -1,13 +1,13 @@
-<table class="table table-striped table-hover">
+<table class="table table-striped table-hover" id="filteredreport">
   <thead>
   <tr>
-    <th>Program</th>
-    <th>ID</th>
+    <th style="width:70px">Program</th>
+    <th style="width:30px">ID</th>
     <th>Title</th>
-    <th>FY</th>
-    <th>Requested</th>
-    <th>Status</th>
-    <th>Implementation</th>
+    <th style="width:30px">FY</th>
+    <th style="width:90px">Requested</th>
+    <th style="width:110px">Approval</th>
+    <th style="width:60px">Status</th>
   </tr>
   </thead>
 
@@ -18,10 +18,12 @@
         <td><%= link_to project.id, project %></td>
         <td><%= link_to project.name, project %></td>
         <td><%= project.fiscal_year %></td>
-        <td><%= project.budget_requested %></td>
+        <td><%= number_to_currency(project.budget_requested, precision: 0) %></td>
         <td><%= project.current_state.to_s.titleize %></td>
         <td><%= project.implementation_status %></td>
       </tr>
   <% end %>
   </tbody>
 </table>
+
+<%= @projects.sum(:budget_requested) %>
