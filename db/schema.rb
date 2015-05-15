@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150507194521) do
+ActiveRecord::Schema.define(version: 20150515220251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20150507194521) do
     t.datetime "updated_at",     null: false
     t.integer  "old_id"
     t.string   "workflow_state"
+    t.boolean  "on_hold"
   end
 
   create_table "congressional_notifications_projects", id: false, force: :cascade do |t|

@@ -1,5 +1,23 @@
 <p id="notice"><%= notice %></p>
 
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <span class="bigger">Congressional Notification: <%= @congressional_notification.name %> <%= @congressional_notification.cn_number %></span>
+        <div class="pull-right">
+
+        </div>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <%= render 'cn_status_info' %>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+  </div>
+</div>
+
 <p>
   <strong>State:</strong>
   <%= @congressional_notification.current_state.to_s.titleize %>

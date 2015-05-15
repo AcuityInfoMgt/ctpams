@@ -5,20 +5,17 @@ class CongressionalNotification < ActiveRecord::Base
   has_many :clearances, as: :clearable
   has_many :attached_files, as: :attachable
 
+  after_initialize :set_defaults, :if => :new_record?
+
   workflow do
     state :new do
       event :submit_cn, :transitions_to => :clearance_pending
     end
     state :clearance_pending do
       event :clear, :transitions_to => :congressional_clearance_pending
-      event :hold, :transitions_to => :on_hold
     end
     state :congressional_clearance_pending do
       event :clear, :transitions_to => :cleared
-      event :hold, :transitions_to => :on_hold
-    end
-    state :on_hold   do
-      event :reactivate, :transitions_to => :clearance_pending
     end
     state :cleared
   end
@@ -55,6 +52,10 @@ class CongressionalNotification < ActiveRecord::Base
     c = Clearance.create(name: 'Legislative Affairs Front Office', clearance_status: 0)
     c.clearable = self
     c.save
+  end
+
+  def set_defaults
+    self.on_hold ||= false
   end
 
 end

@@ -10,6 +10,9 @@ class CongressionalNotificationsController < ApplicationController
   # GET /congressional_notifications/1
   # GET /congressional_notifications/1.json
   def show
+    @states = CongressionalNotification.workflow_spec.states.keys
+    @states.shift
+    @states.pop
   end
 
   # GET /congressional_notifications/new

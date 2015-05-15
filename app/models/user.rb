@@ -17,7 +17,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable #, :confirmable
 
   def in_project_region?(project_id)
-    Project.where("id = (?)", @project.id).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id).count > 0
+    Project.where("id = (?)", project_id).where("id in (select project_id from countries_projects where country_id in (select country_id from countries_regions where region_id in (select region_id from regions_users where user_id = (?))))", self.id).count > 0
+    #true
   end
 
   def project_owner?(project_id)

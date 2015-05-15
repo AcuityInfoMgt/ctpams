@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-md-3 text-center">
+    <% if @congressional_notification.on_hold %>
+        <br><span class="text-muted"><strong><i class="fa fa-edit fa-fw"></i>On Hold</strong></span>
+    <% end %>
+  </div>
+  <div class="col-md-3 text-center">
+    <label>Name:</label><br>
+    <%= @congressional_notification.name %>
+  </div>
+  <div class="col-md-3 text-center">
+    <label>CN Number:</label><br>
+    <%= @congressional_notification.cn_number %>
+  </div>
+  <div class="col-md-3 text-center">
+    <label>Clearance Status:</label><br>
+    <%= @congressional_notification.current_state.to_s.titleize %>
+  </div>
+
+</div>
+<hr>
+
+<div class="row">
+  <div class="col-md-12 text-center">
+    <ol class="progtrckr" data-progtrckr-steps="<%= @states.count %>"><!--
+      <% @states.each do |s| %>
+          --><li  class=<% if @congressional_notification.current_state > s %>"progtrckr-done">
+    <% else %>"progtrckr-todo">
+    <% end %>
+                  <%= s.to_s.titleize %></li><!--
+      <% end %>
+      -->
+    </ol>
+  </div>
+</div>
