@@ -66,17 +66,6 @@ class Project < ActiveRecord::Base
     state :fully_obligated
   end
 
-  def set_defaults
-    self.implementation_status ||= :'Pre-Implementation'
-    self.is_active ||= true
-    self.is_archived ||= false
-    self.is_denied ||= false
-    self.reprogram ||= false
-    self.do_renotify ||= false
-    self.is_renotified ||= false
-    self.is_funding_modified ||= false
-  end
-
   def update_project_state(state_event, comments, commenter)
     if comments && comments.strip.length > 0
       c = Comment.create(comments: comments, user_id: commenter, comment_date: DateTime.now)
@@ -126,7 +115,20 @@ class Project < ActiveRecord::Base
     projects = projects.where('projects.id in (select project_id from project_implementers where implementer_id in (?))', attributes[:implementer_id]) if attributes[:implementer_id].present?
     projects = projects.where('workflow_state in (?)', attributes[:workflow_state]) if attributes[:workflow_state].present?
     projects = projects.where('implementation_status in (?)', attributes[:implementation_status]) if attributes[:implementation_status].present?
+    projects = projects.where('upper(projects.name) like (?) or upper(projects.description) like (?) or upper(projects.objective) like (?)', "% #{attributes[:keyword].upcase}%", "% #{attributes[:keyword].upcase}%", "% #{attributes[:keyword].upcase}%") if attributes[:keyword].present?
     projects
+  end
+
+
+  def set_defaults
+    self.implementation_status ||= :'Pre-Implementation'
+    self.is_active ||= true
+    self.is_archived ||= false
+    self.is_denied ||= false
+    self.reprogram ||= false
+    self.do_renotify ||= false
+    self.is_renotified ||= false
+    self.is_funding_modified ||= false
   end
 
 end
