@@ -18,29 +18,33 @@
   </div>
 </div>
 
-<p>
-  <strong>State:</strong>
-  <%= @congressional_notification.current_state.to_s.titleize %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @congressional_notification.name %>
-</p>
-
-<p>
-  <strong>Cn number:</strong>
-  <%= @congressional_notification.cn_number %>
-</p>
-
-<p>
-  <strong>Projects:</strong>
-<ul>
-  <% @congressional_notification.projects.each do |project| %>
-      <li><%= link_to project.name, project %></li>
-  <% end %>
-</ul>
-</p>
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Projects Attached to this Congressional Notification
+        <div class="pull-right">
+          <% if current_user.role == 'budget' ||  current_user.admin? %>
+              <%= link_to 'Edit', edit_congressional_notification_path(@congressional_notification), class: 'btn btn-default btn-xs' %>
+          <% end %>
+        </div>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <ul class="list-inline">
+          <% @congressional_notification.projects.each do |project| %>
+              <li>
+                <%= link_to(project) do %>
+                    <span data-toggle="tooltip" title="<%= project.name %>"><%= project.program.name %>-<%= project.id %></span>
+                <% end %>
+              </li>
+          <% end %>
+        </ul>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+  </div>
+</div>
 
 <p>
   <strong>Clearances:</strong>

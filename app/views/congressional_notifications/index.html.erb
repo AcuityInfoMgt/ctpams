@@ -1,28 +1,50 @@
+<ol class="breadcrumb">
+  <li>Congressional Notifications</li>
+  <li class="active">Filtered List</li>
+</ol>
+
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Congressional Notifications</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Cn number</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-filter fa-fw"></i> Apply Filters
+        <div class="pull-right">
+        </div>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12">
+            <%= render 'cns_filters' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <tbody>
-    <% @congressional_notifications.each do |congressional_notification| %>
-      <tr>
-        <td><%= congressional_notification.name %></td>
-        <td><%= congressional_notification.cn_number %></td>
-        <td><%= link_to 'Show', congressional_notification %></td>
-        <td><%= link_to 'Edit', edit_congressional_notification_path(congressional_notification) %></td>
-        <td><%= link_to 'Destroy', congressional_notification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-tasks fa-fw"></i> Congressional Notifications
+        <div class="pull-right">
+        </div>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12">
+            <%= render 'cns_list' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <br>
 

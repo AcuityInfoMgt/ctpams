@@ -1,0 +1,21 @@
+<table class="table table-striped table-hover" id="filteredcnreport">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Cn number</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @congressional_notifications.each do |congressional_notification| %>
+      <tr>
+        <td><%= congressional_notification.name %></td>
+        <td><%= congressional_notification.cn_number %></td>
+        <td><%= link_to 'Show', congressional_notification %></td>
+        <td><%= link_to 'Edit', edit_congressional_notification_path(congressional_notification) %></td>
+        <td><%= link_to 'Destroy', congressional_notification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
