@@ -119,6 +119,10 @@ class Project < ActiveRecord::Base
     projects
   end
 
+  def full_name
+    self.program.name + '-' + self.id.to_s + ': ' + self.name
+  end
+
 
   def set_defaults
     self.implementation_status ||= :'Pre-Implementation'

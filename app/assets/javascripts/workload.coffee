@@ -4,6 +4,21 @@
 
 
 $(document).on 'page:load ready', ->
+  $('#congressional_notification_project_ids').multiselect
+    buttonWidth: '100%'
+    maxHeight: 340
+    buttonText: (options) ->
+      selected = undefined
+      if options.length == 0
+        'CN Projects <b class="caret"></b>'
+      else if options.length > 2
+        'CN Projects: ' + options.length + ' selected  <b class="caret"></b>'
+      else
+        selected = ''
+        options.each ->
+          selected += $(this).text() + ', '
+          return
+        selected.substr(0, selected.length - 2) + ' <b class="caret"></b>'
   $('#cn_workflow_state').multiselect
     buttonWidth: '260px'
     maxHeight: 340
