@@ -2,19 +2,29 @@
   <thead>
   <tr>
     <th>Name</th>
-    <th>Cn number</th>
-    <th colspan="3"></th>
+    <th style="width:100px">CN Number</th>
+    <th>CN Projects</th>
+    <th>Approval</th>
   </tr>
   </thead>
 
   <tbody>
   <% @congressional_notifications.each do |congressional_notification| %>
       <tr>
-        <td><%= congressional_notification.name %></td>
+        <td><%= link_to congressional_notification.name, congressional_notification %></td>
         <td><%= congressional_notification.cn_number %></td>
-        <td><%= link_to 'Show', congressional_notification %></td>
-        <td><%= link_to 'Edit', edit_congressional_notification_path(congressional_notification) %></td>
-        <td><%= link_to 'Destroy', congressional_notification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <ul class="list-inline">
+              <% congressional_notification.projects.each do |project| %>
+                  <li>
+                    <%= link_to(project) do %>
+                        <span data-toggle="tooltip" title="<%= project.name %>"><%= project.program.name %>-<%= project.id %></span>
+                    <% end %>
+                  </li>
+              <% end %>
+          </ul>
+        </td>
+        <td><%= congressional_notification.current_state.to_s.titleize %></td>
       </tr>
   <% end %>
   </tbody>

@@ -4,7 +4,7 @@ class CongressionalNotificationsController < ApplicationController
   # GET /congressional_notifications
   # GET /congressional_notifications.json
   def index
-    @congressional_notifications = CongressionalNotification.includes(:projects).all
+    @congressional_notifications = CongressionalNotification.filter(params)
   end
 
   # GET /congressional_notifications/1

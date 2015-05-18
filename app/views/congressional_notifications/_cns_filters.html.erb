@@ -1,0 +1,4 @@
+<%= form_tag("/cns", method: "get", class: "form-inline") do %>
+    <%= select_tag(:workflow_state, options_for_select(CongressionalNotification.workflow_spec.states.keys.map {|state| [state.to_s.titleize,state]}, params[:workflow_state]), multiple: true, id: 'cn_workflow_state') %>
+    <%= submit_tag('Go', class: 'btn btn-primary btn-sm') %>
+<% end %>

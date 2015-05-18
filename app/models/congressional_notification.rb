@@ -54,6 +54,12 @@ class CongressionalNotification < ActiveRecord::Base
     c.save
   end
 
+  def self.filter(attributes)
+    cns = CongressionalNotification.includes(:projects).order(:id)
+    cns = cns.where('workflow_state in (?)', attributes[:workflow_state]) if attributes[:workflow_state].present?
+    cns
+  end
+
   def set_defaults
     self.on_hold ||= false
   end
