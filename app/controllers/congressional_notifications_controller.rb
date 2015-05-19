@@ -22,6 +22,7 @@ class CongressionalNotificationsController < ApplicationController
 
   # GET /congressional_notifications/1/edit
   def edit
+    @cn_projects = Project.where("workflow_state = 'cn_clearance' or do_renotify = true")
   end
 
   # POST /congressional_notifications

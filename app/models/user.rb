@@ -115,7 +115,7 @@ class User < ActiveRecord::Base
 
   def get_cn_hold
     if self.role == 'admin' || self.role == 'budget'
-      @cns = CongressionalNotification.with_on_hold_state
+      @cns = CongressionalNotification.where("on_hold = true")
     end
   end
 
