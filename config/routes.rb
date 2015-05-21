@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   patch 'state/:id', to: 'projects#state'
 
   resources :projects
+  resources :clearances
   resources :congressional_notifications, :path => 'cns'
 
   root to: 'workload#index'
