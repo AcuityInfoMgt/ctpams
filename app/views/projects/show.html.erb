@@ -38,32 +38,8 @@
     </div>
   </div>
   <div class="col-md-4">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <i class="fa fa-list-alt fa-fw"></i> Documents
-        <div class="pull-right">
 
-        </div>
-      </div>
-      <!-- /.panel-heading -->
-      <div class="panel-body">
-        <%= render 'projects/project_info/project_documents' %>
-      </div>
-      <!-- /.panel-body -->
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <i class="fa fa-list-alt fa-fw"></i> Comments
-        <div class="pull-right">
 
-        </div>
-      </div>
-      <!-- /.panel-heading -->
-      <div class="panel-body">
-        <%= render 'projects/project_info/project_comments' %>
-      </div>
-      <!-- /.panel-body -->
-    </div>
     <div class="panel panel-default">
       <div class="panel-heading">
         <i class="fa fa-list-alt fa-fw"></i> Actions
@@ -77,6 +53,35 @@
       </div>
       <!-- /.panel-body -->
     </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-list-alt fa-fw"></i> Comments
+        <div class="pull-right">
+
+        </div>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <%= render 'projects/project_info/comments', :comment_entity => @project %>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-list-alt fa-fw"></i> Documents
+        <div class="pull-right">
+
+        </div>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <%= render 'projects/project_info/documents', :document_entity => @project  %>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+
   </div>
 </div>
 

@@ -11,7 +11,7 @@
       </div>
       <!-- /.panel-heading -->
       <div class="panel-body">
-        <%= render 'cn_status_info' %>
+        <%= render 'congressional_notifications/cn_info/cn_status_info' %>
       </div>
       <!-- /.panel-body -->
     </div>
@@ -19,7 +19,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-8">
     <div class="panel panel-default">
       <div class="panel-heading">
         Projects Attached to this Congressional Notification
@@ -43,35 +43,72 @@
       </div>
       <!-- /.panel-body -->
     </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Clearances
+        <div class="pull-right">
+
+        </div>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <%= render 'congressional_notifications/cn_info/cn_clearances' %>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+  </div>
+
+  <div class="col-md-4">
+
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Actions
+        <div class="pull-right">
+
+        </div>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <%= render 'congressional_notifications/cn_info/cn_review_actions' %>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Comments
+        <div class="pull-right">
+
+        </div>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <%= render 'projects/project_info/comments', :comment_entity => @congressional_notification %>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Documents
+        <div class="pull-right">
+
+        </div>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <%= render 'projects/project_info/documents', :document_entity => @congressional_notification  %>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+
   </div>
 </div>
 
-<p>
-  <strong>Clearances:</strong>
-<ul>
-  <% @congressional_notification.clearances.each do |clearance| %>
-      <li><%= clearance.name %> - <%= clearance.clearance_status %> - <%= clearance.clearance_date %> </li>
-  <% end %>
-</ul>
-</p>
 
-<p>
-  <strong>Attached Files:</strong>
-<ul>
-  <% @congressional_notification.attached_files.each do |attached_file| %>
-      <li><%= link_to attached_file.name, attached_file.attachable_document.url %> </li>
-  <% end %>
-</ul>
-</p>
 
-<p>
-  <strong>Comments:</strong>
-<ul>
-  <% @congressional_notification.comments.each do |comment| %>
-      <li><%= comment.comment_date %> - <%= comment.comments %> - <%= comment.user.name %> - <%= comment.user.role %> </li>
-  <% end %>
-</ul>
-</p>
 
-<%= link_to 'Edit', edit_congressional_notification_path(@congressional_notification) %> |
-<%= link_to 'Back', congressional_notifications_path %>
+
+

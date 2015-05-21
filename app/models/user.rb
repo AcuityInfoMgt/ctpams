@@ -103,13 +103,13 @@ class User < ActiveRecord::Base
 
   def get_cn_clearance
     if self.role == 'admin' || self.role == 'budget'
-      @cns = CongressionalNotification.with_clearance_pending_state
+      @cns = CongressionalNotification.with_internal_clearance_state
     end
   end
 
   def get_cn_congress
     if self.role == 'admin' || self.role == 'budget'
-      @cns = CongressionalNotification.with_congressional_clearance_pending_state
+      @cns = CongressionalNotification.with_congressional_clearance_state
     end
   end
 

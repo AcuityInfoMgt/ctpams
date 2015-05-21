@@ -1,0 +1,5 @@
+<ul>
+  <% @congressional_notification.clearances.each do |clearance| %>
+      <li><%= clearance.name %> - <%= clearance.clearance_status %> - <%= clearance.clearance_date %> </li>
+  <% end %>
+</ul>

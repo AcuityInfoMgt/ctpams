@@ -1,5 +1,5 @@
 <table class="table table-striped table-hover">
-  <% @project.attached_files.each do |attached_file| %>
+  <% document_entity.attached_files.each do |attached_file| %>
      <tr> <td><%= link_to attached_file.name, attached_file.attachable_document.url %> </td></tr>
   <% end %>
 </table>

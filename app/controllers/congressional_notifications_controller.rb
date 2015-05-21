@@ -46,7 +46,8 @@ class CongressionalNotificationsController < ApplicationController
   def update
     respond_to do |format|
       if @congressional_notification.update(congressional_notification_params)
-        format.html { redirect_to @congressional_notification, notice: 'Congressional notification was successfully updated.' }
+        state_message = @congressional_notification.update_cn_state(params[:commit], params[:new_comments], current_user.id)
+        format.html { redirect_to @congressional_notification, notice: state_message }
         format.json { render :show, status: :ok, location: @congressional_notification }
       else
         format.html { render :edit }

@@ -1,0 +1,23 @@
+<%= simple_form_for(@congressional_notification) do |f| %>
+
+    <%= f.hidden_field :name %>
+
+    <%= text_area_tag 'new_comments', nil, class: 'form-control' %><br>
+
+    <div class="form-actions">
+      <% if @congressional_notification.new?  && (current_user.role == 'budget' || current_user.admin?) %>
+          <%= f.button :submit, 'Begin CN Clearance', class: 'btn btn-default btn-xs' %>
+      <% elsif @congressional_notification.internal_clearance? && @congressional_notification.all_clearances_passed? && (current_user.role == 'budget' || current_user.admin?) %>
+          <%= f.button :submit, 'Confirm CN Clearance', class: 'btn btn-default btn-xs' %>
+      <% elsif @congressional_notification.congressional_clearance? && (current_user.role == 'budget' || current_user.admin?) %>
+          <%= f.button :submit, 'Confirm Congressional Clearance', class: 'btn btn-default btn-xs' %>
+      <% end %>
+      <%= f.button :submit, 'Add Comments', class: 'btn btn-default btn-xs' %>
+      <% if current_user.role == 'budget' || current_user.admin? %>
+          <hr>
+          <%= f.button :submit, 'Delete CN', class: 'btn btn-default btn-xs' %>
+          <%= f.button :submit, 'Hold CN', class: 'btn btn-default btn-xs' %>
+      <% end %>
+      <br>
+    </div>
+<% end %>

@@ -14,7 +14,6 @@ class ProjectsController < ApplicationController
     @states = Project.workflow_spec.states.keys
     @states.shift
     @states.pop
-    #@comment = Comment.new
   end
 
   # GET /projects/new

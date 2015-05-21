@@ -9,47 +9,78 @@ class CongressionalNotification < ActiveRecord::Base
 
   workflow do
     state :new do
-      event :submit_cn, :transitions_to => :clearance_pending
+      event :submit_cn, :transitions_to => :internal_clearance
     end
-    state :clearance_pending do
-      event :clear, :transitions_to => :congressional_clearance_pending
+    state :internal_clearance do
+      event :clear, :transitions_to => :congressional_clearance
     end
-    state :congressional_clearance_pending do
+    state :congressional_clearance do
       event :clear, :transitions_to => :cleared
     end
     state :cleared
   end
 
+  def update_cn_state(state_event, comments, commenter)
+    if comments && comments.strip.length > 0
+      c = Comment.create(comments: comments, user_id: commenter, comment_date: DateTime.now)
+      c.commentable = self
+      c.save
+    end
+
+    if state_event == 'Begin CN Clearance'
+      self.submit_cn!
+      'CN ready to be cleared.'
+    elsif state_event == 'Confirm CN Clearance'
+      self.clear!
+      'CN clearance confirmed.'
+    elsif state_event == 'Confirm Congressional Clearance'
+      self.clear!
+      'CN congressional clearance confirmed.'
+    elsif comments && comments.strip.length > 0
+      'Comments Added'
+    else
+      'Project Updated'
+    end
+  end
+
+  def all_clearances_passed?
+    all_clear = true
+    self.clearances.each do |c|
+      all_clear = false unless c.clearance_status == 'Yes'
+    end
+    all_clear
+  end
+
 
   def create_cn_clearances
-    c = Clearance.create(name: 'CT', clearance_status: 0)
+    c = Clearance.create(name: 'CT Coordinator')
     c.clearable = self
     c.save
-    c = Clearance.create(name: 'Legal', clearance_status: 0)
+    c = Clearance.create(name: 'Legal')
     c.clearable = self
     c.save
-    c = Clearance.create(name: 'Foreign Assistance', clearance_status: 0)
+    c = Clearance.create(name: 'Foreign Assistance')
     c.clearable = self
     c.save
-    c = Clearance.create(name: 'Legislative Affairs', clearance_status: 0)
+    c = Clearance.create(name: 'Legislative Affairs')
     c.clearable = self
     c.save
-    c = Clearance.create(name: 'Policy Planning', clearance_status: 0)
+    c = Clearance.create(name: 'Policy Planning')
     c.clearable = self
     c.save
-    c = Clearance.create(name: 'Management and Budget', clearance_status: 0)
+    c = Clearance.create(name: 'Management and Budget')
     c.clearable = self
     c.save
-    c = Clearance.create(name: 'Deputy Review', clearance_status: 0)
+    c = Clearance.create(name: 'Deputy Review')
     c.clearable = self
     c.save
-    c = Clearance.create(name: 'Front Office', clearance_status: 0)
+    c = Clearance.create(name: 'Front Office')
     c.clearable = self
     c.save
-    c = Clearance.create(name: 'Foreign Assistance Front Office', clearance_status: 0)
+    c = Clearance.create(name: 'Foreign Assistance Front Office')
     c.clearable = self
     c.save
-    c = Clearance.create(name: 'Legislative Affairs Front Office', clearance_status: 0)
+    c = Clearance.create(name: 'Legislative Affairs Front Office')
     c.clearable = self
     c.save
   end
