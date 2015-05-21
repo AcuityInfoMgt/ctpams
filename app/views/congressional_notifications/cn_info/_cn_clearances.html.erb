@@ -12,10 +12,10 @@
   <tbody>
   <%= f.simple_fields_for :clearances do |c| %>
       <tr>
-        <td><%= c.input :name, label: false %></td>
+        <td><%= c.input :name, :as => :fake, label: false %></td>
         <td><%= c.select(:clearance_status, Clearance.clearance_statuses.keys.map {|clearance_status| [clearance_status, clearance_status]}) %></td>
         <td><%= c.input :comments, label: false %></td>
-        <td><%= c.input :clearance_date, label: false %></td>
+        <td><%= c.input :clearance_date, :as => :fake, label: false %></td>
       </tr>
   <% end %>
   </tbody>
