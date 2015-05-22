@@ -4,25 +4,23 @@ class WorkloadController < ApplicationController
   def index
     @uid = current_user.id
     @user = User.find(@uid)
-    @proposal_in_progress = current_user.get_proposal_in_progress
-    @preliminary_program_review = current_user.get_project_preliminary
-    @pre_legal_review = current_user.get_project_pre_legal
-    @regional_review = current_user.get_project_regional
-    @secondary_program_review = current_user.get_project_secondary
-    @project_cn_pending = current_user.get_project_cn
-    @project_funding_clearance_pending = current_user.get_project_funding
-    @obligation_pending = current_user.get_project_obligation
+    @draft_projects = current_user.draft_projects
+    @preliminary_review_projects = current_user.preliminary_review_projects
+    @pre_legal_review_projects = current_user.pre_legal_review_projects
+    @regional_review_projects = current_user.regional_review_projects
+    @secondary_review_projects = current_user.secondary_review_projects
+    @cn_clearance_projects = current_user.cn_clearance_projects
+    @funding_clearance_projects = current_user.funding_clearance_projects
+    @obligation_projects = current_user.obligation_projects
 
-    @cn_new = current_user.get_cn_new
-    @cn_clearance_pending = current_user.get_cn_clearance
-    @cn_congress_pending = current_user.get_cn_congress
-    @cn_hold = current_user.get_cn_hold
+    @new_cns = current_user.new_cns
+    @internal_clearance_cns = current_user.internal_clearance_cns
+    @congressional_clearance_cns = current_user.congressional_clearance_cns
 
-    @funding_confirmation_pending = current_user.get_funding_confirmation
-    @funding_clearance_pending = current_user.get_funding_clearance
-    @funding_hold = current_user.get_funding_hold
+    @funding_confirmation = current_user.funding_confirmation
+    @funding_clearance = current_user.funding_clearance
 
-    @my_projects = current_user.get_my_projects
+    @my_projects = current_user.my_projects
   end
 
 
@@ -30,7 +28,7 @@ class WorkloadController < ApplicationController
   end
 
   def my_projects
-    @my_projects = current_user.get_my_projects
+    @my_projects = current_user.my_projects
   end
 
 end

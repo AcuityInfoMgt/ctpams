@@ -7,15 +7,11 @@ class ProjectFundingMechanism < ActiveRecord::Base
   has_many :attached_files, as: :attachable
 
   workflow do
-    state :confirmation_pending do
-      event :confirm_funding_mechanism, :transitions_to => :clearance_pending
+    state :funding_confirmation do
+      event :confirm_funding_mechanism, :transitions_to => :funding_clearance
     end
-    state :clearance_pending do
+    state :funding_clearance do
       event :clear, :transitions_to => :cleared
-      event :hold, :transitions_to => :on_hold
-    end
-    state :on_hold   do
-      event :reactivate, :transitions_to => :confirmation_pending
     end
     state :cleared
   end

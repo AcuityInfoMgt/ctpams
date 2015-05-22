@@ -40,9 +40,11 @@ class ClearancesController < ApplicationController
   # PATCH/PUT /clearances/1
   # PATCH/PUT /clearances/1.json
   def update
+    target = congressional_notification_url(@clearance.clearable)
     respond_to do |format|
       if @clearance.update(clearance_params)
-        format.html { redirect_to @clearance, notice: 'Clearance was successfully updated.' }
+        #format.html { redirect_to @clearance, notice: 'Clearance was successfully updated.' }
+        format.html { redirect_to target, notice: 'Clearance was successfully updated.' }
         format.json { render :show, status: :ok, location: @clearance }
       else
         format.html { render :edit }

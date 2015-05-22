@@ -53,7 +53,11 @@
       </div>
       <!-- /.panel-heading -->
       <div class="panel-body">
-        <%= render 'congressional_notifications/cn_info/cn_clearances' %>
+        <% if @congressional_notification.new? %>
+            To begin the CN clearance process, upload a CN document and confirm that the CN is ready for clearance.
+        <% else %>
+            <%= render 'congressional_notifications/cn_info/cn_clearance_list' %>
+        <% end %>
       </div>
       <!-- /.panel-body -->
     </div>
