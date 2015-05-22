@@ -36,6 +36,9 @@ class CongressionalNotification < ActiveRecord::Base
       'CN clearance confirmed.'
     elsif state_event == 'Confirm Congressional Clearance'
       self.clear!
+      self.projects.each do |p|
+        p.cn_cleared!
+      end
       'CN congressional clearance confirmed.'
     elsif comments && comments.strip.length > 0
       'Comments Added'

@@ -81,24 +81,37 @@
       </div>
       <!-- /.panel-body -->
     </div>
+    <% if @project.current_state > :secondary_review %>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <i class="fa fa-list-alt fa-fw"></i> Congressional Notifications
+            <div class="pull-right">
+
+            </div>
+          </div>
+          <!-- /.panel-heading -->
+          <div class="panel-body">
+            <% if @project.congressional_notifications.count > 0 %>
+                <ul class="list-unstyled">
+                  <% @project.congressional_notifications.each do |cn| %>
+                      <li>
+                        <%= link_to(cn) do %>
+                            <%= cn.cn_number %>-<%= cn.name %>
+                        <% end %>
+                      </li>
+                  <% end %>
+                </ul>
+            <% else %>
+                This project has not been assigned to a CN.
+            <% end %>
+          </div>
+          <!-- /.panel-body -->
+        </div>
+    <% end %>
 
   </div>
 </div>
 
-
-
-
-
-
-
-<p>
-  <strong>CNs:</strong>
-<ul>
-  <% @project.congressional_notifications.each do |cn| %>
-      <li><%= link_to cn.cn_number, cn %> </li>
-  <% end %>
-</ul>
-</p>
 
 
 <p>
