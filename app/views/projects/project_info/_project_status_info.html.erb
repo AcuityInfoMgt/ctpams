@@ -33,6 +33,8 @@
     <ol class="progtrckr" data-progtrckr-steps="<%= @states.count %>"><!--
       <% @states.each do |s| %>
           --><li  class=<% if @project.current_state > s %>"progtrckr-done">
+    <% elsif @project.current_state == s %>
+        "progtrckr-pending">
     <% else %>"progtrckr-todo">
     <% end %>
     <%= s.to_s.titleize %></li><!--
